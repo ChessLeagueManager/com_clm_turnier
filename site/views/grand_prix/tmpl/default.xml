@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_CLM_TURNIER_GRAND_PRIX_VIEW_DEFAULT_TITLE">
+		<message>COM_CLM_TURNIER_GRAND_PRIX_VIEW_DEFAULT_DESC
+		</message>
+	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+			<field name="grand_prix" required="true" type="sql"
+				label="COM_CLM_TURNIER_FIELD_NAME_LABEL"
+				description="COM_CLM_TURNIER_FIELD_NAME_DESC"
+				query="SELECT a.id AS value, a.name AS kname FROM #__clm_turniere_grand_prix a WHERE a.published = 1"
+				value_field="kname">
+			</field>
+
+			<field name="kategorie" required="true" type="sql"
+				label="CATEGORY_EDITION"
+				description="CATEGORY_EDITION_DESC"
+				query="SELECT a.id AS value, CONCAT(b.name, ' > ', a.name) AS kname FROM #__clm_categories a 
+					JOIN #__clm_categories b ON b.id = a.parentid
+					WHERE a.parentid != 0 ORDER BY b.name, a.name DESC"
+				value_field="kname">
+			</field>
+		</fieldset>
+	</fields>
+
+	<fields name="params">
+		<fieldset name="basic" label="COM_MENUS_LAYOUT_FEATURED_OPTIONS">
+			<field name="show_title" type="radio" default="1" class="btn-group"
+				label="JGLOBAL_SHOW_TITLE_LABEL" description="JGLOBAL_SHOW_TITLE_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+		</fieldset>
+	</fields>
+</metadata>

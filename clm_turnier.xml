@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.0" method="upgrade">
+
+	<name>CLM_TURNIER</name>
+	<creationDate>Mai 2017</creationDate>
+	<author>Andreas Hrubesch</author>
+	<version>0.9.0</version>
+	<description>COM_CLM_TURNIER_DESC</description>
+
+	<!-- Site Main File Copy Section -->
+	<!-- Note the folder attribute: This attribute describes the folder to copy 
+		FROM in the package to install therefore files copied in this section are 
+		copied from /site/ in the package -->
+	<files folder="site">
+		<filename>index.html</filename>
+		<filename>clm_turnier.php</filename>
+		<filename>controller.php</filename>
+		<folder>classes</folder>
+		<folder>includes</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+
+	<languages folder="site/language">
+		<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
+	</languages>
+
+	<administration>
+		<!-- Administration Main File Copy Section -->
+		<!-- Note the folder attribute: This attribute describes the folder to 
+			copy FROM in the package to install therefore files copied in this section 
+			are copied from /admin/ in the package -->
+		<menu>COM_CLM_TURNIER</menu>
+
+		<files folder="admin">
+			<!-- Admin Main File Copy Section -->
+			<filename>index.html</filename>
+			<filename>clm_turnier.php</filename>
+			<filename>controller.php</filename>
+			<filename>changelog.txt</filename>
+			<folder>controllers</folder>
+			<folder>helpers</folder>
+			<folder>models</folder>
+			<folder>tables</folder>
+			<folder>views</folder>
+
+			<!-- SQL files section -->
+			<folder>sql</folder>
+		</files>
+
+		<languages folder="admin/language">
+			<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
+			<language tag="de-DE">de-DE.com_clm_turnier.sys.ini</language>
+		</languages>
+	</administration>
+
+	<scriptfile>install.php</scriptfile>
+	
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.sql</file>
+		</sql>
+	</install>
+	<update> <!-- Runs on update; New since J2.5 -->
+		<schemas>
+			<schemapath type="mysql">sql/updates</schemapath>
+		</schemas>
+	</update>
+
+</extension>

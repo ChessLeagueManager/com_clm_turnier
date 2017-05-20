@@ -1,0 +1,16 @@
+CHANGELOG com_clm_turnier
+------------
+
+Legend:
+* -> Security Fix
+# -> Bug Fix
+$ -> Language fix or change
++ -> Addition
+^ -> Change
+% -> Performance Fix
+> -> Compatibility
+- -> Removed
+! -> Note
+
+- - - - - 0.9.0 - [??-05-2017] - - - - - - - - - - - - - - - - - - - - -
+! start release
