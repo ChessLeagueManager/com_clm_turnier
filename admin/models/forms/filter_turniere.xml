@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+
+	<fields name="filter">
+		<field
+			name="search" 
+			type="text" 
+			label="COM_CLM_TURNIER_FILTER_TURNIER_SEARCH_LABEL"
+			description="COM_CLM_TURNIER_FILTER_TURNIER_SEARCH_DESC" 
+			hint="JSEARCH_FILTER"
+		/>
+		
+		<field
+			name="published"
+			type="list"
+			label="JOPTION_SELECT_PUBLISHED"
+			description="JOPTION_SELECT_PUBLISHED_DESC"
+			onchange="this.form.submit();"
+			>
+			<option value="">JOPTION_SELECT_PUBLISHED</option>
+			<option value="1">JPUBLISHED</option>
+			<option value="0">JUNPUBLISHED</option>
+		</field>
+
+		<field
+			name="sid"
+			type="sql"
+			sql_select="id, name"
+			sql_from="#__clm_saison"
+			sql_order="id DESC"
+			key_field="id"
+			value_field="name"
+			label="COM_CLM_TURNIER_FILTER_SAISON_LABEL"
+			description="COM_CLM_TURNIER_FILTER_SAISON_DESC"
+			onchange="this.form.submit();"
+		/>
+
+		<field
+			name="typ"
+			type="list"
+			label="MODUS"
+			description="COM_CLM_TURNIER_FILTER_MODUS_DESC"
+			default="a.typ ASC"
+			onchange="this.form.submit();"
+			>
+			<option value="">SELECT_MODUS</option>
+			<option value="1">MODUS_TYP_1</option>
+			<option value="2">MODUS_TYP_2</option>
+			<option value="3">MODUS_TYP_3</option>
+			<option value="5">MODUS_TYP_5</option>
+			<option value="6">MODUS_TYP_6</option>
+		</field>
+	</fields>
+		
+	<fields name="list">
+		<field
+			name="fullordering"
+			type="list"
+			label="SEASON"
+			description="TOURNAMENT_HINT_SEASON_MISSING"
+			default="a.name ASC"
+			onchange="this.form.submit();"
+			>
+			<option value="">JGLOBAL_SORT_BY</option>
+			<option value="a.name ASC">COM_CLM_TURNIER_FIELD_TURNIER_NAME_LABEL_ASC</option>
+			<option value="a.name DESC">COM_CLM_TURNIER_FIELD_TURNIER_NAME_LABEL_DESC</option>
+			<option value="a.sid ASC">COM_CLM_TURNIER_FIELD_SEASON_ASC</option>
+			<option value="a.sid DESC">COM_CLM_TURNIER_FIELD_SEASON_DESC</option>
+			<option value="a.typ ASC">COM_CLM_TURNIER_FIELD_MODUS_ASC</option>
+			<option value="a.typ DESC">COM_CLM_TURNIER_FIELD_MODUS_DESC</option>
+			<option value="a.published ASC">JSTATUS_ASC</option>
+			<option value="a.published DESC">JSTATUS_DESC</option>
+			<option value="a.id ASC">JGRID_HEADING_ID_ASC</option>
+			<option value="a.id DESC">JGRID_HEADING_ID_DESC</option>
+		</field>
+		
+		<field
+			name="limit"
+			type="limitbox"
+			label="COM_CLM_TURNIER_LIST_LIMIT"
+			description="COM_CLM_TURNIER_LIST_LIMIT_DESC"
+			default="25"
+			class="input-mini"
+			onchange="this.form.submit();"
+		/>
+			
+	</fields>
+</form>

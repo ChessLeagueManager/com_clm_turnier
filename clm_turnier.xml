@@ -4,7 +4,7 @@
 	<name>CLM_TURNIER</name>
 	<creationDate>Mai 2017</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>0.9.0</version>
+	<version>0.9.0-1</version>
 	<description>COM_CLM_TURNIER_DESC</description>
 
 	<!-- Site Main File Copy Section -->
@@ -31,6 +31,10 @@
 			copy FROM in the package to install therefore files copied in this section 
 			are copied from /admin/ in the package -->
 		<menu>COM_CLM_TURNIER</menu>
+		<submenu>
+			<menu view="grand_prix">COM_CLM_TURNIER_GRAND_PRIX</menu>
+			<menu view="turniere">COM_CLM_TURNIER_TURNIER_DWZ_UPDATE</menu>
+		</submenu>
 
 		<files folder="admin">
 			<!-- Admin Main File Copy Section -->
