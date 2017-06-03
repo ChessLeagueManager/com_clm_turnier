@@ -26,6 +26,8 @@ if ($saveOrder) {
     JHtml::_('sortablelist.sortable', 'grand_prix_list', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 
+$n = count($this->items);
+
 ?>
 
 <form
@@ -44,7 +46,7 @@ if ($saveOrder) {
 		<table class="table table-striped" id="grand_prix_list">
 			<thead>
 				<tr>
-					<th class="center" width="10">#</th>
+					<th class="center" width="10"><?php echo $n;?></th>
 					<th class="center" width="20">
 						<?php echo JHtml::_('grid.checkall'); ?>
 					</th>
@@ -72,7 +74,6 @@ if ($saveOrder) {
 			<tbody>
 				<?php
     $k = 0;
-    $n = count($this->items);
     foreach ($this->items as $i => $row) {
         $k ++;
         

@@ -23,6 +23,7 @@
 
 	<languages folder="site/language">
 		<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
+		<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
 	</languages>
 
 	<administration>
@@ -51,6 +52,8 @@
 		<languages folder="admin/language">
 			<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
 			<language tag="de-DE">de-DE.com_clm_turnier.sys.ini</language>
+			<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
+			<language tag="en-GB">en-GB.com_clm_turnier.sys.ini</language>
 		</languages>
 	</administration>
 
