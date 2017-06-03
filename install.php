@@ -45,7 +45,9 @@ class com_clm_turnierInstallerScript {
 		$this->strings ['de-DE'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Beispieldaten wurden importiert.';
 		
 		// en-EN.com_clm_turnier.sys.ini
-		$this->strings ['en-EN'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager not installed!';
+		$this->strings ['en-GB'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager not installed!';
+		$this->strings ['en-GB'] ['COM_CLM_TURNIER_DELETE_TABLES'] = 'Removing database tables.';
+		$this->strings ['en-GB'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Installing sample data.';
 	}
 	
 	/**
