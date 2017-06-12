@@ -38,7 +38,7 @@ $n = count($this->items);
 			<?php echo JText::_('JGLOBAL_NO_MATCHING_RESULTS'); ?>
 		</div>
 		<?php else : ?>
-		<table class="table table-striped" id="grand_prix_list">
+		<table class="table table-striped" id="turnier_list">
 			<thead>
 				<tr>
 					<th class="center" width="10"><?php echo $n;?></th>
@@ -95,8 +95,8 @@ $n = count($this->items);
 		</table>
 		<?php endif; ?>
 					
-		<input type="hidden" name="task" value="" /> <input type="hidden"
-			name="boxchecked" value="0" /> 
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" /> 
 		<?php echo JHtml::_( 'form.token' ); ?>
 	
 	</div>	<!-- j-main-container -->	

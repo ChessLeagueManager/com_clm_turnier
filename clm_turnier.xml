@@ -33,8 +33,8 @@
 			are copied from /admin/ in the package -->
 		<menu>COM_CLM_TURNIER</menu>
 		<submenu>
-			<menu view="grand_prix">COM_CLM_TURNIER_GRAND_PRIX</menu>
-			<menu view="turniere">COM_CLM_TURNIER_TURNIER_DWZ_UPDATE</menu>
+			<menu view="grand_prix">COM_CLM_TURNIER_MENU_GRAND_PRIX</menu>
+			<menu view="turniere">COM_CLM_TURNIER_MENU_DWZ_UPDATE</menu>
 		</submenu>
 
 		<files folder="admin">

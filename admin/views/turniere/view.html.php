@@ -7,6 +7,13 @@
  * @author Andreas Hrubesch
  */
 
+/** 
+ * TODO
+ * Kategorie(en) anzeigen
+ * Reihenfolge anzeigen
+ * DWZ aktivieren ?!
+ * 
+ */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
@@ -71,7 +78,7 @@ class CLM_TurnierViewTurniere extends JViewLegacy {
             return false;
         }
         
-        // läd CLM Sprachen Dateien
+        // CLM Sprachen Dateien
         $lang = JFactory::getLanguage()->load('com_clm.turnier', JPATH_ADMINISTRATOR);
 
         $this->addToolbar();
@@ -85,10 +92,8 @@ class CLM_TurnierViewTurniere extends JViewLegacy {
      * @return void
      */
     protected function addToolbar() {
-        clm_core::$load->load_css("icons_images");
-        JToolBarHelper::title(JText::_('COM_CLM_TURNIER_TURNIER_DWZ_UPDATE'), 'clm_table_image_tournament');
-        
-        JToolBarHelper::custom('turniere.update_dwz', 'edit', '', JText::_('COM_CLM_TURNIER_UPDATE_DWZ')); // TODO
+        JToolBarHelper::title(JText::_('COM_CLM_TURNIER_TURNIER_TITLE'), 'clm_table_image_tournament');
+        JToolBarHelper::custom('turniere.update_dwz', 'edit', '', JText::_('COM_CLM_TURNIER_BUTTON_UPDATE_DWZ'));
     }
 
     /**

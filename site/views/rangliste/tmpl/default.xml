@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="COM_CLM_TURNIER_RANGLISTE_VIEW_DEFAULT_TITLE">
+		<message>COM_CLM_TURNIER_RANGLISTE_VIEW_DEFAULT_DESC
+		</message>
+	</layout>
+
+	<fields name="request">
+		<fieldset name="request">
+			<field name="kategorie" type="sql"
+				label="CATEGORY_ALLTIME"
+				query="SELECT a.id AS value, a.name AS kname FROM #__clm_categories AS a WHERE a.parentid = 0"
+				value_field="kname">
+			</field>
+
+			<field name="date_before" type="calendar" format="%Y-%m-%d"
+				label="COM_CLM_TURNIER_RANGLISTE_DATE_BEFORE" description="COM_CLM_TURNIER_RANGLISTE_DATE_BEFORE_DESC">
+			</field>
+		</fieldset>
+	</fields>
+
+	<fields name="params">
+		<fieldset name="basic" label="COM_MENUS_LAYOUT_FEATURED_OPTIONS">
+			<field name="show_title" type="radio" default="1" class="btn-group"
+				label="JGLOBAL_SHOW_TITLE_LABEL" description="JGLOBAL_SHOW_TITLE_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+
+			<field name="show_verein" type="radio" default="1" class="btn-group"
+				label="COM_CLM_TURNIER_RANGLISTE_SHOW_VEREIN_LABEL" description="COM_CLM_TURNIER_RANGLISTE_SHOW_VEREIN_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+
+			<field name="zps" type="text" default=""
+				label="COM_CLM_TURNIER_RANGLISTE_ZPS_LABEL" description="COM_CLM_TURNIER_RANGLISTE_ZPS_DESC">
+			</field>
+			<field name="col_dwz" type="text" defaults="DWZ"
+				label="COM_CLM_TURNIER_RANGLISTE_DWZ_LABEL" />
+		</fieldset>
+	</fields>
+</metadata>

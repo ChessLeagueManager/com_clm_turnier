@@ -10,6 +10,11 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+//
+jimport('clm.api.db_tournament_publish', JPATH_CLM_COMPONENT);
+jimport('clm.api.db_tournament_delDWZ', JPATH_CLM_COMPONENT);
+jimport('clm.api.db_tournament_genDWZ', JPATH_CLM_COMPONENT);
+
 /**
  * Grand Prix List Model
  */
@@ -43,10 +48,10 @@ class CLM_TurnierModelTurniere extends JModelList {
         
         // aktive Saison als default
         // TODO: ausgewählten Eintrag markieren
-        $db	= JFactory::getDBO();
+        $db = JFactory::getDBO();
         $query = ' SELECT id FROM #__clm_saison
 					WHERE published = 1 AND archiv = 0
-					ORDER BY name DESC LIMIT 1;' ;
+					ORDER BY name DESC LIMIT 1;';
         $db->setQuery($query);
         $sid = $db->loadObject()->id;
         $this->setState('filter.sid', $sid);
@@ -88,7 +93,6 @@ class CLM_TurnierModelTurniere extends JModelList {
         }
         
         // Filter by search in name
-        // TODO: SQL injection ? Auch bei Grand Prix !?
         $search = $this->getState('filter.search');
         if (! empty($search)) {
             if (stripos($search, 'id:') === 0) {
@@ -105,8 +109,58 @@ class CLM_TurnierModelTurniere extends JModelList {
         
         $query->order($db->escape($orderCol) . ' ' . $db->escape($orderDirn));
         
-        // var_dump($query->dump());
         return $query;
     }
 
+    /**
+     * Method to change the published state of one or more records.
+     *
+     * @param
+     *            array &$pks A list of the primary keys to change.
+     * @param integer $value
+     *            The value of the published state.
+     *            
+     * @return boolean True on success.
+     */
+    public function publish(&$pks, $value = 1) {
+        foreach ($pks as $i => $pk) {
+            clm_api_db_tournament_publish($pk, $value, false);
+        }
+        
+        return true;
+    }
+
+    /**
+     * Method to change the published state of one or more records.
+     *
+     * @param
+     *            array &$pks A list of the primary keys to change.
+     * @param integer $value
+     *            The value of the published state.
+     *            
+     * @return boolean True on success.
+     */
+    public function dwzPublish(&$pks, $value = 1) {
+        foreach ($pks as $i => $pk) {
+            switch ($value) {
+                case 0:
+                    // DWZ Auswertung entfernen
+                    clm_api_db_tournament_delDWZ($pk, false);
+                    break;
+                
+                case 1:
+                    // DWZ Auswertung berechnen
+                    clm_api_db_tournament_genDWZ($pk, false);
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        // if (in_array(false, $result, true)) {
+        // $this->setError("");
+        // return false;
+        // }
+        return true;
+    }
 }

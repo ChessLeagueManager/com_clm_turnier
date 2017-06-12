@@ -36,30 +36,31 @@ abstract class JHtmlTurnier {
         
         return $modus[0];
     }
-    
-    public static  function  getDatum($dateStart = null, $dateEnd = null) {
-        $value = 'unbestimmt'; // TODO
+
+    public static function getDatum($dateStart = null, $dateEnd = null) {
+        $value = JText::_('COM_CLM_TURNIER_UNKNOWN_DATE');
         if (! JHtmlTurnier::isDefaultDate($dateStart)) {
-            $value = $dateStart; // TODO Formatieren
+            $value = JHtml::_('date', $dateStart, JText::_('DATE_FORMAT_CLM'));
         }
         
         if (! JHtmlTurnier::isDefaultDate($dateEnd)) {
-            $value = $value . ' bis ' . $dateEnd;
+            $value = $value . ' ' . JText::_('TOURNAMENT_UNTIL') . ' ' . JHtml::_('date', $dateEnd, JText::_('DATE_FORMAT_CLM'));
         }
         return $value;
     }
-    
-    public static function getInofDWZ($params = null, $i) {
-        $published = 0;
-         return JHtml::_('grid.published', $published, $i, 'tick.png', 'publish_x.png', 'grand_prix.' );
+
+    public static function getInofDWZ($params = null, $i = 0) {
+        $turParams = new clm_class_params($params);
+        $published = $turParams->get('inofDWZ');
+        // TODO HELP TEXT ??
+        return JHtml::_('jgrid.published', $published, $i, 'turniere.dwz_');
     }
-    
-    // TODO: auslagern und mit Joomla abgeleichen
+
+    // TODO: auslagern und mit Joomla / CLM abgeleichen
     public static function isDefaultDate($value) {
-        if ($value == null || 
-            $value == '0000-00-00' || $value == '1970-01-01') {
-                return true;
-            }
+        if ($value == null || $value == '0000-00-00' || $value == '1970-01-01') {
+            return true;
+        }
         return false;
     }
 }
