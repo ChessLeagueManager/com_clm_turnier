@@ -10,6 +10,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+jimport('clm.classes.params', JPATH_CLM_COMPONENT);
+
 /**
  * HTML helper class
  */

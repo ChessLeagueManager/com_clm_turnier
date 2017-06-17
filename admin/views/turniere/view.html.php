@@ -17,6 +17,7 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+
 /**
  * View Klasse zur Darstellung der Turnier Liste.
  */
@@ -79,7 +80,9 @@ class CLM_TurnierViewTurniere extends JViewLegacy {
         }
         
         // CLM Sprachen Dateien
-        $lang = JFactory::getLanguage()->load('com_clm.turnier', JPATH_ADMINISTRATOR);
+        $lang = JFactory::getLanguage();
+        $lang->load('com_clm', JPATH_ADMINISTRATOR);
+        $lang->load('com_clm.turnier', JPATH_ADMINISTRATOR);
 
         $this->addToolbar();
         

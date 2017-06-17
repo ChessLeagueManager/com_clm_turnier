@@ -9,6 +9,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 //
+jimport('clm.index', JPATH_CLM_COMPONENT);
 jimport('clm.api.db_tournament_delDWZ', JPATH_CLM_COMPONENT);
 
 /**
@@ -28,6 +29,8 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 	function __construct($config = array()) {
 		parent::__construct($config);
 
+		JLoader::register('AdminLink', JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_clm' . DS . 'classes' . DS . 'AdminLink.class.php');
+		
 		// The default view for the display method.
 		$this->default_view = 'update_dwz';
 		
@@ -68,8 +71,7 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 		$this->jinput = JFactory::getApplication()->input;
 		
 		// Turnier ID ermitteln
-		$this->param['id'] = $this->jinput->getInt('id');
-		
+		$this->param['id'] = $this->jinput->getInt('id');		
 		$this->param['task'] = $this->jinput->getCmd('task');
 	}
 
@@ -112,7 +114,9 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 		$new_I0 = JRequest::getVar('new_I0', array(), '', 'array');
 		JArrayHelper::toInteger($new_I0, array());
 		
-		$row = & JTable::getInstance('turnier_teilnehmer', 'TableCLM');
+		// Set the table directory
+		JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_clm' . DS . 'tables');
+		$row = JTable::getInstance('turnier_teilnehmer', 'TableCLM');
 		
 		foreach ($cid as $playerid) {
 			$row->load($playerid); // Daten zu dieser ID laden

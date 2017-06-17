@@ -11,8 +11,11 @@
 defined('_JEXEC') or die('Restricted access');
 
 // Component definitions
-file_exists(__DIR__ . '/includes/defines.php') or die();
-include_once __DIR__ . '/includes/defines.php';
+if (! file_exists(JPATH_SITE . '/components/com_clm_turnier/includes/defines.php')) {
+    JError::raiseError('404', JText::_('COM_CLM_TURNIER_ERROR'));
+    return;
+}
+include_once JPATH_SITE . '/components/com_clm_turnier/includes/defines.php';
 
 // TODO: intelligenten CLMLoader ...
 jimport('joomla.filesystem.folder');

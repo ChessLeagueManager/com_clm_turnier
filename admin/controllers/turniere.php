@@ -12,6 +12,9 @@ defined('_JEXEC') or die('Restricted access');
 
 use Joomla\Utilities\ArrayHelper;
 
+// Import CLM Classes
+jimport('clm.index', JPATH_CLM_COMPONENT);
+
 /**
  * Turnier List Controller
  */

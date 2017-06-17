@@ -82,8 +82,7 @@ class CLM_TurnierViewGrand_prix extends JViewLegacy {
      * @return void
      */
     protected function addToolbar() {
-        clm_core::$load->load_css("icons_images");
-        JToolBarHelper::title(JText::_('COM_CLM_TURNIER_GRAND_PRIX'), 'clm_headmenu_sonderranglisten.png');
+        JToolBarHelper::title(JText::_('COM_CLM_TURNIER_GRAND_PRIX'));
         
         JToolBarHelper::publishList('grand_prix.publish');
         JToolBarHelper::unpublishList('grand_prix.unpublish');
