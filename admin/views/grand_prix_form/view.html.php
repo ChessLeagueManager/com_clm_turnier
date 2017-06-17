@@ -75,7 +75,7 @@ class CLM_TurnierViewGrand_Prix_Form extends JViewLegacy {
         $isNew = ($this->item->id == 0);
         $checkedOut = ! ($this->item->checked_out == 0 || $this->item->checked_out == $userId);
         
-        JToolbarHelper::title($isNew ? JText::_('COM_CLM_TURNIER_GRAND_PRIX_NEW') : JText::_('COM_CLM_TURNIER_GRAND_PRIX_EDIT'), 'clm_headmenu_sonderranglisten.png');
+        JToolbarHelper::title($isNew ? JText::_('COM_CLM_TURNIER_GRAND_PRIX_NEW') : JText::_('COM_CLM_TURNIER_GRAND_PRIX_EDIT'));
         
         // Build the actions for new and existing records.
         JToolBarHelper::apply('grand_prix_form.apply');
