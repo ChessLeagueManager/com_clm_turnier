@@ -19,7 +19,7 @@ jimport('includes.css_path', JPATH_CLM_TURNIER_COMPONENT);
 $config = clm_core::$db->config();
 
 // CLM-Container
-echo "<div id='clm'><div id='turnier_kategorie_gesamtwertung'>";
+echo "<div id='clm'><div id='turnier_rangliste'>";
 
 // Page Header
 if ($this->params->get('show_title')) {
@@ -75,7 +75,7 @@ if ($this->grand_prix->col_header) {
         ?>
 		
 	<tr class=<?php echo $zeilenr; ?>>
-		<td class="rang">  <?php echo ($row->gesamt <> $gb) ? $p : ''; ?>			</td>
+		<td class="rang">  <?php echo ($row->gesamt <> $gb) ? $p . '. ' : ''; ?>			</td>
 		<td class="titel"> <?php echo $row->titel; ?> 	</td>
 		<td class="name">  <?php echo $row->name; ?> 	</td>		
 		<?php

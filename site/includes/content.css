@@ -1,5 +1,9 @@
 /**
- * CSS Style für CLM Turnier Erweiterung
+ * Chess League Manager Turnier Erweiterungen 
+ * CSS Style
+ *
+ * Erweiterung der Styles aus 'clm_content.css'
+ *   #turnier_rangliste .rang .name
  *
  * @copyright (C) 2017 Andreas Hrubesch
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
@@ -7,68 +11,42 @@
  */
 @charset "UTF-8";
 
-/** Darstellung Turnier Kategorie Rangliste **/
-#turnier_kategorie_rangliste .rang {
-	width: 30px;
-	text-align: center;
-}
-
-#turnier_kategorie_rangliste .titel {
+/** **/
+#turnier_rangliste .titel {
 	width: 40px;
 	text-align: center;
 }
 
-#turnier_kategorie_rangliste .name {
+#turnier_rangliste .verein {
 	
 }
 
-#turnier_kategorie_rangliste .verein {
-	
-}
-
-#turnier_kategorie_rangliste .diff {
+/** Turnier DWZ Rangliste **/
+#turnier_rangliste .diff {
 	width: 50px;
 	text-align: center;
 	color: blue;
 }
 
-#turnier_kategorie_rangliste .dwz {
+#turnier_rangliste .dwz {
 	width: 40px;
 	text-align: right;
 	border-right-style: none !important;
 }
 
-#turnier_kategorie_rangliste .i0 {
+#turnier_rangliste .i0 {
 	width: 40px;
 	text-align: left;
 	border-left-style: none !important;
 }
 
-/** Darstellung Turnier Kategorie Gesamtwertung **/
-#turnier_kategorie_gesamtwertung .rang {
-	width: 30px;
-	text-align: center;
-}
-
-#turnier_kategorie_gesamtwertung .titel {
+/** Turnier Kategorie Gesamtwertung **/
+#turnier_rangliste .erg {
 	width: 40px;
 	text-align: center;
 }
 
-#turnier_kategorie_gesamtwertung .name {
-	
-}
-
-#turnier_kategorie_gesamtwertung .verein {
-	
-}
-
-#turnier_kategorie_gesamtwertung .erg {
-	width: 40px;
-	text-align: center;
-}
-
-#turnier_kategorie_gesamtwertung .gesamt {
+#turnier_rangliste .gesamt {
 	width: 40px;
 	text-align: center;
 }
