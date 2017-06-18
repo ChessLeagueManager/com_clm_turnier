@@ -70,7 +70,7 @@ if (count($this->rangliste) == 0) {
 		?>
 
 	<tr class=<?php echo $zeilenr . ' ' . $style; ?>>
-		<td class="rang">  <?php echo $p; ?>  			</td>
+		<td class="rang">  <?php echo $p . '. '; ?>		</td>
 		<td class="titel"> <?php echo $row->titel; ?> 	</td>
 		<td class="name">  <?php echo $row->name; ?>	</td>
 		<?php if ($colVerein) { ?>
