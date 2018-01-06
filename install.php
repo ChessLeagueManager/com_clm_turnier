@@ -40,11 +40,13 @@ class com_clm_turnierInstallerScript {
 		$this->lang = JFactory::getLanguage ();
 		
 		// de-DE.com_clm_turnier.sys.ini
+		$this->strings ['de-DE'] ['COM_CLM_TURNIER_DESC'] = 'ChessLeagueManager Turnier Erweiterung';
 		$this->strings ['de-DE'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager nicht installiert!';
 		$this->strings ['de-DE'] ['COM_CLM_TURNIER_DELETE_TABLES'] = 'Datenbank Tabelle(n) gelöscht.';
 		$this->strings ['de-DE'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Beispieldaten wurden importiert.';
-		
+
 		// en-EN.com_clm_turnier.sys.ini
+		$this->strings ['en-GB'] ['COM_CLM_TURNIER_DESC'] = 'ChessLeagueManager Tournament Extension';
 		$this->strings ['en-GB'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager not installed!';
 		$this->strings ['en-GB'] ['COM_CLM_TURNIER_DELETE_TABLES'] = 'Removing database tables.';
 		$this->strings ['en-GB'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Installing sample data.';
@@ -79,7 +81,8 @@ class com_clm_turnierInstallerScript {
 	 * @return void
 	 */
 	public function install($parent) {
-		// NOP
+	    // replace the extension's description
+	    $parent->getParent()->message = $this->_('COM_CLM_TURNIER_DESC');
 	}
 	
 	/**
