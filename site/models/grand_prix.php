@@ -208,17 +208,32 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
     /**
      * ermittelt die veröffentlichten Turniere einer Kategorie (Veranstaltung).
      *
+     * @param integer $orderBy
+     *            Turnierereihenfolge
+     *            
      * @return array veröffentlichte Turniere
      */
-    protected function _loadTurnierListe() {
+    protected function _loadTurnierListe($orderBy) {
         $catidEdition = (int) $this->getState('grand_prix.catidEdition');
         
         // Create a new query object
         $query = $this->_db->getQuery(true);
-        $query->select($this->_db->quoteName(explode(',', 't1.id,t1.dateStart')));
+        $query->select($this->_db->quoteName(explode(',', 't1.id,t1.dateStart,t1.ordering')));
         $query->from($this->_db->quoteName('#__clm_turniere', 't1'));
         $query->where($this->_db->quoteName('t1.published') . ' = 1');
         $query->andWhere($this->_db->quoteName('t1.catidEdition') . ' = ' . $catidEdition);
+        
+        switch ($orderBy) {
+            case 1:
+                $query->order($this->_db->quoteName('t1.dateStart') . ' ASC');
+                break;
+            case 2:
+                $query->order($this->_db->quoteName('t1.ordering') . ' ASC');
+                break;
+            case 3:
+                $query->order($this->_db->quoteName('t1.id') . ' ASC');
+                break;
+        }
         
         $this->_db->setQuery($query);
         $list = $this->_db->loadObjectList();
@@ -253,10 +268,13 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      * Ein negatives Einzelergbnis bedeutet, dass diese in der Gesamtwertung
      * nicht berücksichtigt ist.
      * </p>
+     *
+     * @param integer $orderBy
+     *            Turnierereihenfolge
      */
-    protected function _getGesamtwertung() {
+    protected function _getGesamtwertung($orderBy) {
         // veröffentlichte Turniere ermitteln
-        $list = $this->_loadTurnierListe();
+        $list = $this->_loadTurnierListe($orderBy);
         
         // Tunrierergebnisse berechnen
         $ii = 0;
@@ -316,6 +334,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
         
         $catidEdition = $app->input->getInt('kategorie');
         $this->setState('grand_prix.catidEdition', $catidEdition);
+        
+        $orderBy = $app->input->getInt('order_by');
+        $this->setState('grand_prix.order_by', $orderBy);
     }
 
     /**
@@ -323,11 +344,14 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @param integer $pk
      *            Id der Grand Prix Wertung
+     * @param integer $orderBy
+     *            Turnierereihenfolge
      *            
      * @return mixed Grand Prix Object, false im Fehlerfall
      */
-    public function getItem($pk = null) {
+    public function getItem($pk = null, $orderBy = null) {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
+        $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
         if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
             
             // Grand Prix Wertung ermitteln
@@ -344,13 +368,13 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
             
             // Grand Prix Gesamtwertung berechnen
             try {
-                $this->_getGesamtwertung();
+                $this->_getGesamtwertung($orderBy);
             } catch (Exception $e) {
                 $this->setError($e->getMessage());
                 return false;
             }
         }
-        
+
         return $this->grandPrix;
     }
 
@@ -359,13 +383,17 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @param integer $pk
      *            Id der Grand Prix Wertung
+     * @param integer $orderBy
+     *            Turnierereihenfolge
      *            
      * @return Ambigous <multitype:, stdClass>
      */
-    public function getGesamtWertung($pk = null) {
+    public function getGesamtWertung($pk = null, $orderBy = 0) {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
+        $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
+        
         if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
-            $this->getItem($pk);
+            $this->getItem($pk, $orderBy);
         }
         
         return $this->gesamtergebnis;

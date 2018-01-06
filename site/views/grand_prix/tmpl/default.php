@@ -47,16 +47,16 @@ if (count($this->gesamtwertung) == 0) {
 		<th class="titel">Titel</th>
 		<th class="name">Name</th>		
 		<?php
-    for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
+
+		for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
         ?>
 		<th class="erg">
-			<?php
-        
-if ($this->grand_prix->col_header) {
-            echo strftime("%b", mktime(0, 0, 0, $ii));
-        } else {
-            echo $ii;
-        }
+		<?php
+    		if (is_object($this->grand_prix) && $this->grand_prix->col_header) {
+                echo strftime("%b", mktime(0, 0, 0, $ii));
+            } else {
+                echo $ii;
+            }
         ?>
 		</th>
 		<?php } ?>
