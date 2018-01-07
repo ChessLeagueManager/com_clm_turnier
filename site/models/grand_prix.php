@@ -210,7 +210,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @param integer $orderBy
      *            Turnierereihenfolge
-     *            
+     *            <ul>
+     *            <li>1: Turnierdatum</li>
+     *            <li>2: Turnierreihenfolge</li>
+     *            <li>3: Turnier ID</li>
+     *            </ul>
      * @return array veröffentlichte Turniere
      */
     protected function _loadTurnierListe($orderBy) {
@@ -336,6 +340,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
         $this->setState('grand_prix.catidEdition', $catidEdition);
         
         $orderBy = $app->input->getInt('order_by');
+        if ($orderBy == 0) {
+             $orderBy = $app->getParams()->get('order_by');
+        }
         $this->setState('grand_prix.order_by', $orderBy);
     }
 
@@ -352,6 +359,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
     public function getItem($pk = null, $orderBy = null) {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
         $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
+
         if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
             
             // Grand Prix Wertung ermitteln

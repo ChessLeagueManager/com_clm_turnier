@@ -34,7 +34,7 @@
 			</field>
 			<field name="order_by" type="list" default="0"
 				label="COM_CLM_TURNIER_FIELD_ORDER_BY_LABEL" description="COM_CLM_TURNIER_FIELD_ORDER_BY_DESC">
-				<option value="9">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
+				<option value="0">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
 				<option value="1">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_1</option>
 				<option value="2">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_2</option>
 				<option value="3">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_3</option>

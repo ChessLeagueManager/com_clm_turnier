@@ -48,7 +48,7 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
         }
         
         $this->state = $this->get('State');
-        $this->grand_prix = $this->get('Item', $this->params->get('order_by'));
+        $this->grand_prix = $this->get('Item');
         $this->gesamtwertung = $this->get('GesamtWertung');
         $this->anzahlTurniere = $this->get('AnzahlTurniere');
         
