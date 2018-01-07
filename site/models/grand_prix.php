@@ -13,7 +13,8 @@ defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
 /**
  * Grand Prix Model Class
  */
-class CLM_TurnierModelGrand_Prix extends JModelLegacy {
+class CLM_TurnierModelGrand_Prix extends JModelLegacy
+{
 
     // Grand Prix Wertung
     protected $grandPrix = null;
@@ -35,7 +36,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *            
      * @return array Verteilung der Punkte
      */
-    protected function _getPunkteVerteilung($pk, $wertung) {
+    protected function _getPunkteVerteilung($pk, $wertung)
+    {
         $query = $this->_db->getQuery(true);
         
         $query->select('t1.sum_punkte, count(*) AS anzahl');
@@ -75,7 +77,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *            
      * @return array Rangliste
      */
-    protected function _loadTurnierErgebnis($pk) {
+    protected function _loadTurnierErgebnis($pk)
+    {
         $query = $this->_db->getQuery(true);
         $query->select($this->_db->quoteName(explode(',', 't2.name,t2.verein,t2.titel,t2.sum_punkte,t2.rankingPos,t2.sumTiebr1,t2.sumTiebr2,t2.sumTiebr3,t1.dateStart,t1.runden,t1.dg')));
         $query->from($this->_db->quoteName('#__clm_turniere', 't1'));
@@ -96,10 +99,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @param integer $ii
      *            Index im Gesamtergebnis
-     * @param unknown $row            
-     * @param float $punkte            
+     * @param unknown $row
+     * @param float $punkte
      */
-    protected function _setErgebnis($ii, $row, $punkte) {
+    protected function _setErgebnis($ii, $row, $punkte)
+    {
         if (isset($this->gesamtergebnis[$row->name])) {
             $spieler = $this->gesamtergebnis[$row->name];
         } else {
@@ -129,7 +133,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      * @param integer $ii
      *            Index im Gesamtergebnis
      */
-    protected function _getTurnierErgebnisSumme($pk, $ii) {
+    protected function _getTurnierErgebnisSumme($pk, $ii)
+    {
         $list = $this->_loadTurnierErgebnis($pk);
         foreach ($list as $row) {
             $this->_setErgebnis($ii, $row, $row->sum_punkte);
@@ -151,7 +156,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      * @param integer $ii
      *            Index im Gesamtergebnis
      */
-    protected function _getTurnierErgebnisProzentual($pk, $ii) {
+    protected function _getTurnierErgebnisProzentual($pk, $ii)
+    {
         $list = $this->_loadTurnierErgebnis($pk);
         $count = $list[0]->runden * $list[0]->dg;
         foreach ($list as $row) {
@@ -184,7 +190,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      * @param integer $ii
      *            Index im Gesamtergebnis
      */
-    protected function _getTurnierErgebnisAbsolut($pk, $ii) {
+    protected function _getTurnierErgebnisAbsolut($pk, $ii)
+    {
         $list = $this->_loadTurnierErgebnis($pk);
         
         if ($this->grandPrix->typ_calculation == null || trim($this->grandPrix->typ_calculation == '')) {
@@ -210,19 +217,46 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @param integer $orderBy
      *            Turnierereihenfolge
-     *            
+     *            <ul>
+     *            <li>1: Turnierdatum</li>
+     *            <li>2: Turnierreihenfolge</li>
+     *            <li>3: Turnier ID</li>
+     *            </ul>
      * @return array veröffentlichte Turniere
      */
-    protected function _loadTurnierListe($orderBy) {
-        $catidEdition = (int) $this->getState('grand_prix.catidEdition');
+    protected function _loadTurnierListe($orderBy)
+    {
+        $where = array();
+        
+        // Turnierkategorie
+        $catid = (int) $this->getState('grand_prix.catidEdition');
+        if ($catid > 0) {
+            array_push($where, $this->_db->quoteName('t1.catidAlltime') . ' = ' . $catid);
+            array_push($where, $this->_db->quoteName('t1.catidEdition') . ' = ' . $catid);
+        }
+
+        // Array der Turnier ID's
+        $tids = $this->getState('grand_prix.tids');
+        if ($tids) {
+            $list = array_diff(array_map("intval", $tids), [0]);
+            if (count($list) > 0) {
+                array_push($where, $this->_db->quoteName('t1.id') . ' IN(' . implode(', ', $list) . ')');
+            }
+        }
+        
+        // keine Parameter 
+        if (count($where) == 0) {
+            return array();
+        }
         
         // Create a new query object
         $query = $this->_db->getQuery(true);
         $query->select($this->_db->quoteName(explode(',', 't1.id,t1.dateStart,t1.ordering')));
         $query->from($this->_db->quoteName('#__clm_turniere', 't1'));
         $query->where($this->_db->quoteName('t1.published') . ' = 1');
-        $query->andWhere($this->_db->quoteName('t1.catidEdition') . ' = ' . $catidEdition);
+        $query->andWhere($where);
         
+        // TODO: default Order == 1 ?!
         switch ($orderBy) {
             case 1:
                 $query->order($this->_db->quoteName('t1.dateStart') . ' ASC');
@@ -272,7 +306,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      * @param integer $orderBy
      *            Turnierereihenfolge
      */
-    protected function _getGesamtwertung($orderBy) {
+    protected function _getGesamtwertung($orderBy)
+    {
         // veröffentlichte Turniere ermitteln
         $list = $this->_loadTurnierListe($orderBy);
         
@@ -325,17 +360,27 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *
      * @return void
      */
-    protected function populateState() {
+    protected function populateState()
+    {
         $app = JFactory::getApplication('site');
         
         // Load state from the request.
         $pk = $app->input->getInt('grand_prix');
         $this->setState('grand_prix.id', $pk);
         
+        // Turnierkategorie
         $catidEdition = $app->input->getInt('kategorie');
         $this->setState('grand_prix.catidEdition', $catidEdition);
         
+        // Turnier ID's
+        $tids = $app->input->get('turniere');
+        $this->setState('grand_prix.tids', $tids);
+        
+        // Sortierung
         $orderBy = $app->input->getInt('order_by');
+        if ($orderBy == 0) {
+            $orderBy = $app->getParams()->get('order_by');
+        }
         $this->setState('grand_prix.order_by', $orderBy);
     }
 
@@ -349,9 +394,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *            
      * @return mixed Grand Prix Object, false im Fehlerfall
      */
-    public function getItem($pk = null, $orderBy = null) {
+    public function getItem($pk = null, $orderBy = null)
+    {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
         $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
+        
         if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
             
             // Grand Prix Wertung ermitteln
@@ -374,7 +421,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
                 return false;
             }
         }
-
+        
         return $this->grandPrix;
     }
 
@@ -388,7 +435,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *            
      * @return Ambigous <multitype:, stdClass>
      */
-    public function getGesamtWertung($pk = null, $orderBy = 0) {
+    public function getGesamtWertung($pk = null, $orderBy = 0)
+    {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
         $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
         
@@ -407,7 +455,8 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
      *            
      * @return integer Anzahl der Turniere
      */
-    public function getAnzahlTurniere($pk = null) {
+    public function getAnzahlTurniere($pk = null)
+    {
         $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
         if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
             $this->getItem($pk);

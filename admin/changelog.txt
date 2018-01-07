@@ -12,6 +12,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 1.1.0 - [??-02-2018] - - - - - - - - - - - - - - - - - - - - -
++ Turnierauswahl erweitert
+  Auswahl über Kategorie saisonübergreifend oder Veranstaltung sowie von 
+  einzelnen Turnieren
+
 - - - - - 1.0.0 - [07-01-2018] - - - - - - - - - - - - - - - - - - - - -
 # Fehlerhafte Bezeichnung der Komponenten in Anschluss an die Installation
 + Auswahl der Turnierreihenfolge

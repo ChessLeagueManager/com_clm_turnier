@@ -2,9 +2,9 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>Januar 2018</creationDate>
+	<creationDate>Februar 2018</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>1.0.0-1</version>
+	<version>1.1.0-1</version>
 	<description>COM_CLM_TURNIER_DESC</description>
 
 	<!-- Site Main File Copy Section -->

@@ -14,13 +14,25 @@
 				value_field="kname">
 			</field>
 
-			<field name="kategorie" required="true" type="sql"
-				label="CATEGORY_EDITION"
-				description="CATEGORY_EDITION_DESC"
-				query="SELECT a.id AS value, CONCAT(b.name, ' > ', a.name) AS kname FROM #__clm_categories a 
-					JOIN #__clm_categories b ON b.id = a.parentid
-					WHERE a.parentid != 0 ORDER BY b.name, a.name DESC"
+			<field name="kategorie" type="sql" default="0"
+				label="CATEGORY_NAME"
+				description="CATEGORY_NAME_SELECT_DESC"
+				query="SELECT a.id AS value, a.name AS kname FROM #__clm_categories a WHERE a.parentid = 0
+					UNION
+					SELECT a.id AS value, CONCAT(b.name, ' > ', a.name) AS kname FROM #__clm_categories a 
+						JOIN #__clm_categories b ON b.id = a.parentid
+					ORDER BY kname ASC"
 				value_field="kname">
+				<option value="0">PARAMETER_SELECT</option>
+			</field>
+			
+			<field name="turniere" type="sql" default="0" 
+				label="TOURNAMENTS" 
+				description="TOURNAMENTS_SELECT_DESC" 
+				query="SELECT a.id AS value, a.name AS tname FROM #__clm_turniere a WHERE a.published = 1 ORDER BY a.datestart" 
+				value_field="tname"
+				multiple="multiple">
+				<option value="0">PARAMETER_SELECT</option>
 			</field>
 		</fieldset>
 	</fields>
@@ -34,7 +46,7 @@
 			</field>
 			<field name="order_by" type="list" default="0"
 				label="COM_CLM_TURNIER_FIELD_ORDER_BY_LABEL" description="COM_CLM_TURNIER_FIELD_ORDER_BY_DESC">
-				<option value="9">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
+				<option value="0">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
 				<option value="1">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_1</option>
 				<option value="2">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_2</option>
 				<option value="3">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_3</option>
