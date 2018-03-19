@@ -67,6 +67,7 @@ class CLM_TurnierViewGrand_prix extends JViewLegacy {
         
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
+            // TODO: throw new Exception(implode("\n", $errors), 500);
             JError::raiseError(500, implode("\n", $errors));
             return false;
         }
@@ -83,12 +84,16 @@ class CLM_TurnierViewGrand_prix extends JViewLegacy {
      */
     protected function addToolbar() {
         JToolBarHelper::title(JText::_('COM_CLM_TURNIER_GRAND_PRIX'));
-        
-        JToolBarHelper::publishList('grand_prix.publish');
-        JToolBarHelper::unpublishList('grand_prix.unpublish');
-        JToolBarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'grand_prix.delete');
-        JToolBarHelper::editList('grand_prix_form.edit');
-        JToolBarHelper::addNew('grand_prix_form.add');
+
+        if (clm_core::$access->access('BE_tournament_create')) {
+            JToolBarHelper::publishList('grand_prix.publish');
+            JToolBarHelper::unpublishList('grand_prix.unpublish');
+            JToolBarHelper::deleteList('JGLOBAL_CONFIRM_DELETE', 'grand_prix.delete');
+            JToolBarHelper::editList('grand_prix_form.edit');
+            JToolBarHelper::addNew('grand_prix_form.add');
+        } else {
+            JToolBarHelper::editList('grand_prix_form.edit');
+        }
     }
 
     /**

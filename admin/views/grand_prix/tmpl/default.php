@@ -21,6 +21,8 @@ $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
 $saveOrder = $listOrder == 'a.name';
 
+$canChange = clm_core::$access->access('BE_tournament_create');
+
 if ($saveOrder) {
     $saveOrderingUrl = 'index.php?option=com_clm_turnier&task=grand_prix.saveOrderAjax&tmpl=component';
     JHtml::_('sortablelist.sortable', 'grand_prix_list', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
@@ -79,9 +81,8 @@ $n = count($this->items);
         
         $canCreate = true;
         $canEdit = true;
-        $canCheckin = $user->authorise('core.manage', 'com_checkin') || $row->checked_out == $userId || $row->checked_out == 0;
         $canEditOwn = true;
-        $canChange = true;
+        $canCheckin = $user->authorise('core.manage', 'com_checkin') || $row->checked_out == $userId || $row->checked_out == 0;
         ?>
 				<tr class="<?php echo 'row'. $k; ?>">
 					<td class="center"><?php echo $k; ?></td>
@@ -93,17 +94,17 @@ $n = count($this->items);
 							<?php echo JHtml::_('jgrid.checkedout', $i, $row->editor, $row->checked_out_time, 'grand_prix.', $canCheckin); ?>
 						<?php endif; ?>
 						<?php if ($canEdit || $canEditOwn) : ?>
-							<span class="editlinktip hasTip"
-						title="<?php echo JText::_( 'COM_CLM_TURNIER_GRAND_PRIX_EDIT' );?>">
+						<span class="editlinktip hasTip"
+							title="<?php echo JText::_( 'COM_CLM_TURNIER_GRAND_PRIX_EDIT' );?>">
 							<a
 							href="<?php echo JRoute::_('index.php?option=com_clm_turnier&task=grand_prix_form.edit&id=' . (int) $row->id); ?>"><?php echo $this->escape($row->name); ?></a>
-					</span>
+						</span>
 							<?php else : ?>
 							<?php echo $this->escape($row->name); ?>
 						<?php endif; ?>
 					</td>
 					<td class="title"><?php echo JHtml::_('grand_prix.getGrandPrixModus', $row->typ);?></td>
-					<td class="center"><?php echo JHtml::_('grid.published', $row->published, $i, 'tick.png', 'publish_x.png', 'grand_prix.' );?></td>
+					<td class="center"><?php echo JHtml::_('jgrid.published', $row->published, $i, 'grand_prix.', $canChange); ?></td>
 					<td class="center"><?php echo $row->id; ?></td>
 				</tr>
 				<?php } ?>

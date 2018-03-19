@@ -78,9 +78,11 @@ class CLM_TurnierViewGrand_Prix_Form extends JViewLegacy {
         JToolbarHelper::title($isNew ? JText::_('COM_CLM_TURNIER_GRAND_PRIX_NEW') : JText::_('COM_CLM_TURNIER_GRAND_PRIX_EDIT'));
         
         // Build the actions for new and existing records.
-        JToolBarHelper::apply('grand_prix_form.apply');
-        JToolBarHelper::save('grand_prix_form.save');
-        JToolBarHelper::save2copy('grand_prix_form.save2copy');
+        if (clm_core::$access->access('BE_tournament_create')) {
+            JToolBarHelper::apply('grand_prix_form.apply');
+            JToolBarHelper::save('grand_prix_form.save');
+            JToolBarHelper::save2copy('grand_prix_form.save2copy');
+        }
         JToolbarHelper::cancel('grand_prix_form.cancel');
     }
 }

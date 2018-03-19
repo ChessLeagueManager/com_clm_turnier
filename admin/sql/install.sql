@@ -5,8 +5,8 @@
 CREATE TABLE IF NOT EXISTS `#__clm_turniere_grand_prix` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `published` tinyint(1) NOT NULL DEFAULT '0',  
-  `checked_out` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `published` tinyint(4) NOT NULL DEFAULT '0',  
+  `checked_out` int(10) unsigned NOT NULL DEFAULT '0',
   `checked_out_time` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 
   `typ` tinyint(1) unsigned DEFAULT '0',		-- Modus

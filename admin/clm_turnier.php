@@ -10,18 +10,24 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// Chess League Manager installiert ?
-if (! JComponentHelper::isInstalled('com_clm')) {
-    JError::raiseError('404', JText::_('COM_CLM_TURNIER_REQ_COM_CLM'));
-    return;
+// Access check: is this user allowed to access the backend of this component?
+if (!JFactory::getUser()->authorise('core.manage', 'com_clm_turnier')) {
+    throw new Exception(JText::_('JERROR_ALERTNOAUTHOR'));
 }
 
 // Component definitions
 if (! file_exists(JPATH_SITE . '/components/com_clm_turnier/includes/defines.php')) {
-    JError::raiseError('404', JText::_('COM_CLM_TURNIER_ERROR'));
-    return;
+    throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), '404');
 }
 include_once JPATH_SITE . '/components/com_clm_turnier/includes/defines.php';
+
+// Chess League Manager installiert ?
+if (! JComponentHelper::isInstalled('com_clm') 
+        || ! file_exists(JPATH_CLM_COMPONENT . '/clm/index.php')) {
+    throw new Exception(JText::_('COM_CLM_TURNIER_REQ_COM_CLM'), '404');
+}
+include_once JPATH_CLM_COMPONENT . '/clm/index.php';
+
 
 echo '<div id="clm"><div class="clm">';
 
