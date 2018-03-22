@@ -40,22 +40,27 @@
 			<filename>controller.php</filename>
 			<filename>access.xml</filename>
 			<filename>changelog.txt</filename>
+			
 			<folder>controllers</folder>
 			<folder>helpers</folder>
 			<folder>models</folder>
 			<folder>tables</folder>
 			<folder>views</folder>
+			
+			<!-- translation managing menus and install scripts -->
+			<folder>language/de-DE</folder>
+			<folder>language/en-GB</folder>
 
 			<!-- SQL files section -->
 			<folder>sql</folder>
+			
 		</files>
 
 		<languages folder="admin/language">
 			<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
-			<language tag="de-DE">de-DE.com_clm_turnier.sys.ini</language>
 			<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
-			<language tag="en-GB">en-GB.com_clm_turnier.sys.ini</language>
 		</languages>
+			
 	</administration>
 
 	<scriptfile>install.php</scriptfile>

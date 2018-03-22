@@ -28,50 +28,7 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
  * @license GNU General Public License version 2 or later; see LICENSE.txt
  */
 class com_clm_turnierInstallerScript {
-	// Übersetzungen
-	protected $strings = array ();
-	
-	// JLanguage Objekt
-	protected $lang;
-	
-	/**
-	 */
-	public function __construct() {
-		$this->lang = JFactory::getLanguage ();
-		
-		// de-DE.com_clm_turnier.sys.ini
-		$this->strings ['de-DE'] ['COM_CLM_TURNIER_DESC'] = 'ChessLeagueManager Turnier Erweiterung';
-		$this->strings ['de-DE'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager nicht installiert!';
-		$this->strings ['de-DE'] ['COM_CLM_TURNIER_DELETE_TABLES'] = 'Datenbank Tabelle(n) gelöscht.';
-		$this->strings ['de-DE'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Beispieldaten wurden importiert.';
 
-		// en-EN.com_clm_turnier.sys.ini
-		$this->strings ['en-GB'] ['COM_CLM_TURNIER_DESC'] = 'ChessLeagueManager Tournament Extension';
-		$this->strings ['en-GB'] ['COM_CLM_TURNIER_REQ_COM_CLM'] = 'Chess Leage Manager not installed!';
-		$this->strings ['en-GB'] ['COM_CLM_TURNIER_DELETE_TABLES'] = 'Removing database tables.';
-		$this->strings ['en-GB'] ['COM_CLM_TURNIER_INSTALL_SAMPLES'] = 'Installing sample data.';
-	}
-	
-	/**
-	 * Translate function, mimics the php gettext (alias _) function.
-	 *
-	 * @param string $string
-	 *        	The string to translate
-	 * @return string The translation of the string
-	 */
-	protected function _($text) {
-		if ($this->lang->hasKey ( $text )) {
-			return $this->lang->_ ( $text );
-		}
-		
-		$tag = $this->lang->getTag ();
-		if (isset ( $this->strings [$tag] [$text] )) {
-			return $this->strings [$tag] [$text];
-		}
-		
-		return $text;
-	}
-	
 	/**
 	 * This method is called after a component is installed.
 	 *
@@ -82,7 +39,7 @@ class com_clm_turnierInstallerScript {
 	 */
 	public function install($parent) {
 	    // replace the extension's description
-	    $parent->getParent()->message = $this->_('COM_CLM_TURNIER_DESC');
+	    $parent->getParent()->message = JText::_('COM_CLM_TURNIER_DESC');
 	}
 	
 	/**
@@ -112,7 +69,7 @@ class com_clm_turnierInstallerScript {
 			$element = new SimpleXMLElement ( '<sql><file driver="mysql" charset="utf8">sql/uninstall.sql</file></sql>' );
 			$result = $parent->getParent ()->parseSQLFiles ( $element );
 			
-			echo $this->_ ( 'COM_CLM_TURNIER_DELETE_TABLES' );
+			echo JText::_ ( 'COM_CLM_TURNIER_DELETE_TABLES' );
 		}
 	}
 	
@@ -125,7 +82,16 @@ class com_clm_turnierInstallerScript {
 	 * @return void
 	 */
 	public function update($parent) {
-		// NOP
+        // remove depricated language files
+        foreach (array(
+            'de-DE/de-DE.com_clm_turnier.sys.ini',
+            'en-GB/en-GB.com_clm_turnier.sys.ini'
+        ) as $file) {
+            $filename = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $file;
+            if (file_exists($filename)) {
+                unlink($filename);
+            }
+        }
 	}
 	
 	/**
@@ -145,7 +111,7 @@ class com_clm_turnierInstallerScript {
 	public function preflight($type, $parent) {
 		// Chess League Manager installiert ?
 		if (! JComponentHelper::isInstalled ( 'com_clm' )) {
-			JError::raiseError ( '404', $this->_ ( 'COM_CLM_TURNIER_REQ_COM_CLM' ) );
+		    JError::raiseError ( '404', JText::_ ( 'COM_CLM_TURNIER_REQ_COM_CLM' ) );
 		}
 	}
 	
@@ -173,7 +139,7 @@ class com_clm_turnierInstallerScript {
 			$element = new SimpleXMLElement ( '<sql><file driver="mysql" charset="utf8">sql/samples.sql</file></sql>' );
 			$result = $parent->getParent ()->parseSQLFiles ( $element );
 			
-			echo $this->_ ( 'COM_CLM_TURNIER_INSTALL_SAMPLES' );
+			echo JText::_ ( 'COM_CLM_TURNIER_INSTALL_SAMPLES' );
 		}
 	}
 }
