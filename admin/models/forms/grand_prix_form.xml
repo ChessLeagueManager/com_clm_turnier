@@ -60,6 +60,20 @@
 		description="COM_CLM_TURNIER_FIELD_BEST_OF_DESC"
 	/>		
 
+	<field
+		name="num_tournaments"
+		type="text"
+		label="COM_CLM_TURNIER_FIELD_NUM_TOURNAMENTS_LABEL"
+		description="COM_CLM_TURNIER_FIELD_NUM_TOURNAMENTS_DESC"
+	/>		
+
+	<field
+		name="extra_points"
+		type="text"
+		label="COM_CLM_TURNIER_FIELD_EXTRA_POINTS_LABEL"
+		description="COM_CLM_TURNIER_FIELD_EXTRA_POINTS_DESC"
+	/>		
+
 	<field 
 		name="col_header" 
 		type="radio" 

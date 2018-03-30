@@ -17,6 +17,7 @@ $ -> Language fix or change
   Auswahl über Kategorie saisonübergreifend oder Veranstaltung sowie von 
   einzelnen Turnieren
 + Joomla / CLM Berechtigungen
++ Zusatzpunkte für regelmäßige Turnierteilnahme
 $ Backend Übersetzungen (*.sys.ini) in's Komponentenverzeichnis verschoben
   Damit werden diese bei der Erstinstallation der Komponente genutzt. 
 

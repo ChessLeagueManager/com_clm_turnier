@@ -347,6 +347,16 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             }
         }
         
+        // Zusatzpunkte
+        if ($this->grandPrix->num_tournaments > 0 && $this->grandPrix->extra_points > 0) {
+            foreach ($this->gesamtergebnis as $spieler) {
+                $nt = count($spieler->ergebnis) - $this->grandPrix->num_tournaments + 1;
+                if ($nt > 0) {
+                    $spieler->gesamt += ($nt * $this->grandPrix->extra_points);
+                }
+            }
+        }
+        
         // Gesamtwertung sortieren
         usort($this->gesamtergebnis, function ($a, $b) {
             return $a->gesamt < $b->gesamt;

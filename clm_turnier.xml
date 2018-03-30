@@ -39,6 +39,7 @@
 			<filename>clm_turnier.php</filename>
 			<filename>controller.php</filename>
 			<filename>access.xml</filename>
+			<filename>config.xml</filename>
 			<filename>changelog.txt</filename>
 			
 			<folder>controllers</folder>
