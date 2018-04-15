@@ -12,7 +12,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-- - - - - 2.0.0 - [??-03-2018] - - - - - - - - - - - - - - - - - - - - -
+- - - - - 2.0.0 - [15-05-2018] - - - - - - - - - - - - - - - - - - - - -
 + Turnierauswahl erweitert
   Auswahl über Kategorie saisonübergreifend oder Veranstaltung sowie von 
   einzelnen Turnieren

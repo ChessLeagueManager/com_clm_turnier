@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -11,28 +11,26 @@
 defined('_JEXEC') or die('Restricted access');
 
 // Component definitions
-if (! file_exists(JPATH_SITE . '/components/com_clm_turnier/includes/defines.php')) {
-    JError::raiseError('404', JText::_('COM_CLM_TURNIER_ERROR'));
-    return;
+if (! jimport('components.com_clm_turnier.includes.defines', JPATH_SITE)) {
+    throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), '404');
 }
-include_once JPATH_SITE . '/components/com_clm_turnier/includes/defines.php';
 
 // TODO: intelligenten CLMLoader ...
 jimport('joomla.filesystem.folder');
 
 // lädt alle CLM-Klassen - quasi autoload
-$classpath = JPATH_CLM_COMPONENT . DS . 'classes';
+$classpath = JPATH_CLM_COMPONENT . DIRECTORY_SEPARATOR . 'classes';
 foreach (JFolder::files($classpath) as $file) {
-    JLoader::register(str_replace('.class.php', '', $file), $classpath . DS . $file);
+    JLoader::register(str_replace('.class.php', '', $file), $classpath . DIRECTORY_SEPARATOR . $file);
 }
 
-$classpath = JPATH_SITE . DS . 'components' . DS . 'com_clm_turnier' . DS . 'classes';
+$classpath = JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'classes';
 foreach (JFolder::files($classpath) as $file) {
-    JLoader::register(str_replace('.class.php', '', $file), $classpath . DS . $file);
+    JLoader::register(str_replace('.class.php', '', $file), $classpath . DIRECTORY_SEPARATOR . $file);
 }
 
 // Set the table directory
-JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_clm_turnier' . DS . 'tables');
+JTable::addIncludePath(JPATH_ADMIN_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'tables');
 
 // set current locale for date and time formatting with strftime()
 setlocale(LC_TIME, JFactory::getLanguage()->getLocale());

@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -111,7 +111,7 @@ class com_clm_turnierInstallerScript {
 	public function preflight($type, $parent) {
 		// Chess League Manager installiert ?
 		if (! JComponentHelper::isInstalled ( 'com_clm' )) {
-		    JError::raiseError ( '404', JText::_ ( 'COM_CLM_TURNIER_REQ_COM_CLM' ) );
+		    throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), 404);
 		}
 	}
 	

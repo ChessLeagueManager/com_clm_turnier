@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 

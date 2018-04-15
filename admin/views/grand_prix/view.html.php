@@ -1,9 +1,9 @@
 <?php
-/** 
+/**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -67,9 +67,7 @@ class CLM_TurnierViewGrand_prix extends JViewLegacy {
         
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {
-            // TODO: throw new Exception(implode("\n", $errors), 500);
-            JError::raiseError(500, implode("\n", $errors));
-            return false;
+            throw new Exception(implode("\n", $errors), 500);
         }
         
         $this->addToolbar();
