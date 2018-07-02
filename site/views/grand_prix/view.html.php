@@ -52,10 +52,8 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
         $this->gesamtwertung = $this->get('GesamtWertung');
         $this->anzahlTurniere = $this->get('AnzahlTurniere');
         
-        // tableWithFloatingHeader
-        $document = JFactory::getDocument();
-        $document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
-        $document->addScript(JURI::base() . 'components/com_clm/javascript/updateTableHeaders.js');
+        // Tables with floating headers
+        JHtml::_('thead.framework');
         
         // Display the view
         parent::display($tpl);
