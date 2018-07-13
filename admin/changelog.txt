@@ -12,7 +12,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-- - - - - 2.0.1 - [??-??-2018] - - - - - - - - - - - - - - - - - - - - -
+- - - - - 2.0.1 - [12-07-2018] - - - - - - - - - - - - - - - - - - - - -
 # Spaltenbreite bei schwebenden Tabellenüberschriften
 
 - - - - - 2.0.0 - [15-05-2018] - - - - - - - - - - - - - - - - - - - - -
