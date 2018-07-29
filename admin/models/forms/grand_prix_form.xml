@@ -61,6 +61,13 @@
 	/>		
 
 	<field
+		name="min_tournaments"
+		type="text"
+		label="COM_CLM_TURNIER_FIELD_MIN_TOURNAMENTS_LABEL"
+		description="COM_CLM_TURNIER_FIELD_MIN_TOURNAMENTS_DESC"
+	/>		
+
+	<field
 		name="num_tournaments"
 		type="text"
 		label="COM_CLM_TURNIER_FIELD_NUM_TOURNAMENTS_LABEL"

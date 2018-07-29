@@ -12,6 +12,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 2.1.0 - [??-??-2018] - - - - - - - - - - - - - - - - - - - - -
+# Mindesteilnahmepflicht für Gesamtwertung
+
 - - - - - 2.0.1 - [12-07-2018] - - - - - - - - - - - - - - - - - - - - -
 # Spaltenbreite bei schwebenden Tabellenüberschriften
 

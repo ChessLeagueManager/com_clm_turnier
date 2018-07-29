@@ -39,6 +39,10 @@ class TableCLMTurnier_Grand_Prix extends JTable {
     // 0 = alle Turniere werden berücksichtigt
     var $best_of = 0;
 
+    // minimale Anzahl der Turniere für Gesamtwertung
+    // 0 = alle Turniere werden berücksichtigt
+    var $min_tournaments = 0;
+    
     // Anzahl Turniere ab denen man Extrapunkte erhält
     // 0 = keine Extrapunkte
     var $num_tournaments = 0;
