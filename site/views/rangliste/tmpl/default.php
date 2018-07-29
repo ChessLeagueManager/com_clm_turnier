@@ -39,9 +39,9 @@ if (count($this->rangliste) == 0) {
 	echo CLMTurnierContent::componentheading($this->escape(strftime('%B %G', $date[0])));
 	?>
 
-<table cellpadding="0" cellspacing="0" id="turnier_rangliste"
-	<?php if ($config->fixth_ttln == "1") echo 'class="tableWithFloatingHeader"'; ?>>
+<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_rangliste" cellpadding="0" cellspacing="0">
 
+	<thead>
 	<tr>
 		<th class="rang">Nr.</th>
 		<th class="titel">Titel</th>
@@ -52,6 +52,7 @@ if (count($this->rangliste) == 0) {
 		<th class="diff"></th>
 		<th colspan=2 align="center"><?php echo $colDWZ; ?></th>
 	</tr>
+	</thead>
 
 <?php
 	

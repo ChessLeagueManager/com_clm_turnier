@@ -38,7 +38,7 @@ if (count($this->gesamtwertung) == 0) {
 } else {
     ?>
 
-<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0" ?>
+<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
 	<thead>
 	<tr>

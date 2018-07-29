@@ -47,11 +47,9 @@ class CLM_TurnierViewRangliste extends JViewLegacy {
 		$this->rangliste = $model->getTurnierKategorieRangliste($options);
 		$this->maxDateStart = $model->getTurnierKategorieMaxDateStart($options);
 		
-		// tableWithFloatingHeader
-		$document = JFactory::getDocument();		
-		$document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
-		$document->addScript(JURI::base() . 'components/com_clm/javascript/updateTableHeaders.js');
-		
+		// Tables with floating headers
+		JHtml::_('thead.framework');
+
 		// Display the view
 		parent::display($tpl);
 	}
