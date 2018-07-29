@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -52,10 +52,8 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
         $this->gesamtwertung = $this->get('GesamtWertung');
         $this->anzahlTurniere = $this->get('AnzahlTurniere');
         
-        // tableWithFloatingHeader
-        $document = JFactory::getDocument();
-        $document->addScript('http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js');
-        $document->addScript(JURI::base() . 'components/com_clm/javascript/updateTableHeaders.js');
+        // Tables with floating headers
+        JHtml::_('thead.framework');
         
         // Display the view
         parent::display($tpl);

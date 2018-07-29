@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -47,6 +47,8 @@ JFactory::getDocument()->addScriptDeclaration('
 				<?php echo $this->form->renderField('typ_calculation'); ?>
 				<?php echo $this->form->renderField('use_tiebreak'); ?>
 				<?php echo $this->form->renderField('best_of'); ?>
+				<?php echo $this->form->renderField('num_tournaments'); ?>
+				<?php echo $this->form->renderField('extra_points'); ?>
 				<?php echo $this->form->renderField('col_header'); ?>
 				<?php echo $this->form->renderField('published'); ?>
 			</div>

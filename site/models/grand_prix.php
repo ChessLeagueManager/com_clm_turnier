@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -99,7 +99,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
      *
      * @param integer $ii
      *            Index im Gesamtergebnis
-     * @param unknown $row
+     * @param object $row
      * @param float $punkte
      */
     protected function _setErgebnis($ii, $row, $punkte)
@@ -256,16 +256,16 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         $query->where($this->_db->quoteName('t1.published') . ' = 1');
         $query->andWhere($where);
         
-        // TODO: default Order == 1 ?!
+        // default Order == 1
         switch ($orderBy) {
-            case 1:
-                $query->order($this->_db->quoteName('t1.dateStart') . ' ASC');
-                break;
             case 2:
                 $query->order($this->_db->quoteName('t1.ordering') . ' ASC');
                 break;
             case 3:
                 $query->order($this->_db->quoteName('t1.id') . ' ASC');
+                break;
+            default:
+                $query->order($this->_db->quoteName('t1.dateStart') . ' ASC');
                 break;
         }
         
@@ -343,6 +343,16 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
                 } else {
                     $key = array_search($ergebnis[$ii], $spieler->ergebnis);
                     $spieler->ergebnis[$key] *= - 1;
+                }
+            }
+        }
+        
+        // Zusatzpunkte
+        if ($this->grandPrix->num_tournaments > 0 && $this->grandPrix->extra_points > 0) {
+            foreach ($this->gesamtergebnis as $spieler) {
+                $nt = count($spieler->ergebnis) - $this->grandPrix->num_tournaments + 1;
+                if ($nt > 0) {
+                    $spieler->gesamt += ($nt * $this->grandPrix->extra_points);
                 }
             }
         }

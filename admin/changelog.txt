@@ -12,6 +12,18 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 2.0.1 - [12-07-2018] - - - - - - - - - - - - - - - - - - - - -
+# Spaltenbreite bei schwebenden Tabellenüberschriften
+
+- - - - - 2.0.0 - [15-05-2018] - - - - - - - - - - - - - - - - - - - - -
++ Turnierauswahl erweitert
+  Auswahl über Kategorie saisonübergreifend oder Veranstaltung sowie von 
+  einzelnen Turnieren
++ Joomla / CLM Berechtigungen
++ Zusatzpunkte für regelmäßige Turnierteilnahme
+$ Backend Übersetzungen (*.sys.ini) in's Komponentenverzeichnis verschoben
+  Damit werden diese bei der Erstinstallation der Komponente genutzt. 
+
 - - - - - 1.1.0 - [??-02-2018] - - - - - - - - - - - - - - - - - - - - -
 + Turnierauswahl erweitert
   Auswahl über Kategorie saisonübergreifend oder Veranstaltung sowie von 

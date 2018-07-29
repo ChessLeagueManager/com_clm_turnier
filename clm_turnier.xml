@@ -2,9 +2,11 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>Februar 2018</creationDate>
+	<creationDate>Juli 2018</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>1.1.0-1</version>
+	<version>2.0.1-1</version>
+	<copyright>Copyright (C) 2017 - 2018. All rights reserved</copyright>
+	<license>GNU General Public License; see https://www.gnu.org/licenses/gpl.html</license>
 	<description>COM_CLM_TURNIER_DESC</description>
 
 	<!-- Site Main File Copy Section -->
@@ -16,6 +18,7 @@
 		<filename>clm_turnier.php</filename>
 		<filename>controller.php</filename>
 		<folder>classes</folder>
+		<folder>helpers</folder>
 		<folder>includes</folder>
 		<folder>models</folder>
 		<folder>views</folder>
@@ -31,7 +34,7 @@
 		<!-- Note the folder attribute: This attribute describes the folder to 
 			copy FROM in the package to install therefore files copied in this section 
 			are copied from /admin/ in the package -->
-		<menu>COM_CLM_TURNIER</menu>
+		<menu link="option=com_clm_turnier">COM_CLM_TURNIER</menu>
 		<submenu>
 			<menu view="grand_prix">COM_CLM_TURNIER_MENU_GRAND_PRIX</menu>
 			<menu view="turniere">COM_CLM_TURNIER_MENU_DWZ_UPDATE</menu>
@@ -42,6 +45,8 @@
 			<filename>index.html</filename>
 			<filename>clm_turnier.php</filename>
 			<filename>controller.php</filename>
+			<filename>access.xml</filename>
+			<filename>config.xml</filename>
 			<filename>changelog.txt</filename>
 			<folder>controllers</folder>
 			<folder>helpers</folder>
@@ -49,15 +54,18 @@
 			<folder>tables</folder>
 			<folder>views</folder>
 
+			<!-- translation managing menus and install scripts -->
+			<file>language/index.html</file>
+			<folder>language/de-DE</folder>
+			<folder>language/en-GB</folder>
+
 			<!-- SQL files section -->
 			<folder>sql</folder>
 		</files>
 
 		<languages folder="admin/language">
 			<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
-			<language tag="de-DE">de-DE.com_clm_turnier.sys.ini</language>
 			<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
-			<language tag="en-GB">en-GB.com_clm_turnier.sys.ini</language>
 		</languages>
 	</administration>
 

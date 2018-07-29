@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -38,10 +38,9 @@ if (count($this->gesamtwertung) == 0) {
 } else {
     ?>
 
-<table cellpadding="0" cellspacing="0"
-	id="turnier_kategorie_gesamtwertung"
-	<?php if ($config->fixth_ttab == "1") echo 'class="tableWithFloatingHeader"'; ?>>
+<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0" ?>
 
+	<thead>
 	<tr>
 		<th class="rang">Nr.</th>
 		<th class="titel">Titel</th>
@@ -62,7 +61,9 @@ if (count($this->gesamtwertung) == 0) {
 		<?php } ?>
 		<th class="gesamt">Gesamt</th>
 	</tr>
-	
+	</thead>
+
+	<tbody>
 <?php
     // alle Spieler durchgehen
     $p = 0;
@@ -93,17 +94,22 @@ if (count($this->gesamtwertung) == 0) {
 		<td class="erg" <?php echo $style; ?>> <?php echo $ergebnis; ?></td>
 		<?php
         
-}
+        }
         $gb = $row->gesamt;
         ?>
 		<td class="gesamt"> <?php echo $row->gesamt; ?>	</td>
 	</tr>
 
-<?php
+<?php 
     }
-    
-    echo '</table>';
-}
+?>
+
+    </tbody>
+</table>
+
+
+<?php 
+} 
 
 // CLM-Container
 echo '</div></div>';

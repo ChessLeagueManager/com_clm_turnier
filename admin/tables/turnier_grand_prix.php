@@ -2,8 +2,8 @@
 /**
  * Chess League Manager Turnier Erweiterungen 
  *  
- * @copyright (C) 2017 Andreas Hrubesch
- * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
+ * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
  */
 
@@ -39,6 +39,13 @@ class TableCLMTurnier_Grand_Prix extends JTable {
     // 0 = alle Turniere werden berücksichtigt
     var $best_of = 0;
 
+    // Anzahl Turniere ab denen man Extrapunkte erhält
+    // 0 = keine Extrapunkte
+    var $num_tournaments = 0;
+    
+    // Extrapunkte pro Turnier
+    var $extra_points = 0;
+    
     // 1 = monatliche Turniere
     var $col_header = 0;
 
