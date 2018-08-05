@@ -110,11 +110,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $spieler = new stdClass();
             $spieler->name = $row->name;
             $spieler->titel = $row->titel;
-            $spieler->gesamt = 0;
+            $spieler->gesamt = 0.0;
             $spieler->ergebnis = array();
         }
         
-        $spieler->ergebnis[$ii] = $punkte;
+        $spieler->ergebnis[$ii] = floatval($punkte);
         $this->gesamtergebnis[$row->name] = $spieler;
     }
 
@@ -341,8 +341,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
                 if ($this->grandPrix->best_of == 0 || $ii < $this->grandPrix->best_of) {
                     $spieler->gesamt += $ergebnis[$ii];
                 } else {
+                    // Streichresultate
                     $key = array_search($ergebnis[$ii], $spieler->ergebnis);
-                    $spieler->ergebnis[$key] *= - 1;
+                    $spieler->ergebnis[$key] *= -1;
                 }
             }
         }

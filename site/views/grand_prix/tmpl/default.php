@@ -38,7 +38,7 @@ if (count($this->gesamtwertung) == 0) {
 } else {
     ?>
 
-<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0" ?>
+<table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
 	<thead>
 	<tr>
@@ -83,12 +83,12 @@ if (count($this->gesamtwertung) == 0) {
         for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
             $style = '';
             $ergebnis = '';
-            if (isset($row->ergebnis[$ii]) && $row->ergebnis[$ii] != 0) {
+            if (isset($row->ergebnis[$ii])) {
                 $ergebnis = $row->ergebnis[$ii];
-                if ($ergebnis < 0) {
-                    $ergebnis *= - 1;
+                if ($ergebnis < 0 || strcmp(strval($ergebnis), '-0') == 0) {
+                    $ergebnis *= -1;
                     $style = ' style=" background-color: yellow;"';
-                }
+                } 
             }
             ?>
 		<td class="erg" <?php echo $style; ?>> <?php echo $ergebnis; ?></td>
