@@ -1,7 +1,7 @@
 <?php
 /**
- * Chess League Manager Turnier Erweiterungen 
- *  
+ * Chess League Manager Turnier Erweiterungen
+ *
  * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
  * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
@@ -15,16 +15,19 @@ defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
  */
 class CLM_TurnierModelGrand_Prix extends JModelLegacy
 {
-
+    
     // Grand Prix Wertung
     protected $grandPrix = null;
-
+    
+    // Grand Prix Turniere für Gesamtwertung
+    protected $turniere = array();
+    
     // Grand Prix Gesamtwertung
     protected $gesamtergebnis = array();
-
+    
     // Anzahl der gewerteten Turniere
     protected $anzahlTurniere = 0;
-
+    
     /**
      * ermittelt für den Modus 'absolut' die Verteilung der Punkte für die
      * jeweilige Platzierung innerhalb eines Turnieres.
@@ -33,7 +36,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
      *
      * @param int $pk
      *            des Turnieres
-     *            
+     *
      * @return array Verteilung der Punkte
      */
     protected function _getPunkteVerteilung($pk, $wertung)
@@ -59,22 +62,22 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             
             if ($sum == 0)
                 break;
-            $sum = round($sum / $row->anzahl, 1);
-            
-            for ($ik = 0; $ik < $row->anzahl; $ik ++) {
-                array_push($verteilung, $sum);
-            }
+                $sum = round($sum / $row->anzahl, 1);
+                
+                for ($ik = 0; $ik < $row->anzahl; $ik ++) {
+                    array_push($verteilung, $sum);
+                }
         }
         
         return $verteilung;
     }
-
+    
     /**
      * ermittelt die Rangliste eines Turnieres.
      *
      * @param int $pk
      *            Id des Turnieres
-     *            
+     *
      * @return array Rangliste
      */
     protected function _loadTurnierErgebnis($pk)
@@ -93,7 +96,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         $list = $this->_db->loadObjectList();
         return $list;
     }
-
+    
     /**
      * speichert das Turnierergebnis eines Spielers.
      *
@@ -110,14 +113,14 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $spieler = new stdClass();
             $spieler->name = $row->name;
             $spieler->titel = $row->titel;
-            $spieler->gesamt = 0;
+            $spieler->gesamt = 0.0;
             $spieler->ergebnis = array();
         }
         
-        $spieler->ergebnis[$ii] = $punkte;
+        $spieler->ergebnis[$ii] = floatval($punkte);
         $this->gesamtergebnis[$row->name] = $spieler;
     }
-
+    
     /**
      * berechnet das Turnierergebnis für den Modus 'Summe'.
      *
@@ -140,7 +143,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $this->_setErgebnis($ii, $row, $row->sum_punkte);
         }
     }
-
+    
     /**
      * berechnet das Turnierergebnis für den Modus 'prozentual'.
      *
@@ -164,7 +167,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $this->_setErgebnis($ii, $row, round($row->sum_punkte / $count * 100));
         }
     }
-
+    
     /**
      * berechnet das Turnierergebnis für den Modus 'absolut'.
      *
@@ -211,7 +214,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             }
         }
     }
-
+    
     /**
      * ermittelt die veröffentlichten Turniere einer Kategorie (Veranstaltung).
      *
@@ -234,7 +237,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             array_push($where, $this->_db->quoteName('t1.catidAlltime') . ' = ' . $catid);
             array_push($where, $this->_db->quoteName('t1.catidEdition') . ' = ' . $catid);
         }
-
+        
         // Array der Turnier ID's
         $tids = $this->getState('grand_prix.tids');
         if ($tids) {
@@ -244,14 +247,14 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             }
         }
         
-        // keine Parameter 
+        // keine Parameter
         if (count($where) == 0) {
             return array();
         }
         
         // Create a new query object
         $query = $this->_db->getQuery(true);
-        $query->select($this->_db->quoteName(explode(',', 't1.id,t1.dateStart,t1.ordering')));
+        $query->select($this->_db->quoteName(explode(',', 't1.id,t1.name,t1.dateStart,t1.ordering')));
         $query->from($this->_db->quoteName('#__clm_turniere', 't1'));
         $query->where($this->_db->quoteName('t1.published') . ' = 1');
         $query->andWhere($where);
@@ -276,7 +279,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         
         return $list;
     }
-
+    
     /**
      * berechnet die Grand Prix Gesamtwertung der veröffentlichten Turniere
      * einer Kategorie (Veranstaltung).
@@ -320,6 +323,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
                 $ii = $date["mon"];
             }
             
+            $this->turniere[$ii] = $row;
             switch ($this->grandPrix->typ) {
                 case 3:
                     $this->_getTurnierErgebnisSumme($row->id, $ii);
@@ -341,8 +345,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
                 if ($this->grandPrix->best_of == 0 || $ii < $this->grandPrix->best_of) {
                     $spieler->gesamt += $ergebnis[$ii];
                 } else {
+                    // Streichresultate
                     $key = array_search($ergebnis[$ii], $spieler->ergebnis);
-                    $spieler->ergebnis[$key] *= - 1;
+                    $spieler->ergebnis[$key] *= -1;
                 }
             }
         }
@@ -362,7 +367,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             return $a->gesamt < $b->gesamt;
         });
     }
-
+    
     /**
      * Method to auto-populate the model state.
      *
@@ -393,7 +398,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         }
         $this->setState('grand_prix.order_by', $orderBy);
     }
-
+    
     /**
      * berechnet die Grand Prix Geamtwertung.
      *
@@ -401,7 +406,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
      *            Id der Grand Prix Wertung
      * @param integer $orderBy
      *            Turnierereihenfolge
-     *            
+     *
      * @return mixed Grand Prix Object, false im Fehlerfall
      */
     public function getItem($pk = null, $orderBy = null)
@@ -434,16 +439,16 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         
         return $this->grandPrix;
     }
-
+    
     /**
-     * Grand Prix Gesamtwertung.
+     * ermittelt dei Grand Prix Gesamtwertung.
      *
      * @param integer $pk
      *            Id der Grand Prix Wertung
      * @param integer $orderBy
      *            Turnierereihenfolge
-     *            
-     * @return Ambigous <multitype:, stdClass>
+     *
+     * @return <multitype:, stdClass>
      */
     public function getGesamtWertung($pk = null, $orderBy = 0)
     {
@@ -456,13 +461,13 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         
         return $this->gesamtergebnis;
     }
-
+    
     /**
-     * Anzahl der gewerteten Turniere.
+     * ermittelt die Anzahl der gewerteten Turniere.
      *
      * @param integer $pk
      *            Id der Grand Prix Wertung
-     *            
+     *
      * @return integer Anzahl der Turniere
      */
     public function getAnzahlTurniere($pk = null)
@@ -473,6 +478,26 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         }
         
         return $this->anzahlTurniere;
+    }
+    
+    /**
+     * ermittelt die Liste der gewerteten Turniere.
+     *  
+     * @param integer $pk
+     *            Id der Grand Prix Wertung
+     * @param integer $orderBy
+     *            Turnierereihenfolge
+     * @return array
+     */
+    public function getTurnierListe($pk = null, $orderBy = 0) {
+        $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
+        $orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
+        
+        if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
+            $this->getItem($pk, $orderBy);
+        }
+        
+        return $this->turniere;
     }
 }
 

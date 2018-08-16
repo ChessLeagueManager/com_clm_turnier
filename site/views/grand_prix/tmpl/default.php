@@ -36,7 +36,8 @@ if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
 if (count($this->gesamtwertung) == 0) {
     echo CLMContent::clmWarning(JText::_('COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO'));
 } else {
-    ?>
+
+?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
@@ -51,11 +52,26 @@ if (count($this->gesamtwertung) == 0) {
         ?>
 		<th class="erg">
 		<?php
-    		if (is_object($this->grand_prix) && $this->grand_prix->col_header) {
-                echo strftime("%b", mktime(0, 0, 0, $ii));
-            } else {
-                echo $ii;
-            }
+		    // monatliche Turniere
+		    if (is_object($this->grand_prix) && $this->grand_prix->col_header) {
+		        $colTitle = strftime("%b", mktime(0, 0, 0, $ii));
+		    } else {
+		        $colTitle = $ii;
+		    }
+		
+		    // Turnier gewertet
+		    if (isset($this->turniere[$ii])) {
+		        $url = JRoute::_('index.php?option=com_clm&view=turnier_rangliste'
+		            . '&turnier=' . $this->turniere[$ii]->id
+		            . '&orderby=pos');
+		        $attribs = 'class="active_link"' .
+		  		        ' title="' . $this->turniere[$ii]->name . '"';
+		  		        
+                $colTitle = JHtml::_('link', $url, $colTitle, $attribs);
+		    }
+
+		    // Spaltenüberschrift ausgeben
+		    echo $colTitle;
         ?>
 		</th>
 		<?php } ?>
@@ -83,12 +99,12 @@ if (count($this->gesamtwertung) == 0) {
         for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
             $style = '';
             $ergebnis = '';
-            if (isset($row->ergebnis[$ii]) && $row->ergebnis[$ii] != 0) {
+            if (isset($row->ergebnis[$ii])) {
                 $ergebnis = $row->ergebnis[$ii];
-                if ($ergebnis < 0) {
-                    $ergebnis *= - 1;
+                if ($ergebnis < 0 || strcmp(strval($ergebnis), '-0') == 0) {
+                    $ergebnis *= -1;
                     $style = ' style=" background-color: yellow;"';
-                }
+                } 
             }
             ?>
 		<td class="erg" <?php echo $style; ?>> <?php echo $ergebnis; ?></td>
