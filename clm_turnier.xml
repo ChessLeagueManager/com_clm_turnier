@@ -2,7 +2,7 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>Juli 2018</creationDate>
+	<creationDate>August 2018</creationDate>
 	<author>Andreas Hrubesch</author>
 	<version>2.1.0</version>
 	<copyright>Copyright (C) 2017 - 2018. All rights reserved</copyright>
@@ -57,15 +57,13 @@
 			<folder>language/en-GB</folder>
 
 			<!-- SQL files section -->
-			<folder>sql</folder>
-			
+			<folder>sql</folder>			
 		</files>
 
 		<languages folder="admin/language">
 			<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
 			<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
-		</languages>
-			
+		</languages>			
 	</administration>
 
 	<scriptfile>install.php</scriptfile>

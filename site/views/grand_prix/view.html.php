@@ -31,12 +31,15 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 
     // Gesamtwertung
     protected $gesamtwertung;
-
+    
+    // Liste der gewerteten Turniere 
+    protected $turniere;
+    protected $anzahlTurniere;
+    
+    // Grand Prix Wertung
     protected $grand_prix;
 
     function display($tpl = null) {
-        $options = array();
-        
         $app = JFactory::getApplication();
         
         $this->params = $app->getParams();
@@ -50,6 +53,7 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
         $this->state = $this->get('State');
         $this->grand_prix = $this->get('Item');
         $this->gesamtwertung = $this->get('GesamtWertung');
+        $this->turniere = $this->get('TurnierListe');
         $this->anzahlTurniere = $this->get('AnzahlTurniere');
         
         // Tables with floating headers
