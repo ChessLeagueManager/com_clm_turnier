@@ -13,7 +13,7 @@ defined ( '_JEXEC' ) or die ( 'Restricted access' );
 /**
  * Utility class für "jquery.floatThead" JavaScript Bibliothek
  *
- * @since 2.1
+ * @since 2.0.1
  * @see https://github.com/mkoryak/floatThead
  * @see http://mkoryak.github.io/floatThead/
  */
