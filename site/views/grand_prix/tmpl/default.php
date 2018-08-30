@@ -36,7 +36,35 @@ if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
 if (count($this->gesamtwertung) == 0) {
     echo CLMContent::clmWarning(JText::_('COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO'));
 } else {
-    ?>
+    $min_tournaments = 0;
+    if ($this->grand_prix->min_tournaments > 0 &&
+            count($this->turniere) >= $this->grand_prix->min_tournaments) {
+        $min_tournaments = $this->grand_prix->min_tournaments;
+        
+        $uri = JUri::getInstance();
+        $uri->setVar('filter', array('tlnr' => !$this->filter['tlnr']));
+
+        if ($this->filter['tlnr']) {
+            $icon_class = 'icon-plus';
+            $title = JText::_('COM_CLM_TURNIER_FILTER_TLNR_PLUS');
+        } else {
+            $icon_class = 'icon-minus';
+            $title = JText::_('COM_CLM_TURNIER_FILTER_TLNR_MINUS');
+        }
+        $title = JHtml::_('tooltipText', $title, '', 0);
+?>
+        
+        <div style="float: right; padding: 2px">
+        	<a class="btn btn-micro active hasTooltip" 
+        		href="<?php echo $uri; ?>" title="<?php echo $title; ?>"
+        	>
+        		<span class="<?php echo $icon_class; ?>"></span>
+        	</a>        
+        </div>
+        
+<?php 
+    }
+?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
@@ -82,13 +110,20 @@ if (count($this->gesamtwertung) == 0) {
     $p = 0;
     $gb = 0;
     foreach ($this->gesamtwertung as $row) {
+        $style = '';
+        if (count($row->ergebnis) < $min_tournaments) {
+            if ($this->filter['tlnr']) {
+                continue;
+            }
+            $style = 'style="color: red;"';
+        }
+        
         $p ++; // row count (entspricht Platzierung)
         
         $zeilenr = (($p % 2) != 0) ? '"zeile1"' : '"zeile2"';
-        $style = '';
         ?>
 		
-	<tr class=<?php echo $zeilenr; ?>>
+	<tr class=<?php echo $zeilenr . ' ' . $style; ?>>
 		<td class="rang">  <?php echo ($row->gesamt <> $gb) ? $p . '. ' : ''; ?>			</td>
 		<td class="titel"> <?php echo $row->titel; ?> 	</td>
 		<td class="name">  <?php echo $row->name; ?> 	</td>		
@@ -100,7 +135,7 @@ if (count($this->gesamtwertung) == 0) {
                 $ergebnis = $row->ergebnis[$ii];
                 if ($ergebnis < 0 || strcmp(strval($ergebnis), '-0') == 0) {
                     $ergebnis *= - 1;
-                    $style = ' style=" background-color: yellow;"';
+                    $style = ' style="background-color: yellow;"';
                 }
             }
             ?>

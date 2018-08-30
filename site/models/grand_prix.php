@@ -376,7 +376,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
      * @return void
      */
     protected function populateState()
-    {
+    {       
         $app = JFactory::getApplication('site');
         
         // Load state from the request.
@@ -397,6 +397,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $orderBy = $app->getParams()->get('order_by');
         }
         $this->setState('grand_prix.order_by', $orderBy);
+        
+        // Filter, inkl. Default Werte
+        $filter = (array)$app->input->get('filter', null, 'RAW');
+        $filter['tlnr'] = (isset($filter['tlnr'])) ? $filter['tlnr'] : 0;
+        $this->setState('grand_prix.filter', $filter);
     }
     
     /**
@@ -498,7 +503,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         }
         
         return $this->turniere;
-    }
+    }    
 }
 
 ?>

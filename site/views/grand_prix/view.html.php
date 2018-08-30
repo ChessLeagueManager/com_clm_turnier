@@ -22,6 +22,7 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
      * @since 1.6
      */
     protected $state;
+    protected $filter;
 
     // Menü Parameter
     protected $params;
@@ -58,7 +59,10 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
         
         // Tables with floating headers
         JHtml::_('thead.framework');
-        
+      
+        // Filter
+        $this->filter = $this->state->get('grand_prix.filter');
+
         // Display the view
         parent::display($tpl);
     }
