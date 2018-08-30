@@ -83,7 +83,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
     protected function _loadTurnierErgebnis($pk)
     {
         $query = $this->_db->getQuery(true);
-        $query->select($this->_db->quoteName(explode(',', 't2.name,t2.verein,t2.titel,t2.sum_punkte,t2.rankingPos,t2.sumTiebr1,t2.sumTiebr2,t2.sumTiebr3,t1.dateStart,t1.runden,t1.dg')));
+        $query->select($this->_db->quoteName(explode(',', 't2.name,t2.verein,t2.titel,t2.twz,t2.start_dwz,t2.FIDEelo,t2.sum_punkte,t2.rankingPos,t2.sumTiebr1,t2.sumTiebr2,t2.sumTiebr3,t1.dateStart,t1.runden,t1.dg')));
         $query->from($this->_db->quoteName('#__clm_turniere', 't1'));
         $query->join('INNER', $this->_db->quoteName('#__clm_turniere_tlnr', 't2') . ' ON ' . $this->_db->quoteName('t2.turnier') . ' = ' . $this->_db->quoteName('t1.id'));
         $query->where($this->_db->quoteName('t1.id') . ' = ' . $pk);
@@ -113,6 +113,10 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $spieler = new stdClass();
             $spieler->name = $row->name;
             $spieler->titel = $row->titel;
+            $spieler->verein = $row->verein;
+            $spieler->twz = $row->twz;
+            $spieler->dwz = $row->start_dwz;
+            $spieler->elo = $row->FIDEelo;
             $spieler->gesamt = 0.0;
             $spieler->ergebnis = array();
         }
@@ -369,14 +373,25 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
     }
     
     /**
+     * 
+     * @param JApplication  $app
+     * @param string        $name
+     */
+    protected function setParameterFromInput($app, $name) {
+        $value = $app->input->get($name);
+        if (isset($value)) {
+            $app->getParams()->set($name, $value);
+        }
+    }
+    
+    /**
      * Method to auto-populate the model state.
      *
      * Note. Calling getState in this method will result in recursion.
      *
      * @return void
      */
-    protected function populateState()
-    {       
+    protected function populateState() {       
         $app = JFactory::getApplication('site');
         
         // Load state from the request.
@@ -390,13 +405,19 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         // Turnier ID's
         $tids = $app->input->get('turniere');
         $this->setState('grand_prix.tids', $tids);
-        
+
         // Sortierung
         $orderBy = $app->input->getInt('order_by');
         if ($orderBy == 0) {
             $orderBy = $app->getParams()->get('order_by');
         }
         $this->setState('grand_prix.order_by', $orderBy);
+
+        // *** Layout Parameter ***
+        $this->setParameterFromInput($app, 'show_dwz');
+        $this->setParameterFromInput($app, 'show_elo');
+        $this->setParameterFromInput($app, 'show_verein');
+        $this->setParameterFromInput($app, 'show_player_title');
         
         // Filter, inkl. Default Werte
         $filter = (array)$app->input->get('filter', null, 'RAW');

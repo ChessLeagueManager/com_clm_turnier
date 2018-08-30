@@ -70,9 +70,24 @@ if (count($this->gesamtwertung) == 0) {
 
 	<thead>
 	<tr>
-		<th class="rang">Nr.</th>
-		<th class="titel">Titel</th>
-		<th class="name">Name</th>		
+		<th class="rang"><?php echo JText::_('COM_CLM_TURNIER_COL_RANG') ?></th>
+		<?php if ($this->params->get('show_player_title')) { ?>
+			<th class="titel"><?php echo JText::_('COM_CLM_TURNIER_COL_PLAYER_TITLE') ?></th>
+		<?php } ?>
+		<th class="name"><?php echo JText::_('COM_CLM_TURNIER_COL_NAME') ?></th>
+		<?php if ($this->params->get('show_verein')) { ?>
+			<th class="verein"><?php echo JText::_('COM_CLM_TURNIER_COL_VEREIN') ?></th>
+		<?php } ?>
+		<?php if ($this->params->get('show_dwz') && $this->params->get('show_elo')) { ?>
+			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_TWZ') ?></th>
+		<?php } ?>
+		<?php if ($this->params->get('show_dwz')) { ?>
+			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_DWZ') ?></th>
+		<?php } ?>
+		<?php if ($this->params->get('show_elo')) { ?>
+			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_ELO') ?></th>
+		<?php } ?>
+		
 		<?php
 		for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
         ?>
@@ -100,7 +115,7 @@ if (count($this->gesamtwertung) == 0) {
         ?>
 		</th>
 		<?php } ?>
-		<th class="gesamt">Gesamt</th>
+		<th class="gesamt"><?php echo JText::_('COM_CLM_TURNIER_COL_GESATM') ?></th>
 	</tr>
 	</thead>
 
@@ -125,8 +140,22 @@ if (count($this->gesamtwertung) == 0) {
 		
 	<tr class=<?php echo $zeilenr . ' ' . $style; ?>>
 		<td class="rang">  <?php echo ($row->gesamt <> $gb) ? $p . '. ' : ''; ?>			</td>
-		<td class="titel"> <?php echo $row->titel; ?> 	</td>
-		<td class="name">  <?php echo $row->name; ?> 	</td>		
+		<?php if ($this->params->get('show_player_title')) { ?>
+			<td class="titel"> <?php echo $row->titel; ?> 	</td>
+		<?php } ?>
+		<td class="name">  <?php echo $row->name; ?> 	</td>
+		<?php if ($this->params->get('show_verein')) { ?>
+			<td class="verein"><?php echo $row->verein; ?></td>
+		<?php } ?>
+		<?php if ($this->params->get('show_dwz') && $this->params->get('show_elo')) { ?>
+			<td class="dwz"><?php echo $row->twz; ?></td>
+		<?php } ?>
+		<?php if ($this->params->get('show_dwz')) { ?>
+			<td class="dwz"><?php echo $row->dwz; ?></td>
+		<?php } ?>
+		<?php if ($this->params->get('show_elo')) { ?>
+			<td class="dwz"><?php echo $row->elo; ?></td>
+		<?php } ?>
 		<?php
         for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
             $style = '';

@@ -44,6 +44,26 @@
 				<option value="1">JSHOW</option>
 				<option value="0">JHIDE</option>
 			</field>
+			<field name="show_player_title" type="radio" default="0" class="btn-group"
+				label="COM_CLM_TURNIER_SHOW_PLAYER_TITEL_LABEL" description="COM_CLM_TURNIER_SHOW_PLAYER_TITEL_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+			<field name="show_verein" type="radio" default="0" class="btn-group"
+				label="COM_CLM_TURNIER_SHOW_VEREIN_LABEL" description="COM_CLM_TURNIER_SHOW_VEREIN_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+			<field name="show_dwz" type="radio" default="0" class="btn-group"
+				label="COM_CLM_TURNIER_SHOW_DWZ_LABEL" description="COM_CLM_TURNIER_SHOW_DWZ_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
+			<field name="show_elo" type="radio" default="0" class="btn-group"
+				label="COM_CLM_TURNIER_SHOW_ELO_LABEL" description="COM_CLM_TURNIER_SHOW_ELO_DESC">
+				<option value="1">JSHOW</option>
+				<option value="0">JHIDE</option>
+			</field>
 			<field name="order_by" type="list" default="0"
 				label="COM_CLM_TURNIER_FIELD_ORDER_BY_LABEL" description="COM_CLM_TURNIER_FIELD_ORDER_BY_DESC">
 				<option value="0">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
