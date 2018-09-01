@@ -28,6 +28,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
     // Anzahl der gewerteten Turniere
     protected $anzahlTurniere = 0;
     
+    // DWZ desersten/letzten Turniers 
+    private $useDwzFrom = 0;
+    
     /**
      * ermittelt für den Modus 'absolut' die Verteilung der Punkte für die
      * jeweilige Platzierung innerhalb eines Turnieres.
@@ -121,6 +124,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
             $spieler->ergebnis = array();
         }
         
+        if ($this->useDwzFrom) {
+            $spieler->twz = $row->twz;
+            $spieler->dwz = $row->start_dwz;
+            $spieler->elo = $row->FIDEelo;
+        }
         $spieler->ergebnis[$ii] = floatval($punkte);
         $this->gesamtergebnis[$row->name] = $spieler;
     }
@@ -418,6 +426,11 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         $this->setParameterFromInput($app, 'show_elo');
         $this->setParameterFromInput($app, 'show_verein');
         $this->setParameterFromInput($app, 'show_player_title');
+        
+        $this->useDwzFrom = $app->input->getInt('use_dwz_from');
+        if ($this->useDwzFrom == 0) {
+            $this->useDwzFrom = $app->getParams()->get('use_dwz_from');
+        }
         
         // Filter, inkl. Default Werte
         $filter = (array)$app->input->get('filter', null, 'RAW');

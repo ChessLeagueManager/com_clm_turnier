@@ -64,6 +64,11 @@
 				<option value="1">JSHOW</option>
 				<option value="0">JHIDE</option>
 			</field>
+			<field name="use_dwz_from" type="list" default="0"
+				label="COM_CLM_TURNIER_USE_DWZ_LABEL" description="COM_CLM_TURNIER_USE_DWZ_DESC">
+				<option value="0">COM_CLM_TURNIER_USE_DWZ_FROM_VALUE_0</option>
+				<option value="1">COM_CLM_TURNIER_USE_DWZ_FROM_VALUE_1</option>
+			</field>
 			<field name="order_by" type="list" default="0"
 				label="COM_CLM_TURNIER_FIELD_ORDER_BY_LABEL" description="COM_CLM_TURNIER_FIELD_ORDER_BY_DESC">
 				<option value="0">COM_CLM_TURNIER_FIELD_ORDER_BY_VALUE_SELECT</option>
