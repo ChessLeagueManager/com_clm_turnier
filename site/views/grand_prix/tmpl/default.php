@@ -21,10 +21,14 @@ $config = clm_core::$db->config();
 // CLM-Container
 echo "<div id='clm'><div id='turnier_rangliste'>";
 
+
 // Page Header
 if ($this->params->get('show_title')) {
-    echo CLMTurnierContent::componentTitle($this->escape($this->titel));
+    echo CLMTurnierContent::componentTitle($this->escape($this->params->get('page_title')));
 }
+
+// Icons
+echo JLayoutHelper::render('icons', array('state' => $this->state, 'params' => $this->params, 'print' => $this->print), JPATH_CLM_TURNIER_COMPONENT);
 
 // Einleitungstext
 if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
@@ -36,34 +40,8 @@ if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
 if (count($this->gesamtwertung) == 0) {
     echo CLMContent::clmWarning(JText::_('COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO'));
 } else {
-    $min_tournaments = 0;
-    if ($this->grand_prix->min_tournaments > 0 &&
-            count($this->turniere) >= $this->grand_prix->min_tournaments) {
-        $min_tournaments = $this->grand_prix->min_tournaments;
-        
-        $uri = JUri::getInstance();
-        $uri->setVar('filter', array('tlnr' => !$this->filter['tlnr']));
-
-        if ($this->filter['tlnr']) {
-            $icon_class = 'icon-plus';
-            $title = JText::_('COM_CLM_TURNIER_FILTER_TLNR_PLUS');
-        } else {
-            $icon_class = 'icon-minus';
-            $title = JText::_('COM_CLM_TURNIER_FILTER_TLNR_MINUS');
-        }
-        $title = JHtml::_('tooltipText', $title, '', 0);
-?>
-        
-        <div style="float: right; padding: 2px">
-        	<a class="btn btn-micro active hasTooltip" 
-        		href="<?php echo $uri; ?>" title="<?php echo $title; ?>"
-        	>
-        		<span class="<?php echo $icon_class; ?>"></span>
-        	</a>        
-        </div>
-        
-<?php 
-    }
+    $min_tournaments = $this->get('minTournaments');
+    $filter = $this->state->get('grand_prix.filter');
 ?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
@@ -100,14 +78,12 @@ if (count($this->gesamtwertung) == 0) {
 		    }
 		
 		    // Turnier gewertet
-		    if (isset($this->turniere[$ii])) {
-		        $url = JRoute::_('index.php?option=com_clm&view=turnier_rangliste'
-		            . '&turnier=' . $this->turniere[$ii]->id
-		            . '&orderby=pos');
+		    if (!$this->print && isset($this->turniere[$ii])) {
+		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ii]->id);
 		        $attribs = 'class="active_link"' .
 		  		        ' title="' . $this->turniere[$ii]->name . '"';
 		  		        
-                $colTitle = JHtml::_('link', $url, $colTitle, $attribs);
+		        $colTitle = JHtml::_('link', JRoute::_($link), $colTitle, $attribs);
             }
 
 		    // Spaltenüberschrift ausgeben
@@ -127,7 +103,7 @@ if (count($this->gesamtwertung) == 0) {
     foreach ($this->gesamtwertung as $row) {
         $style = '';
         if (count($row->ergebnis) < $min_tournaments) {
-            if ($this->filter['tlnr']) {
+            if ($filter['tlnr']) {
                 continue;
             }
             $style = 'style="color: red;"';

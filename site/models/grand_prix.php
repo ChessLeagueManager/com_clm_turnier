@@ -537,7 +537,26 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         }
         
         return $this->turniere;
-    }    
+    }
+    
+    /**
+     * 
+     * @param unknown $pk
+     * @return number
+     */
+    public function getMinTournaments($pk = null) {
+        $pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
+        if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
+            $this->getItem($pk);
+        }
+        
+        if ($this->grandPrix->min_tournaments > 0 &&
+            count($this->turniere) >= $this->grandPrix->min_tournaments) {
+                return $this->grandPrix->min_tournaments;
+        }
+            
+        return 0;        
+    }
 }
 
 ?>
