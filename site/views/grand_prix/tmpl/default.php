@@ -67,6 +67,7 @@ if (count($this->gesamtwertung) == 0) {
 		<?php } ?>
 		
 		<?php
+		$linkTurnier = (boolean)($this->params->get('link_turnier') && !$this->print);
 		for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
         ?>
 		<th class="erg">
@@ -76,9 +77,8 @@ if (count($this->gesamtwertung) == 0) {
             } else {
 		        $colTitle = $ii;
 		    }
-		
 		    // Turnier gewertet
-		    if (!$this->print && isset($this->turniere[$ii])) {
+		    if ($linkTurnier && isset($this->turniere[$ii])) {
 		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ii]->id);
 		        $attribs = 'class="active_link"' .
 		  		        ' title="' . $this->turniere[$ii]->name . '"';

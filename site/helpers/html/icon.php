@@ -58,10 +58,43 @@ abstract class JHtmlIcon {
 	 *        	True für legacy Images, false für icomoon basierte Grafiken
 	 * @return string HTML Markup für den Link
 	 */
-	public static function print_screen($item, $params, $attribs = array(), $legacy = false) {
+	public static function print_screen($state, $params, $attribs = array(), $legacy = false) {
 		$text = JLayoutHelper::render('joomla.content.icons.print_screen', array('params' => $params,'legacy' => $legacy));
 
 		return '<a href="#" onclick="window.print();return false;">' . $text . '</a>';
+	}
+
+	/**
+	 * erstellt einen Link um einen Link der Grand Prix Tabelle per E-Mail zu versenden.
+	 *
+	 * @param CMSObject $state
+	 *        	Grand Prix Model State
+	 * @param Registry $params
+	 *        	Grand Prix Parameters
+	 * @param array $attribs
+	 *        	optionale Atrribute für den Link
+	 * @param boolean $legacy
+	 *        	True für legacy Images, false für icomoon basierte Grafiken
+	 * @return string HTML Markup für den Link
+	 */
+	public static function email($state, $params, $attribs = array(), $legacy = false) {
+		JLoader::register('MailtoHelper', JPATH_SITE . '/components/com_mailto/helpers/mailto.php');
+
+		$uri = JUri::getInstance();
+		$base = $uri->toString(array('scheme','host','port'));
+		$template = JFactory::getApplication()->getTemplate();
+		$link = $base . JRoute::_(Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter')), false);
+		$url = 'index.php?option=com_mailto&tmpl=component&template=' . $template . '&link=' . MailtoHelper::addLink($link);
+
+		$status = 'width=400,height=450,menubar=yes,resizable=yes';
+
+		$text = JLayoutHelper::render('joomla.content.icons.email', array('params' => $params,'legacy' => $legacy));
+
+		$attribs['title'] = JText::_('JGLOBAL_EMAIL_TITLE');
+		$attribs['onclick'] = "window.open(this.href,'win2','" . $status . "'); return false;";
+		$attribs['rel'] = 'nofollow';
+
+		return JHtml::_('link', JRoute::_($url), $text, $attribs);
 	}
 
 	/**

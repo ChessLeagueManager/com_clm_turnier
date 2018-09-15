@@ -401,7 +401,22 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
      */
     protected function populateState() {       
         $app = JFactory::getApplication('site');
+
+        // Load the parameters.
+        $params = $app->getParams();
+        $this->setState('params', $params);
         
+        // *** Layout Parameter ***
+        $this->setParameterFromInput($app, 'show_dwz');
+        $this->setParameterFromInput($app, 'show_elo');
+        $this->setParameterFromInput($app, 'show_verein');
+        $this->setParameterFromInput($app, 'show_player_title');
+        
+        $this->useDwzFrom = $app->input->getInt('use_dwz_from');
+        if ($this->useDwzFrom == 0) {
+        	$this->useDwzFrom = $params->get('use_dwz_from');
+        }
+
         // Load state from the request.
         $pk = $app->input->getInt('grand_prix');
         $this->setState('grand_prix.id', $pk);
@@ -417,20 +432,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
         // Sortierung
         $orderBy = $app->input->getInt('order_by');
         if ($orderBy == 0) {
-            $orderBy = $app->getParams()->get('order_by');
+        	$orderBy = $params->get('order_by');
         }
         $this->setState('grand_prix.order_by', $orderBy);
-
-        // *** Layout Parameter ***
-        $this->setParameterFromInput($app, 'show_dwz');
-        $this->setParameterFromInput($app, 'show_elo');
-        $this->setParameterFromInput($app, 'show_verein');
-        $this->setParameterFromInput($app, 'show_player_title');
-        
-        $this->useDwzFrom = $app->input->getInt('use_dwz_from');
-        if ($this->useDwzFrom == 0) {
-            $this->useDwzFrom = $app->getParams()->get('use_dwz_from');
-        }
         
         // Filter, inkl. Default Werte
         $filter = (array)$app->input->get('filter', null, 'RAW');

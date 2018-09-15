@@ -38,40 +38,32 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 	protected $grand_prix;
 
 	function display($tpl = null) {
+		$app = JFactory::getApplication();
+		
 		$this->state = $this->get('State');
 		$this->grand_prix = $this->get('Item');
 		$this->gesamtwertung = $this->get('GesamtWertung');
 		$this->turniere = $this->get('TurnierListe');
 		$this->anzahlTurniere = $this->get('AnzahlTurniere');
 
-		// TODO
-		$app = JFactory::getApplication();
 		$this->print = $app->input->getBool('print');
 
-		$this->mergeParams();
-
+		// merge params
+		$this->params = $this->state->get('params');
+		$this->params->set('show_filter_icon', $this->get('minTournaments'));
+		
+		$menu = $app->getMenu();
+		if (!(isset($menu) && $menu->getActive() != null)) {
+			$this->params->set('show_title', 0);
+			$this->params->set('show_print_icon', 0);
+			$this->params->set('show_email_icon', 0);
+		}
+		
 		// Tables with floating headers
 		JHtml::_('thead.framework');
 
 		// Display the view
 		parent::display($tpl);
-	}
-
-	private function mergeParams() {
-		$app = JFactory::getApplication();
-
-		$this->params = $app->getParams();
-		$this->params->set('show_icons', 1);
-
-		$menu = $app->getMenu();
-		if ((isset($menu) && $menu->getActive() != null)) {
-			$this->params->set('show_print_icon', 1);
-		} else {
-			$this->params->set('show_title', 0);
-			$this->params->set('show_print_icon', 0);
-		}
-
-		$this->params->set('show_filter_icon', $this->get('minTournaments'));
 	}
 }
 

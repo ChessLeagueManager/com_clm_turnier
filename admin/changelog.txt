@@ -14,7 +14,9 @@ $ -> Language fix or change
 
 - - - - - 2.1.0 - [??-09-2018] - - - - - - - - - - - - - - - - - - - - -
 + Mindesteilnahmepflicht für Gesamtwertung
-+ Zusätzlich Spieler Infos - u.a. Verein, DWZ etc - für Darstellung 
++ Zusätzlich Spieler Infos - u.a. Verein, DWZ etc - für Darstellung
+  Standardeinstellungen für "Layout" konfigurierbar
++ Icons für "Drucken", "E-Mail" und "Filter"
 
 - - - - - 2.0.2 - [17-08-2018] - - - - - - - - - - - - - - - - - - - - -
 # Turnierergebnisse mit Null Punkte in der Gesamtwertung ausgeben
