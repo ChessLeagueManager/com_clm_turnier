@@ -12,7 +12,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-- - - - - 2.1.0 - [??-09-2018] - - - - - - - - - - - - - - - - - - - - -
+- - - - - 2.1.0 - [01-10-2018] - - - - - - - - - - - - - - - - - - - - -
 + Mindesteilnahmepflicht für Gesamtwertung
 + Zusätzlich Spieler Infos - u.a. Verein, DWZ etc - für Darstellung
   Standardeinstellungen für "Layout" konfigurierbar
