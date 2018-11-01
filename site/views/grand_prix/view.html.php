@@ -50,8 +50,10 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 
 		// merge params
 		$this->params = $this->state->get('params');
-		$this->params->set('show_filter_icon', $this->get('minTournaments'));
-		
+        if ($this->params->get('show_filter_icon')) {
+		  $this->params->set('show_filter_icon', $this->get('minTournaments'));
+        }
+
 		$menu = $app->getMenu();
 		if (!(isset($menu) && $menu->getActive() != null)) {
 			$this->params->set('show_title', 0);
