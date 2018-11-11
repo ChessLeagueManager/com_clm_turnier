@@ -12,10 +12,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-- - - - - 2.1.1 - [??-10-2018] - - - - - - - - - - - - - - - - - - - - -
+- - - - - 2.1.1 - [11-11-2018] - - - - - - - - - - - - - - - - - - - - -
 # Modus "prozentual":
   fehlerhafte Berechnung bei Vollturnier mit ungerader Teilnehmeranzahl 
 # Layout Einstellung "Filter: verbergen"  
+! Installationsscript überarbeitet
 
 - - - - - 2.1.0 - [01-10-2018] - - - - - - - - - - - - - - - - - - - - -
 + Mindesteilnahmepflicht für Gesamtwertung
