@@ -2,9 +2,9 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>November 2018</creationDate>
+	<creationDate>Dezember 2018</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>2.1.1</version>
+	<version>2.1.2</version>
 	<copyright>Copyright (C) 2017 - 2018. All rights reserved</copyright>
 	<license>GNU General Public License; see https://www.gnu.org/licenses/gpl.html</license>
 	<description>COM_CLM_TURNIER_DESC</description>
@@ -29,6 +29,10 @@
 		<language tag="de-DE">de-DE.com_clm_turnier.ini</language>
 		<language tag="en-GB">en-GB.com_clm_turnier.ini</language>
 	</languages>
+
+	<media folder="media" destination="com_clm_turnier">		
+		<folder>js</folder>
+	</media>
 
 	<administration>
 		<!-- Administration Main File Copy Section -->

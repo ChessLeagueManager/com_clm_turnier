@@ -12,6 +12,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 2.1.2 - [??-12-2018] - - - - - - - - - - - - - - - - - - - - -
+# Schwebenden Tabellenüberschriften bei Template "ict_drivingschool"
+
 - - - - - 2.1.1 - [11-11-2018] - - - - - - - - - - - - - - - - - - - - -
 # Modus "prozentual":
   fehlerhafte Berechnung bei Vollturnier mit ungerader Teilnehmeranzahl 
