@@ -13,7 +13,7 @@ function floatThead() {
 jQuery(window).ready(function(){
 	var bounceInDuration = jQuery(".wow.bounceInDown").attr("data-wow-duration");
 	if (bounceInDuration) {
-		window.setTimeout( floatThead, parseInt(bounceInDuration) * 500 );
+		window.setTimeout( floatThead, (parseInt(bounceInDuration) * 1000) + 100 );
 	} else {
 		floatThead();
 	}
