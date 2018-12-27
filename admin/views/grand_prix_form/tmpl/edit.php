@@ -47,6 +47,7 @@ JFactory::getDocument()->addScriptDeclaration('
 				<?php echo $this->form->renderField('typ_calculation'); ?>
 				<?php echo $this->form->renderField('use_tiebreak'); ?>
 				<?php echo $this->form->renderField('best_of'); ?>
+				<?php echo $this->form->renderField('min_tournaments'); ?>
 				<?php echo $this->form->renderField('num_tournaments'); ?>
 				<?php echo $this->form->renderField('extra_points'); ?>
 				<?php echo $this->form->renderField('col_header'); ?>

@@ -5,6 +5,8 @@
  * @copyright (C) 2017 Andreas Hrubesch; All rights reserved
  * @license GNU General Public License; see https://www.gnu.org/licenses/gpl.html
  * @author Andreas Hrubesch
+ * 
+ * TODO: nach helpers/html verschieben
  */
 
 // No direct access to this file

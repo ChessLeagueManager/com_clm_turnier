@@ -11,7 +11,7 @@
 defined ( '_JEXEC' ) or die ( 'Restricted access' );
 
 /**
- * Utility class für "jquery.floatThead" JavaScript Bibliothek
+ * HTML Utility Klasse für "jquery.floatThead" JavaScript Bibliothek
  *
  * @since 2.0.1
  * @see https://github.com/mkoryak/floatThead
@@ -39,21 +39,8 @@ abstract class JHtmlThead {
 		JHtml::_ ( 'jquery.framework' );
 		
 		// load floatThead JavaScript framework
-		JHtml::_ ( 'script', 'https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.2/jquery.floatThead.js' );
-		
-		//
-		$document = JFactory::getDocument ();
-		$document->addScriptDeclaration ( '
-            if (typeof jQuery == "function") {
-                jQuery(document).ready(function() {        
-                    jQuery(".theadFloatingHeader").floatThead({position: "absolute"});
-                });
-            } else if (typeof $ == "function") {
-                $(document).ready(function() {        
-                    $(".theadFloatingHeader").floatThead({position: "absolute"});
-                });
-            }
-        ' );
+		JHtml::_ ( 'script', 'https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.1.2/jquery.floatThead.js' );		
+		JHtml::_ ( 'script', 'com_clm_turnier/thead.js', array('relative' => true) );
 		
 		static::$loaded [__METHOD__] = true;
 		
@@ -69,7 +56,7 @@ abstract class JHtmlThead {
 	 */
 	public static function tableClass($active = true) {
 		if ($active == true) {
-			echo 'class="theadFloatingHeader"';
+			echo 'class="theadFloatingHeader"'; // als ReturnValue !!
 		}
 	}
 }

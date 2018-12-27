@@ -28,16 +28,21 @@
 	color: blue;
 }
 
-#turnier_rangliste .dwz {
+#turnier_rangliste th.dwz {
+	width: 40px;
+	text-align: center;
+}
+
+#turnier_rangliste td.dwz {
 	width: 40px;
 	text-align: right;
-	border-right-style: none !important;
+	border-right-style: none;
 }
 
 #turnier_rangliste .i0 {
 	width: 40px;
 	text-align: left;
-	border-left-style: none !important;
+	border-left-style: none;
 }
 
 /** Turnier Kategorie Gesamtwertung **/
