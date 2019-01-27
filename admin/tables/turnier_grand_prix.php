@@ -50,6 +50,9 @@ class TableCLMTurnier_Grand_Prix extends JTable {
     // Extrapunkte pro Turnier
     var $extra_points = 0;
     
+    // Nachkommastellen Modus "prozentual"
+    var $precision = 0;
+    
     // 1 = monatliche Turniere
     var $col_header = 0;
 

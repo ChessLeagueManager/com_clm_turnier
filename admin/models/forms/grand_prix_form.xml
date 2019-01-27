@@ -81,6 +81,13 @@
 		description="COM_CLM_TURNIER_FIELD_EXTRA_POINTS_DESC"
 	/>		
 
+	<field
+		name="precision"
+		type="text"
+		label="COM_CLM_TURNIER_FIELD_PRECISION_LABEL"
+		description="COM_CLM_TURNIER_FIELD_PRECISION_DESC"
+	/>		
+
 	<field 
 		name="col_header" 
 		type="radio" 

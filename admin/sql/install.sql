@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `#__clm_turniere_grand_prix` (
   `min_tournaments` mediumint(5) unsigned  DEFAULT '0', -- minimale Anzahl der Turniere für Gesamtwertung
   `num_tournaments` mediumint(5) unsigned  DEFAULT '0',	-- Anzahl Turniere für Extrapunkte
   `extra_points` decimal(3,1) unsigned  DEFAULT '0',	-- Extrapunkte pro Turnier
+  `precision` mediumint(5) unsigned DEFAULT '0',		-- Nachkommastellen Modus "prozentual"
   `col_header` enum('0','1') DEFAULT '0',		-- monatlich Turniere
   `introduction` text,							-- Einleitungstext
   PRIMARY KEY (`id`)

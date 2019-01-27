@@ -175,7 +175,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy
     {
         $list = $this->_loadTurnierErgebnis($pk);
         foreach ($list as $row) {
-            $punkte = ($row->anz_spiele == 0) ? 0 : round($row->sum_punkte / $row->anz_spiele * 100);
+            $punkte = ($row->anz_spiele == 0) ? 0 : round(($row->sum_punkte / $row->anz_spiele * 100), $this->grandPrix->precision);
             $this->_setErgebnis($ii, $row, $punkte);
         }
     }
