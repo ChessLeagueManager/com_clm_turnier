@@ -12,7 +12,7 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
-- - - - - 2.2.0 - [??-02-2019] - - - - - - - - - - - - - - - - - - - - -
+- - - - - 2.2.0 - [02-02-2019] - - - - - - - - - - - - - - - - - - - - -
 + Modus "prozentual":
   Genauigkeit - Definition der Anzahl der Dezimalstellen, auf die gerundet 
   werden soll.
