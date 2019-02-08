@@ -50,6 +50,7 @@ JFactory::getDocument()->addScriptDeclaration('
 				<?php echo $this->form->renderField('min_tournaments'); ?>
 				<?php echo $this->form->renderField('num_tournaments'); ?>
 				<?php echo $this->form->renderField('extra_points'); ?>
+				<?php echo $this->form->renderField('precision'); ?>
 				<?php echo $this->form->renderField('col_header'); ?>
 				<?php echo $this->form->renderField('published'); ?>
 			</div>
