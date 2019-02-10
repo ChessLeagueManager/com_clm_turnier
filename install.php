@@ -28,6 +28,9 @@ defined('_JEXEC') or die('Restricted access');
  * @license GNU General Public License version 2 or later; see LICENSE.txt
  */
 class com_clm_turnierInstallerScript {
+    // the version we are updating from    
+    protected $fromVersion = null;
+    
     /**
      * This method is executed before any Joomla uninstall action, such as file
      * removal or database changes.
@@ -69,15 +72,7 @@ class com_clm_turnierInstallerScript {
      */
     public function update($parent) {
         // remove depricated language files
-        foreach (array(
-            'de-DE/de-DE.com_clm_turnier.sys.ini',
-            'en-GB/en-GB.com_clm_turnier.sys.ini'
-        ) as $file) {
-            $filename = JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'language' . DIRECTORY_SEPARATOR . $file;
-            if (file_exists($filename)) {
-                unlink($filename);
-            }
-        }
+        $this->deleteUnexistingFiles();
     }
 
     /**
@@ -99,6 +94,15 @@ class com_clm_turnierInstallerScript {
         if (! JComponentHelper::isInstalled('com_clm')) {
             $this->enqueueMessage(JText::_('COM_CLM_TURNIER_REQ_COM_CLM'), 'warning');
         }
+        
+        if ($type === 'update') {
+            if (!empty($parent->extension->manifest_cache)) {
+                $manifestValues = json_decode($parent->extension->manifest_cache, true);
+                if ((array_key_exists('version', $manifestValues))) {
+                    $this->fromVersion = $manifestValues['version'];
+                }
+            }
+        }
     }
 
     /**
@@ -117,7 +121,7 @@ class com_clm_turnierInstallerScript {
     public function postflight($type, $parent) {
         $notice = array();
 
-        if ($type == 'install') {
+        if ($type === 'install') {
             $notice[] = JText::_('COM_CLM_TURNIER_CONFIG_OPTIONS');
         }
 
@@ -159,5 +163,36 @@ class com_clm_turnierInstallerScript {
                 . '<pre style="line-height: 1.6em;">' . $msg . '</pre>', 
             $type
         );
+    }
+    
+    /**
+     * Delete files that should not exist
+     *
+     * @see /joomla-cms/administrator/components/com_admin/script.php
+     * @return  void
+     */
+    private function deleteUnexistingFiles() {
+        $files = array(
+            // Release 2.0
+            '/administrator/language/de-DE/de-DE.com_clm_turnier.sys.ini',
+            '/administrator/language/en-GB/en-GB.com_clm_turnier.sys.ini'            
+        );
+
+        $folders = array();
+        
+        
+        jimport('joomla.filesystem.file');        
+        foreach ($files as $file) {
+            if (JFile::exists(JPATH_ROOT . $file) && !JFile::delete(JPATH_ROOT . $file)) {
+                $this->enqueueMessage(JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file), 'warning');
+            }
+        }
+
+        jimport('joomla.filesystem.folder');
+        foreach ($folders as $folder) {
+            if (JFolder::exists(JPATH_ROOT . $folder) && !JFolder::delete(JPATH_ROOT . $folder)) {
+                $this->enqueueMessage(JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $folder), 'warning');
+            }
+        }        
     }
 }
