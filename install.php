@@ -48,25 +48,40 @@ class com_clm_turnierInstallerScript
     {
         echo '<br><b>' . __FILE__ . ' ' . __FUNCTION__ . '</b>:';
 
-        // TODO: DB fehler (sql-mode)
-        $removeTables = false;
-        if (file_exists(JPATH_SITE . '/components/com_clm/clm/index.php')) {
-            require_once JPATH_SITE . '/components/com_clm/clm/index.php';
-            $removeTables = ! clm_core::$db->config()->database_safe;
-        } else {
-            try {
-                $db = JFactory::getDBO();
-                $columns = $db->getTableColumns('#__clm_config');
-            } catch (RuntimeException $r) {
-                $removeTables = true;
+        try {
+            $removeTables = false;
+            if (file_exists(JPATH_SITE . '/components/com_clm/clm/includes/config.php')) {
+                define('clm', '1');
+                require_once JPATH_SITE . '/components/com_clm/clm/includes/config.php';
+                if (isset($config['database_safe'])) {
+                    $removeTables = !($config['database_safe'][2]); // default value
+                    
+                    $db = JFactory::getDBO();
+                    $query = $db->getQuery(true)
+                        ->select($db->quoteName(array(
+                        'id',
+                        'value'
+                    )))
+                        ->from($db->quoteName('#__clm_config'))
+                        ->where($db->quoteName('id') . ' = ' . $db->quote($config['database_safe'][0]));
+                        $db->setQuery($query);
+                    
+                    $row = $db->loadObject();
+                    if (isset($row)) {
+                        $removeTables = !($row->value);
+                    }
+                }
             }
-        }
 
-        if ($removeTables == true) {
-            $element = new SimpleXMLElement('<sql><file driver="mysql" charset="utf8">sql/uninstall.sql</file></sql>');
-            $result = $parent->getParent()->parseSQLFiles($element);
-
-            $this->enqueueMessage(JText::_('COM_CLM_TURNIER_DELETE_TABLES'), 'notice');
+            $this->enqueueMessage('RemoveTable: ' . $removeTables, 'notice');
+            if ($removeTables === true) {
+                $element = new SimpleXMLElement('<sql><file driver="mysql" charset="utf8">sql/uninstall.sql</file></sql>');
+                if ($parent->getParent()->parseSQLFiles($element) > 0) {
+                    $this->enqueueMessage(JText::_('COM_CLM_TURNIER_DELETE_TABLES'), 'notice');
+                }
+            }
+        } catch (Exception $e) {
+            $this->enqueueMessage($e->getMessage(), 'warning');
         }
     }
 
