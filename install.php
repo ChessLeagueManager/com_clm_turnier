@@ -54,8 +54,8 @@ class com_clm_turnierInstallerScript
                 define('clm', '1');
                 require_once JPATH_SITE . '/components/com_clm/clm/includes/config.php';
                 if (isset($config['database_safe'])) {
-                    $removeTables = !($config['database_safe'][2]); // default value
-                    
+                    $removeTables = ! ($config['database_safe'][2]); // default value
+
                     $db = JFactory::getDBO();
                     $query = $db->getQuery(true)
                         ->select($db->quoteName(array(
@@ -64,11 +64,11 @@ class com_clm_turnierInstallerScript
                     )))
                         ->from($db->quoteName('#__clm_config'))
                         ->where($db->quoteName('id') . ' = ' . $db->quote($config['database_safe'][0]));
-                        $db->setQuery($query);
-                    
+                    $db->setQuery($query);
+
                     $row = $db->loadObject();
                     if (isset($row)) {
-                        $removeTables = !($row->value);
+                        $removeTables = ! ($row->value);
                     }
                 }
             }
@@ -150,26 +150,9 @@ class com_clm_turnierInstallerScript
     {
         echo '<br><b>' . __FILE__ . ' ' . __FUNCTION__ . '</b>:';
 
-        $notice = array();
-
-        // Beispieldaten importieren
-        $query = 'SELECT id FROM #__clm_turniere_grand_prix';
-        $db = JFactory::getDbo();
-        $db->setQuery($query);
-        $db->execute();
-        $num_rows = $db->getNumRows();
-        if ($num_rows == 0) {
-            $element = new SimpleXMLElement('<sql><file driver="mysql" charset="utf8">sql/samples.sql</file></sql>');
-            $result = $parent->getParent()->parseSQLFiles($element);
-
-            $notice[] = JText::_('COM_CLM_TURNIER_INSTALL_SAMPLES');
-        }
-
         $this->loadConfigXml($parent);
 
-        if (! empty($notice)) {
-            $this->enqueueMessage(implode("\n", $notice), 'notice');
-        }
+        $this->loadSamples($parent);
     }
 
     /**
@@ -346,5 +329,33 @@ class com_clm_turnierInstallerScript
         }
 
         return json_encode($ini);
+    }
+
+    /**
+     * Method to load the sample data into the database.
+     * 
+     * @param \stdClass $parent
+     *            - Parent object calling object.
+     * @return void
+     */
+    private function loadSamples($parent)
+    {
+        try {
+            $db = JFactory::getDbo();
+            $query = $db->getQuery(true)
+                ->select($db->quoteName('id'))
+                ->from($db->quoteName('#__clm_turniere_grand_prix'));
+            $db->setQuery($query);
+            $db->execute();
+
+            if ($db->getNumRows() == 0) {
+                $element = new SimpleXMLElement('<sql><file driver="mysql" charset="utf8">sql/samples.sql</file></sql>');
+                if ($parent->getParent()->parseSQLFiles($element) > 0) {
+                    $this->enqueueMessage(JText::_('COM_CLM_TURNIER_INSTALL_SAMPLES'), 'notice');
+                }
+            }
+        } catch (Exception $e) {
+            $this->enqueueMessage($e->getMessage(), 'warning');
+        }
     }
 }
