@@ -73,7 +73,6 @@ class com_clm_turnierInstallerScript
                 }
             }
 
-            $this->enqueueMessage('RemoveTable: ' . $removeTables, 'notice');
             if ($removeTables === true) {
                 $element = new SimpleXMLElement('<sql><file driver="mysql" charset="utf8">sql/uninstall.sql</file></sql>');
                 if ($parent->getParent()->parseSQLFiles($element) > 0) {
