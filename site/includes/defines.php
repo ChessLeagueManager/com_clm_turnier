@@ -12,20 +12,30 @@ defined('_JEXEC') or die('Restricted access');
 
 // Directory Separator (backward compatibility)
 if (! defined("DS")) {
-    define('DS', DIRECTORY_SEPARATOR);
-}
-
-// CLM Turnier Component Administrator Path
-if (! defined('JPATH_ADMIN_CLM_TURNIER_COMPONENT')) {
-    define('JPATH_ADMIN_CLM_TURNIER_COMPONENT', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_clm_turnier');
+	define('DS', DIRECTORY_SEPARATOR);
 }
 
 // CLM Turnier Component Path
 if (! defined('JPATH_CLM_TURNIER_COMPONENT')) {
-    define('JPATH_CLM_TURNIER_COMPONENT', JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_clm_turnier');
+	define('JPATH_CLM_TURNIER_COMPONENT', JPATH_SITE . DIRECTORY_SEPARATOR .
+			'components' . DIRECTORY_SEPARATOR . 'com_clm_turnier');
+}
+
+// CLM Turnier Component Administrator Path
+if (! defined('JPATH_ADMIN_CLM_TURNIER_COMPONENT')) {
+	define('JPATH_ADMIN_CLM_TURNIER_COMPONENT', JPATH_ADMINISTRATOR .
+			DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR .
+			'com_clm_turnier');
 }
 
 // CLM Component Path
 if (! defined('JPATH_CLM_COMPONENT')) {
-    define('JPATH_CLM_COMPONENT', JPATH_SITE . DIRECTORY_SEPARATOR . 'components' . DIRECTORY_SEPARATOR . 'com_clm');
+	define('JPATH_CLM_COMPONENT', JPATH_SITE . DIRECTORY_SEPARATOR . 'components' .
+			DIRECTORY_SEPARATOR . 'com_clm');
+}
+
+// CLM Component Administrator Path
+if (! defined('JPATH_ADMIN_CLM_COMPONENT')) {
+	define('JPATH_ADMIN_CLM_COMPONENT', JPATH_ADMINISTRATOR . DIRECTORY_SEPARATOR .
+			'components' . DIRECTORY_SEPARATOR . 'com_clm');
 }

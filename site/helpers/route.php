@@ -22,16 +22,20 @@ abstract class Grand_PrixHelperRoute {
 	 * erstellt einen "Link" zu einer Grand Prix Gesamtwertung.
 	 *
 	 * @param number $id
-	 *        	Grand prix ID
+	 *        	Grand Prix ID
 	 * @param number $catidEdition
 	 *        	Turnier Kategorie ID
 	 * @param array $tids
 	 *        	Turnier ID's
 	 * @param array $filter
 	 *        	Filter (optional)
+	 * @param array $rids
+	 *        	Ranglisten ID's (optional)
+	 * @param number $rid
+	 *        	Rangliste ID (optional)
 	 * @return string Link zur Grand Prix Gesamtwertung
 	 */
-	public static function getGrandPrixRoute($id, $catidEdition = 0, $tids = array(), $filter = array()) {
+	public static function getGrandPrixRoute($id, $catidEdition = 0, $tids = array(), $filter = array(), $rids = array(), $rid = 0) {
 		// Link erstellen
 		$link = 'index.php?option=com_clm_turnier&view=grand_prix';
 
@@ -53,6 +57,18 @@ abstract class Grand_PrixHelperRoute {
 					$link .= '&filter[' . $key . ']=' . $value;
 				}
 			}
+		}
+
+		if (isset($rids) && is_array($rids)) {
+			foreach ($rids as $key => $value) {
+				if (! empty($value)) {
+					$link .= '&ranglisten[' . $key . ']=' . $value;
+				}
+			}
+		}
+
+		if ($rid > 0) {
+			$link .= '&rid=' . (int) $rid;
 		}
 
 		return $link;

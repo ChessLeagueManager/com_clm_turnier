@@ -37,12 +37,16 @@ if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
     echo '</p>';
 }
 
+// Submenü
+echo JLayoutHelper::render('submenu', array('state' => $this->state, 'ranglisten' => $this->get('ranglisten')), JPATH_CLM_TURNIER_COMPONENT);
+
 if (count($this->gesamtwertung) == 0) {
-    echo CLMContent::clmWarning(JText::_('COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO'));
+	$string = ($this->state->get('grand_prix.rids')) ? 'TOURNAMENT_SPECIALRANKING_NOPLAYERS' : 'COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO';
+    echo CLMContent::clmWarning(JText::_($string));
 } else {
     $min_tournaments = $this->get('minTournaments');
     $filter = $this->state->get('grand_prix.filter');
-?>
+ ?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
@@ -99,7 +103,7 @@ if (count($this->gesamtwertung) == 0) {
 <?php
     // alle Spieler durchgehen
     $p = 0;
-    $gb = 0;
+    $gb = -1;
     foreach ($this->gesamtwertung as $row) {
         $style = '';
         if (count($row->ergebnis) < $min_tournaments) {
