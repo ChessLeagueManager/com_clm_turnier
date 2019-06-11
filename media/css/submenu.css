@@ -1,10 +1,10 @@
+@charset "UTF-8";
 #clm .clm-navigator {
 	margin: 15px auto 15px auto;
 	max-width: 500px;
 	padding: 0;
 	position: relative;
 	overflow: visible;
-	z-index: 9999;
 	word-wrap: break-word;
 	list-style-type: none;
 	list-style-image: none;
@@ -17,7 +17,6 @@
 	display: flex;
 	flex-direction: row;
 	overflow: inherit;
-	z-index: inherit;
 	word-wrap: inherit;
 	list-style-type: inherit;
 	list-style-image: inherit;
@@ -39,7 +38,6 @@
 	background-image: none;
 	line-height: inherit;
 	overflow: inherit;
-	z-index: inherit;
 	word-wrap: inherit;
 	list-style-type: inherit;
 	list-style-image: inherit;
@@ -49,24 +47,21 @@
 
 #clm .clm-navigator ul li ul {
 	width: 100%;
-	-moz-box-sizing: border-box;
+	-moz-box-sizing:    border-box;
 	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
+	box-sizing:        border-box;
 	border: 1px solid #DDD;
 	display: none;
 	position: absolute;
 	z-index: 9999;
 	left: 0;
-	filter: alpha(opacity = 95);
-	-ms-filter: "alpha(opacity = 95)";
 	opacity: .950;
 	border-bottom-right-radius: 15px;
-	border-bottom-left-radius: 15px;
+	border-bottom-left-radius: 15px; 
 	background-image: none;
 	line-height: inherit;
 	font-size: inherit;
 	overflow: inherit;
-	z-index: inherit;
 	word-wrap: inherit;
 	list-style-type: inherit;
 	list-style-image: inherit;
@@ -89,7 +84,8 @@
 	list-style-image: inherit;
 }
 
-#clm .clm-navigator ul li p, #clm .clm-navigator ul li a {
+#clm .clm-navigator ul li p,
+#clm .clm-navigator ul li a {
 	height: 100%;
 	text-align: center;
 	color: inherit;
@@ -124,7 +120,8 @@
 	border-top: 1px solid #DDD;
 }
 
-#clm .clm-navigator ul li ul li a, #clm .clm-navigator ul li ul li p {
+#clm .clm-navigator ul li ul li a, 
+#clm .clm-navigator ul li ul li p {
 	font-weight: normal;
 }
 

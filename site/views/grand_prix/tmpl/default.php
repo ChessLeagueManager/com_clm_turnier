@@ -12,9 +12,6 @@ defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
 
 echo "<div class='clm'>";
 
-// Stylesheet laden
-jimport('includes.css_path', JPATH_CLM_TURNIER_COMPONENT);
-
 // CLM Config
 $config = clm_core::$db->config();
 
@@ -46,7 +43,7 @@ if (count($this->gesamtwertung) == 0) {
 } else {
     $min_tournaments = $this->get('minTournaments');
     $filter = $this->state->get('grand_prix.filter');
- ?>
+?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
 
@@ -61,13 +58,13 @@ if (count($this->gesamtwertung) == 0) {
 			<th class="verein"><?php echo JText::_('COM_CLM_TURNIER_COL_VEREIN') ?></th>
 		<?php } ?>
 		<?php if ($this->params->get('show_dwz') && $this->params->get('show_elo')) { ?>
-			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_TWZ') ?></th>
+			<th class="twz"><?php echo JText::_('COM_CLM_TURNIER_COL_TWZ') ?></th>
 		<?php } ?>
 		<?php if ($this->params->get('show_dwz')) { ?>
-			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_DWZ') ?></th>
+			<th class="twz"><?php echo JText::_('COM_CLM_TURNIER_COL_DWZ') ?></th>
 		<?php } ?>
 		<?php if ($this->params->get('show_elo')) { ?>
-			<th class="dwz"><?php echo JText::_('COM_CLM_TURNIER_COL_ELO') ?></th>
+			<th class="twz"><?php echo JText::_('COM_CLM_TURNIER_COL_ELO') ?></th>
 		<?php } ?>
 		
 		<?php
@@ -128,13 +125,13 @@ if (count($this->gesamtwertung) == 0) {
 			<td class="verein"><?php echo $row->verein; ?></td>
 		<?php } ?>
 		<?php if ($this->params->get('show_dwz') && $this->params->get('show_elo')) { ?>
-			<td class="dwz"><?php echo $row->twz; ?></td>
+			<td class="twz"><?php echo ($row->twz == 0 ? '-' : $row->twz); ?></td>
 		<?php } ?>
 		<?php if ($this->params->get('show_dwz')) { ?>
-			<td class="dwz"><?php echo $row->dwz; ?></td>
+			<td class="twz"><?php echo ($row->dwz == 0 ? '-' : $row->dwz); ?></td>
 		<?php } ?>
 		<?php if ($this->params->get('show_elo')) { ?>
-			<td class="dwz"><?php echo $row->elo; ?></td>
+			<td class="twz"><?php echo ($row->elo == 0 ? '-': $row->elo); ?></td>
 		<?php } ?>
 		<?php
         for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {

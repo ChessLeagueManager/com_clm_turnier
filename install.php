@@ -47,23 +47,26 @@ class com_clm_turnierInstallerScript {
 		// Chess League Manager Einstellung
 		try {
 			// Standard Einstellung: Tabellen nicht löschen
-			if (file_exists(JPATH_SITE . '/components/com_clm/clm/includes/config.php')) {
+			if (file_exists(JPATH_SITE .
+					'/components/com_clm/clm/includes/config.php')) {
 				define('clm', '1');
-				require_once JPATH_SITE . '/components/com_clm/clm/includes/config.php';
-				if (isset($config ['database_safe'])) {
-					$removeTables = ! ($config ['database_safe'] [2]); // default value
+				require_once JPATH_SITE .
+						'/components/com_clm/clm/includes/config.php';
+				if (isset($config['database_safe'])) {
+					$removeTables = ! ($config['database_safe'][2]); // default value
 				}
 			}
 
 			// Datenbank Einstellung
 			$db = JFactory::getDBO();
 			$query = $db->getQuery(true)->select($db->quoteName(array ('id',
-					'value' )))->from($db->quoteName('#__clm_config'))->where($db->quoteName('id') . ' = ' . $db->quote('119'));
+					'value' )))->from($db->quoteName('#__clm_config'))->where($db->quoteName('id') .
+					' = ' . $db->quote('119'));
 			$db->setQuery($query);
 
 			$row = $db->loadObject();
 			$removeTables = (isset($row)) ? (! ($row->value)) : 0;
-		} catch ( Exception $e ) {
+		} catch (Exception $e) {
 			// NOP
 		}
 
@@ -105,7 +108,10 @@ class com_clm_turnierInstallerScript {
 	public function preflight($type, $parent) {
 		// Chess League Manager installiert ?
 		$db = JFactory::getDbo();
-		$result = $db->setQuery($db->getQuery(true)->select('COUNT(' . $db->quoteName('extension_id') . ')')->from($db->quoteName('#__extensions'))->where($db->quoteName('element') . ' = ' . $db->quote('com_clm'))->where($db->quoteName('type') . ' = ' . $db->quote('component')))->loadResult();
+		$result = $db->setQuery($db->getQuery(true)->select('COUNT(' .
+				$db->quoteName('extension_id') . ')')->from($db->quoteName('#__extensions'))->where($db->quoteName('element') .
+				' = ' . $db->quote('com_clm'))->where($db->quoteName('type') .
+				' = ' . $db->quote('component')))->loadResult();
 		if ($result == 0) {
 			$this->enqueueMessage(JText::_('COM_CLM_TURNIER_REQ_COM_CLM'), 'warning');
 		}
@@ -138,7 +144,8 @@ class com_clm_turnierInstallerScript {
 
 		$this->loadSamples($parent);
 
-		if ($type === 'update' && version_compare($this->fromVersion, $parent->getManifest()->version, '<')) {
+		if ($type === 'update' &&
+				version_compare($this->fromVersion, $parent->getManifest()->version, '<')) {
 			$this->enqueueMessage($this->getChangelog($parent));
 		}
 	}
@@ -163,7 +170,8 @@ class com_clm_turnierInstallerScript {
 		if (! preg_match('#^<pre|^<div#i', $msg)) {
 			$msg = '<pre style="line-height: 1.6em;">' . $msg . '</pre>';
 		}
-		JFactory::getApplication()->enqueueMessage('<h3>' . JText::_('COM_CLM_TURNIER_DESC') . '</h3>' . $msg, $type);
+		JFactory::getApplication()->enqueueMessage('<h3>' .
+				JText::_('COM_CLM_TURNIER_DESC') . '</h3>' . $msg, $type);
 	}
 
 	/**
@@ -179,18 +187,22 @@ class com_clm_turnierInstallerScript {
 				'/administrator/language/de-DE/de-DE.com_clm_turnier.sys.ini',
 				'/administrator/language/en-GB/en-GB.com_clm_turnier.sys.ini' );
 
-		$folders = array ();
+		$folders = array (
+				// Release 3.0
+				'components/com_clm_turnier/includes' );
 
 		jimport('joomla.filesystem.file');
-		foreach ( $files as $file ) {
-			if (JFile::exists(JPATH_ROOT . $file) && ! JFile::delete(JPATH_ROOT . $file)) {
+		foreach ($files as $file) {
+			if (JFile::exists(JPATH_ROOT . $file) &&
+					! JFile::delete(JPATH_ROOT . $file)) {
 				$this->enqueueMessage(JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $file), 'warning');
 			}
 		}
 
 		jimport('joomla.filesystem.folder');
-		foreach ( $folders as $folder ) {
-			if (JFolder::exists(JPATH_ROOT . $folder) && ! JFolder::delete(JPATH_ROOT . $folder)) {
+		foreach ($folders as $folder) {
+			if (JFolder::exists(JPATH_ROOT . $folder) &&
+					! JFolder::delete(JPATH_ROOT . $folder)) {
 				$this->enqueueMessage(JText::sprintf('FILES_JOOMLA_ERROR_FILE_FOLDER', $folder), 'warning');
 			}
 		}
@@ -204,7 +216,8 @@ class com_clm_turnierInstallerScript {
 	 * @return void
 	 */
 	private function loadConfigXml($parent) {
-		$file = $parent->getParent()->getPath('extension_administrator') . '/config.xml';
+		$file = $parent->getParent()->getPath('extension_administrator') .
+				'/config.xml';
 		$defaults = $this->parseConfigFile($file);
 		if ($defaults === '{}') {
 			return;
@@ -216,7 +229,10 @@ class com_clm_turnierInstallerScript {
 		try {
 			$db = JFactory::getDBO();
 			$query = $db->getQuery(true)->select($db->quoteName(array (
-					'extension_id', 'params' )))->from($db->quoteName('#__extensions'))->where($db->quoteName('type') . ' = ' . $db->quote($type))->where($db->quoteName('element') . ' = ' . $db->quote($parent->getElement()))->where($db->quoteName('name') . ' = ' . $db->quote($parent->getName()));
+					'extension_id', 'params' )))->from($db->quoteName('#__extensions'))->where($db->quoteName('type') .
+					' = ' . $db->quote($type))->where($db->quoteName('element') .
+					' = ' . $db->quote($parent->getElement()))->where($db->quoteName('name') .
+					' = ' . $db->quote($parent->getName()));
 			$db->setQuery($query);
 			$row = $db->loadObject();
 			if (! isset($row)) {
@@ -229,7 +245,7 @@ class com_clm_turnierInstallerScript {
 				$result = array_merge(json_decode($defaults, true), $params);
 				$defaults = json_encode($result);
 			}
-		} catch ( Exception $e ) {
+		} catch (Exception $e) {
 			$this->enqueueMessage($e->getMessage(), 'warning');
 			return;
 		}
@@ -238,11 +254,12 @@ class com_clm_turnierInstallerScript {
 			$query = $db->getQuery(true);
 			$query->update($db->quoteName('#__extensions'));
 			$query->set($db->quoteName('params') . ' = ' . $db->quote($defaults));
-			$query->where($db->quoteName('extension_id') . ' = ' . $db->quote($row->extension_id));
+			$query->where($db->quoteName('extension_id') . ' = ' .
+					$db->quote($row->extension_id));
 
 			$db->setQuery($query);
 			$db->execute();
-		} catch ( Exception $e ) {
+		} catch (Exception $e) {
 			$this->enqueueMessage($e->getMessage(), 'warning');
 		}
 	}
@@ -279,14 +296,14 @@ class com_clm_turnierInstallerScript {
 		$ini = array ();
 
 		// Iterating through the fieldsets:
-		foreach ( $fieldsets as $fieldset ) {
+		foreach ($fieldsets as $fieldset) {
 			if (! count($fieldset->children())) {
 				// Either the tag does not exist or has no children therefore we return zero files processed.
 				return '{}';
 			}
 
 			// Iterating through the fields and collecting the name/default values:
-			foreach ( $fieldset as $field ) {
+			foreach ($fieldset as $field) {
 				// Check against the null value since otherwise default values like "0"
 				// cause entire parameters to be skipped.
 
@@ -298,7 +315,7 @@ class com_clm_turnierInstallerScript {
 					continue;
 				}
 
-				$ini [(string) $name] = (string) $value;
+				$ini[(string) $name] = (string) $value;
 			}
 		}
 
@@ -325,12 +342,21 @@ class com_clm_turnierInstallerScript {
 					$this->enqueueMessage(JText::_('COM_CLM_TURNIER_INSTALL_SAMPLES'), 'notice');
 				}
 			}
-		} catch ( Exception $e ) {
+		} catch (Exception $e) {
 			$this->enqueueMessage($e->getMessage(), 'warning');
 		}
 	}
+
+	/**
+	 * Method to generate the changelog data.
+	 * 
+	 * @param \stdClass $parent
+	 *        	- Parent object calling object.
+	 * @return string
+	 */
 	private function getChangelog($parent) {
-		$file = $parent->getParent()->getPath('extension_administrator') . '/changelog.txt';
+		$file = $parent->getParent()->getPath('extension_administrator') .
+				'/changelog.txt';
 		if (! file_exists($file)) {
 			return '';
 		}
@@ -340,13 +366,13 @@ class com_clm_turnierInstallerScript {
 
 		$parts = explode("\n\n", $changelog);
 		if (empty($parts)) {
-			return;
+			return '';
 		}
 
 		$version = '';
 		$changelog = array ();
 
-		foreach ( $parts as $part ) {
+		foreach ($parts as $part) {
 			$part = trim($part);
 
 			// changeloh eintrag ?!
@@ -356,7 +382,7 @@ class com_clm_turnierInstallerScript {
 
 			// changelog version ermitteln
 			if (preg_match('#.*(\d+\.\d+\.\d+) - \[.*\].*#i', $part, $version)) {
-				$version = $version [1];
+				$version = $version[1];
 			}
 
 			if (version_compare($version, $this->fromVersion, '<=')) {
@@ -365,7 +391,7 @@ class com_clm_turnierInstallerScript {
 
 			$part = preg_replace('#.*(\d+\.\d+\.\d+ - \[.*\]).*#', '<b>$1</b><pre style="line-height: 1.6em;">', $part);
 
-			$changelog [] = $part . '</pre>';
+			$changelog[] = $part . '</pre>';
 		}
 
 		$changelog = implode("\n\n", $changelog);
@@ -376,13 +402,16 @@ class com_clm_turnierInstallerScript {
 				'*' => [ 'Security Fix', 'info' ], '#' => [ 'Bug Fix', 'info' ],
 				'!' => [ 'Note', 'info' ],
 				'$' => [ 'Language fix or change', 'info' ] ];
-		foreach ( $change_types as $char => $type ) {
-			$changelog = preg_replace('#\n' . preg_quote($char, '#') . ' #', "\n" . '<span class="label label-sm label-' . $type [1] . '" title="' . $type [0] . '">' . $char . '</span> ', $changelog);
+		foreach ($change_types as $char => $type) {
+			$changelog = preg_replace('#\n' . preg_quote($char, '#') . ' #', "\n" .
+					'<span class="label label-sm label-' . $type[1] . '" title="' .
+					$type[0] . '">' . $char . '</span> ', $changelog);
 		}
 		$changelog = preg_replace('#\n  #', "\n   ", $changelog);
 
 		$title = JText::sprintf('COM_CLM_TURNIER_CHANGELOG', $this->fromVersion);
 
-		return '<div style="max-height: 240px; padding-right: 20px; margin-right: -20px; overflow: auto;">' . '<p><b>' . $title . '</b></p>' . $changelog . '</div>';
+		return '<div style="max-height: 240px; padding-right: 20px; margin-right: -20px; overflow: auto;">' .
+				'<p><b>' . $title . '</b></p>' . $changelog . '</div>';
 	}
 }
