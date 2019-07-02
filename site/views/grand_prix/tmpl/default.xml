@@ -5,7 +5,7 @@
 		</message>
 	</layout>
 
-	<fields name="request">
+	<fields name="request" addfieldpath="/administrator/components/com_clm_turnier/models/fields">
 		<fieldset name="request">
 			<field name="grand_prix" required="true" type="sql"
 				label="COM_CLM_TURNIER_FIELD_NAME_LABEL"
@@ -32,16 +32,9 @@
 				<option value="0">PARAMETER_SELECT</option>
 			</field>
 
-			<field name="ranglisten" type="sql" default="0"
+			<field name="ranglisten" type="sonderranglisten"
 				label="SPECIALRANKINGS" description="SPECIALRANKINGS_DESC"
-				query="SELECT t1.id AS value, CONCAT(t1.name, ' / ', t2.name) AS rname 
-					FROM #__clm_turniere_sonderranglisten t1 
-						JOIN #__clm_turniere t2 on t2.id = t1.turnier
-						JOIN #__clm_saison t3 on t3.id = t2.sid
-					WHERE t1.published = 1 AND t3.archiv = 0
-					ORDER BY t1.ordering"
-				value_field="rname" multiple="multiple">
-				<option value="0">PARAMETER_SELECT</option>
+				multiple="multiple">
 			</field>
 		</fieldset>
 	</fields>

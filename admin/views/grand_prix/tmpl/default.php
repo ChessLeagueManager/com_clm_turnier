@@ -112,8 +112,8 @@ $n = count($this->items);
 		</table>
 		<?php endif; ?>
 		
-		<input type="hidden" name="task" value="" /> <input type="hidden"
-			name="boxchecked" value="0" /> 
-		<?php echo JHtml::_( 'form.token' ); ?>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" /> 
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

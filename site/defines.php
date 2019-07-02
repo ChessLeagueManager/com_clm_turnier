@@ -7,6 +7,8 @@
  * @author Andreas Hrubesch
  */
 
+// TODO: defines und "bootstrap" trennen, evtl. auch Site und Admin
+
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
