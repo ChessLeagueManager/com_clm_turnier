@@ -10,7 +10,6 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-// TODO: entfernen / anpassen
 jimport('components.com_clm_turnier.defines', JPATH_SITE);
 
 use Joomla\CMS\Form\FormField;

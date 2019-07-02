@@ -11,7 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 // Component definitions / Libraries
-if (! jimport('components.com_clm_turnier.defines', JPATH_SITE)) {
+if (! jimport('components.com_clm_turnier.bootstrap', JPATH_SITE)) {
     throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), '404');
 }
 

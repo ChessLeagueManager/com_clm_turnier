@@ -20,7 +20,6 @@ if ($listOrder === 'r.name') {
 	JHtml::_('sortablelist.sortable', 'sonderranglisten_list', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
 }
 
-// TODO: Link aus URL ermitteln ??
 ?>
 
 <form
