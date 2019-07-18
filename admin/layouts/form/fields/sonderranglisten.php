@@ -41,6 +41,7 @@ defined('_JEXEC') or die('Restricted access');
  * @var   array    $options         Options available for this field.
  *
  * @var   array    $data            Selection List Data
+ * @var   string   $saison         
  */
 extract($displayData);
 
@@ -58,7 +59,12 @@ $attribs = array();
 $attribs['id'] = $id;
 $attribs['name'] = $name;
 $attribs['multiple'] = '';
-$attribs['class'] = 'field-sonderranglisten-input-name';
+
+if (!empty($class)) {
+	$attribs['class'] = 'field-sonderranglisten-input-name ' . $class;
+} else {
+	$attribs['class'] = 'field-sonderranglisten-input-name';
+}
 ?>
 
 <div class="field-sonderranglisten-wrapper"
@@ -67,7 +73,7 @@ $attribs['class'] = 'field-sonderranglisten-input-name';
 	data-modal-width="100%"
 	data-modal-height="400px"
 	data-input=".field-sonderranglisten-input"
-	data-input-name="<?php echo '.' . $attribs['class']?>"
+	data-input-name=".field-sonderranglisten-input-name"
 	data-button-select=".button-select"
 	data-button-save-selected=".button-save-selected"
 	>
@@ -87,7 +93,8 @@ $attribs['class'] = 'field-sonderranglisten-input-name';
 			'bootstrap.renderModal',
 			'sonderranglistenModal_' . $id,
 			array(
-				'title'  => JText::_('COM_CLM_TURNIER_FORM_FIELD_SONDERRANGLISTEN_DIALOG'),
+				'title'  => JText::_('COM_CLM_TURNIER_FORM_FIELD_SONDERRANGLISTEN_DIALOG') 
+					. ' (' . JText::_('SAISON') . ': '. $this->escape($saison) . ')',
 				'closeButton' => true,
 					'footer' => '<a type="button" class="btn button-save-selected" data-dismiss="modal">' . JText::_('JGLOBAL_FIELD_ADD') . '</a>' 
 					. '<a type="button" class="btn" data-dismiss="modal">' . JText::_('JCANCEL') . '</a>'

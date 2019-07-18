@@ -11,7 +11,7 @@
 				label="COM_CLM_TURNIER_FIELD_NAME_LABEL"
 				description="COM_CLM_TURNIER_FIELD_NAME_DESC"
 				query="SELECT a.id AS value, a.name AS kname FROM #__clm_turniere_grand_prix a WHERE a.published = 1 ORDER BY kname"
-				value_field="kname">
+				value_field="kname" class="input-xlarge">
 			</field>
 
 			<field name="kategorie" type="sql" default="0"
@@ -21,20 +21,21 @@
 					SELECT a.id AS value, CONCAT(b.name, ' > ', a.name) AS kname FROM #__clm_categories a 
 						JOIN #__clm_categories b ON b.id = a.parentid
 					ORDER BY kname ASC"
-				value_field="kname">
+				value_field="kname" class="input-xlarge">
 				<option value="0">PARAMETER_SELECT</option>
 			</field>
 
 			<field name="turniere" type="sql" default="0"
 				label="TOURNAMENTS" description="TOURNAMENTS_SELECT_DESC"
 				query="SELECT a.id AS value, a.name AS tname FROM #__clm_turniere a WHERE a.published = 1 ORDER BY a.datestart"
-				value_field="tname" multiple="multiple">
+				value_field="tname" multiple="multiple" class="input-xlarge">
 				<option value="0">PARAMETER_SELECT</option>
 			</field>
 
 			<field name="ranglisten" type="sonderranglisten"
 				label="SPECIALRANKINGS" description="SPECIALRANKINGS_DESC"
-				multiple="multiple">
+				multiple="multiple"
+				class="input-xlarge">
 			</field>
 		</fieldset>
 	</fields>

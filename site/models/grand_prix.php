@@ -258,7 +258,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$tids = $this->getState('grand_prix.tids');
 		if ($tids) {
 			$list = array_diff(array_map("intval", $tids), [ 0 ]);
-			if (count($list) > 0) {
+			if (! empty($list)) {
 				array_push($where, $this->_db->quoteName('t1.id') . ' IN(' .
 						implode(', ', $list) . ')');
 			}
@@ -691,7 +691,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$ids = $this->getState('grand_prix.rids');
 		if ($ids) {
 			$list = array_diff(array_map("intval", $ids), [ 0 ]);
-			if (count($list) > 0) {
+			if (! empty($list)) {
 				array_push($where, $this->_db->quoteName('t1.id') . ' IN(' .
 						implode(', ', $list) . ')');
 			}

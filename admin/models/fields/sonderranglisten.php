@@ -77,9 +77,14 @@ class JFormFieldSonderranglisten extends FormField {
 
 		BaseDatabaseModel::addIncludePath(JPATH_ADMIN_CLM_TURNIER_COMPONENT . '/models');
 		$model = BaseDatabaseModel::getInstance('Sonderranglisten', 'CLM_TurnierModel');
-		$totalItems = $model->getTotalItems();
+		$totalItems = $model->getTotalItems($this->value);
 
-		$extraData = array ('data' => $totalItems );
+		$saison = '';
+		if ($totalItems[0]) {
+			$saison = $totalItems[0]->saison;
+		}
+
+		$extraData = array ('data' => $totalItems, 'saison' => $saison);
 		return array_merge($layoutData, $extraData);
 	}
 
