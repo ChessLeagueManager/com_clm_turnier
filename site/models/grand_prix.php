@@ -327,6 +327,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 	 *        	Turnierereihenfolge
 	 */
 	protected function _getGesamtwertung($orderBy) {
+	    $this->turniere = array();
 		$this->gesamtergebnis = array ();
 
 		// veröffentlichte Turniere ermitteln
