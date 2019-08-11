@@ -2,9 +2,9 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>18.07.2019</creationDate>
+	<creationDate>11.08.2019</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>2.9.2</version>
+	<version>3.0.0</version>
 	<copyright>Copyright (C) 2017 - 2019. All rights reserved</copyright>
 	<license>GNU General Public License; see https://www.gnu.org/licenses/gpl.html</license>
 	<description>COM_CLM_TURNIER_DESC</description>
