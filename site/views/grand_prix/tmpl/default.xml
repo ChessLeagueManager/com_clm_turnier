@@ -63,10 +63,14 @@
 				<option value="1">COM_CLM_TURNIER_USE_DWZ_FROM_VALUE_1</option>
 			</field>
 			<field name="link_turnier" type="list" useglobal="true"
-				label="COM_CLM_TURNIER_LINKED_TURNIER_LABEL"
+				label="COM_CLM_TURNIER_LINKED_TURNIER_LABEL" 
 				description="COM_CLM_TURNIER_LINKED_TURNIER_DESC">
-				<option value="1">JYES</option>
-				<option value="0">JNO</option>
+				<option value="0">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_SELECT</option>
+				<option value="1">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_1</option>
+				<option value="2">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_2</option>
+				<option value="3">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_3</option>
+				<option value="4">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_4</option>
+				<option value="5">COM_CLM_TURNIER_LINKED_TURNIER_VALUE_5</option>
 			</field>
 
 			<field name="spacer1" type="spacer" hr="true" />

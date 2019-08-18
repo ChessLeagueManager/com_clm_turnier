@@ -80,7 +80,7 @@ if (count($this->gesamtwertung) == 0) {
 		    }
 		    // Turnier gewertet
 		    if ($linkTurnier && isset($this->turniere[$ii])) {
-		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ii]->id);
+		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ii]->id, $this->params->get('link_turnier'));
 		        $attribs = 'class="active_link"' .
 		  		        ' title="' . $this->turniere[$ii]->name . '"';
 		  		        

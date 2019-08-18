@@ -75,17 +75,36 @@ abstract class Grand_PrixHelperRoute {
 	}
 
 	/**
-	 * erstellt einen "Link" zu einer Turnier Rangliste
+	 * erstellt einen "Link" zu einem CLM Turnier
 	 *
 	 * @param number $id
 	 *        	Turnier ID
+	 * @param number $vid
+	 *        	CLM View ID
 	 * @param string $orderBy
 	 *        	Sortierung der Teilnehmer (optional)
 	 * @return string Link zur Turnier Rangliste
 	 */
-	public static function getTurnierRanglisteRoute($id, $orderBy = 'pos') {
+	public static function getTurnierRanglisteRoute($id, $vid, $orderBy = 'pos') {
+		switch ((int) $vid) {
+			case 2 :
+				$view = 'turnier_info';
+				break;
+			case 3 :
+				$view = 'turnier_tabelle';
+				break;
+			case 4 :
+				$view = 'turnier_teilnehmer';
+				break;
+			case 5 :
+				$view = 'turnier_paarungsliste';
+				break;
+			default :
+				$view = 'turnier_rangliste';
+		}
+
 		// Link erstellen
-		$link = 'index.php?option=com_clm&view=turnier_rangliste';
+		$link = 'index.php?option=com_clm&view=' . $view;
 
 		$link .= '&turnier=' . (int) $id;
 		$link .= '&orderBy=' . $orderBy;
