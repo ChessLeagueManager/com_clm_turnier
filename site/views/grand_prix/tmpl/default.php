@@ -73,16 +73,17 @@ if (count($this->gesamtwertung) == 0) {
         ?>
 		<th class="erg">
 		<?php
+			$ik = $this->getTurnierIndex($ii);
     		if (is_object($this->grand_prix) && $this->grand_prix->col_header) {
-		        $colTitle = strftime("%b", mktime(0, 0, 0, $ii));
+		        $colTitle = strftime("%b", mktime(0, 0, 0, $ik, 1));
             } else {
-		        $colTitle = $ii;
+		        $colTitle = $ik;
 		    }
 		    // Turnier gewertet
-		    if ($linkTurnier && isset($this->turniere[$ii])) {
-		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ii]->id, $this->params->get('link_turnier'));
+		    if ($linkTurnier && isset($this->turniere[$ik])) {
+		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ik]->id, $this->params->get('link_turnier'));
 		        $attribs = 'class="active_link"' .
-		  		        ' title="' . $this->turniere[$ii]->name . '"';
+		  		        ' title="' . $this->turniere[$ik]->name . '"';
 		  		        
 		        $colTitle = JHtml::_('link', JRoute::_($link), $colTitle, $attribs);
             }
@@ -137,8 +138,9 @@ if (count($this->gesamtwertung) == 0) {
         for ($ii = 1; $ii <= $this->anzahlTurniere; $ii ++) {
             $style = '';
             $ergebnis = '';
-            if (isset($row->ergebnis[$ii])) {
-                $ergebnis = $row->ergebnis[$ii];
+            $ik = $this->getTurnierIndex($ii);
+            if (isset($row->ergebnis[$ik])) {
+                $ergebnis = $row->ergebnis[$ik];
                 if ($ergebnis < 0 || strcmp(strval($ergebnis), '-0') == 0) {
                     $ergebnis *= - 1;
                     $style = ' style="background-color: yellow;"';

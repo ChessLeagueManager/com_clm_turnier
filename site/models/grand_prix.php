@@ -27,6 +27,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 	// Anzahl der gewerteten Turniere
 	protected $anzahlTurniere = 0;
 
+	// Turnier Index (bei monatlichen Turnieren)
+	protected $turnierOffset = 0;
+
 	// Sonderrangliste
 	protected $rangliste = null;
 
@@ -292,7 +295,14 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$this->_db->setQuery($query);
 		$list = $this->_db->loadObjectList();
 
-		$this->anzahlTurniere = ($this->grandPrix->col_header) ? 12 : count($list);
+		$this->anzahlTurniere = count($list);
+		if ($this->grandPrix->col_header) {
+			if ($this->anzahlTurniere > 0) {
+				$date = getdate(strtotime($list[0]->dateStart));
+				$this->turnierOffset = $date["mon"] - 1;
+			}
+			$this->anzahlTurniere = 12;
+		}
 
 		return $list;
 	}
@@ -327,7 +337,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 	 *        	Turnierereihenfolge
 	 */
 	protected function _getGesamtwertung($orderBy) {
-	    $this->turniere = array();
+		$this->turniere = array ();
 		$this->gesamtergebnis = array ();
 
 		// veröffentlichte Turniere ermitteln
@@ -637,6 +647,22 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		}
 
 		return $this->anzahlTurniere;
+	}
+
+	/**
+	 * ermittelt bei monatlichen Turnieren den Index des ersten Turnieres.
+	 *
+	 * @param integer $pk
+	 *        	Id der Grand Prix Wertung
+	 * @return integer Tunrnier Offset
+	 */
+	public function getTurnierOffset($pk = null) {
+		$pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');
+		if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
+			$this->getItem($pk);
+		}
+
+		return $this->turnierOffset;
 	}
 
 	/**
