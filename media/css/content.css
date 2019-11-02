@@ -1,5 +1,12 @@
 @charset "UTF-8";
 
+/** enable background printing **/
+body {
+	color-adjust: exact; 
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact; 
+}
+
 /**** Chess League Manager ****/
 /******************************/
 #clm .clm th a {

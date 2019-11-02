@@ -11,10 +11,12 @@
 defined('_JEXEC') or die('Restricted access');
 
 $state = $displayData['state'];
+$print = isset($displayData['print']) ? $displayData['print'] : false;
 
 if ($state->get('grand_prix.rids')) :
 	JHTML::_('stylesheet', 'com_clm_turnier/submenu.css', array ('relative' => true ));
 
+	if (! $print) :
 ?>
 
 <div align="center">
@@ -22,23 +24,24 @@ if ($state->get('grand_prix.rids')) :
 	<ul class="clm-nav clm-nav-pills">
 	<li>
 	<?php
-	$link = Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'));
-	echo JHtml::_('link', JRoute::_($link), JText::_('TOURNAMENT_RANKING'));
+		$link = Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'));
+		echo JHtml::_('link', JRoute::_($link), JText::_('TOURNAMENT_RANKING'));
 	?>
 		<ul class="clm-nav-child">
-		<?php
+	<?php
 		foreach ($displayData['ranglisten'] as $rangliste) {
 			$link = Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'), $rangliste->id);
 			echo '<li>';
 			echo JHtml::_('link', JRoute::_($link), $rangliste->name);
 			echo '</li>';
 		}
-		?>
+	?>
 		</ul>
 	</li>
 	</ul>
 </nav>
 </div>	<!-- submenu align="center" -->
+	<?php endif; ?>
 
 	<?php 
 	if ($state->get('grand_prix.rid')) :

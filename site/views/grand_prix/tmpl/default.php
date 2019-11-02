@@ -35,7 +35,7 @@ if (is_object($this->grand_prix) && $this->grand_prix->introduction != null) {
 }
 
 // Submenü
-echo JLayoutHelper::render('submenu', array('state' => $this->state, 'ranglisten' => $this->get('ranglisten')), JPATH_CLM_TURNIER_COMPONENT);
+echo JLayoutHelper::render('submenu', array('state' => $this->state, 'ranglisten' => $this->get('ranglisten'), 'print' => $this->print), JPATH_CLM_TURNIER_COMPONENT);
 
 if (count($this->gesamtwertung) == 0) {
 	$string = ($this->state->get('grand_prix.rids')) ? 'TOURNAMENT_SPECIALRANKING_NOPLAYERS' : 'COM_CLM_TURNIER_KATEGORIE_GESAMTWERTUNG_NO';
@@ -143,7 +143,7 @@ if (count($this->gesamtwertung) == 0) {
                 $ergebnis = $row->ergebnis[$ik];
                 if ($ergebnis < 0 || strcmp(strval($ergebnis), '-0') == 0) {
                     $ergebnis *= - 1;
-                    $style = ' style="background-color: yellow;"';
+                    $style = ' style="background-color: yellow !important;"';
                 }
             }
             ?>

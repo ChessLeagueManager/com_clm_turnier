@@ -12,6 +12,11 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 3.0.3 - [02-11-2019] - - - - - - - - - - - - - - - - - - - - -
+# Druckausgabe: 
+  Submenü "Rangliste" entfernt
+  Hintergrundfarbe hinzugefügt
+
 - - - - - 3.0.2 - [04-10-2019] - - - - - - - - - - - - - - - - - - - - -
 # Sortierung bei monatlichen Turnieren nach Turnierdatum
 
