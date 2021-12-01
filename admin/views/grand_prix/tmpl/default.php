@@ -13,7 +13,8 @@ defined('_JEXEC') or die('Restricted access');
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
-JHtml::_('behavior.tooltip');
+// FIXME: behavior.tooltip wird in Joomla 4 nicht mehr unterstüzt
+// JHtml::_('behavior.tooltip');
 
 $user = JFactory::getUser();
 $userId = $user->get('id');

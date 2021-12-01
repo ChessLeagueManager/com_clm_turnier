@@ -10,7 +10,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
-JHtml::_('behavior.tooltip');
+// FIXME: behavior.tooltip wird in Joomla 4 nicht mehr unterstüzt
+// JHtml::_('behavior.tooltip');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));

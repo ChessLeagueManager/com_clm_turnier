@@ -15,6 +15,7 @@ jimport('components.com_clm_turnier.defines', JPATH_SITE);
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use \Joomla\CMS\Version;
 
 /**
  * Field to select Turnier Sonderlangliste(n) from a modal list.
@@ -39,7 +40,11 @@ class JFormFieldSonderranglisten extends FormField {
 		parent::__construct($form);
 
 		// Layout to render
-		$this->layout = 'layouts.form.fields.sonderranglisten';
+		if (Version::MAJOR_VERSION == 4) {
+			$this->layout = 'layouts.form.fields.sonderranglisten-j4';
+		} else {
+			$this->layout = 'layouts.form.fields.sonderranglisten';
+		}
 	}
 
 	/**

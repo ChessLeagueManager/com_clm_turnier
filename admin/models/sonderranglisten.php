@@ -48,7 +48,8 @@ class CLM_TurnierModelSonderranglisten extends JModelList {
 	 */
 	protected function _getQuery() {
 		$query = $this->getDbo()->getQuery(true);
-		$query->select($this->_db->quoteName(explode(',', 'r.id,r.name,r.ordering,s.name,t.name'), explode(',', 'id,name,ordering,saison,turnier')));
+		$query->select($this->_db->quoteName(explode(',', 'r.id,r.name,r.ordering,s.name,t.name'), explode(',', 'id,name,ordering,saison,turnier')))
+			->select('CONCAT(r.name, \' / \', t.name) AS dname');		
 		$query->from($this->_db->quoteName('#__clm_saison', 's'));
 		$query->join('', $this->_db->quoteName('#__clm_turniere', 't') . ' ON ' .
 				$this->_db->quoteName('t.sid') . ' = ' .
