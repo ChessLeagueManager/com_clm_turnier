@@ -12,6 +12,9 @@ $ -> Language fix or change
 - -> Removed
 ! -> Note
 
+- - - - - 3.1.0 - [02-12-2021] - - - - - - - - - - - - - - - - - - - - -
+^ Code-Anpassung Joomla 4
+
 - - - - - 3.0.3 - [02-11-2019] - - - - - - - - - - - - - - - - - - - - -
 # Druckausgabe: 
   Submenü "Rangliste" entfernt
