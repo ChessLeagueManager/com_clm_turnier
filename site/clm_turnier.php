@@ -15,8 +15,8 @@ if (! jimport('components.com_clm_turnier.bootstrap', JPATH_SITE)) {
     throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), '404');
 }
 
-// Boorstrap CSS / JS
-JHtml::_('clm_turnier.framework');
+// Bootstrap CSS / JS
+JHtml::_('grandprix.stylesheet');
 
 // set current locale for date and time formatting with strftime()
 setlocale(LC_TIME, JFactory::getLanguage()->getLocale());

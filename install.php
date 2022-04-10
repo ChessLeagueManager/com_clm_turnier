@@ -185,11 +185,21 @@ class com_clm_turnierInstallerScript {
 		$files = array (
 				// Release 2.0
 				'/administrator/language/de-DE/de-DE.com_clm_turnier.sys.ini',
-				'/administrator/language/en-GB/en-GB.com_clm_turnier.sys.ini' );
+				'/administrator/language/en-GB/en-GB.com_clm_turnier.sys.ini',
+				// Release 3.2.0
+				'/administrator/com_clm_turnier/helpers/html/index.html',
+				'/administrator/com_clm_turnier/helpers/html/grand_prix.php',
+				'/administrator/com_clm_turnier/helpers/index.html',
+				'/components/com_clm_turnier/helpers/html/clm_turnier.php'
+		);
 
 		$folders = array (
 				// Release 3.0
-				'components/com_clm_turnier/includes' );
+				'components/com_clm_turnier/includes',
+				// Release 3.2.0
+				'/administrator/com_clm_turnier/helpers/html',
+				'/administrator/com_clm_turnier/helpers',
+		);
 
 		jimport('joomla.filesystem.file');
 		foreach ($files as $file) {

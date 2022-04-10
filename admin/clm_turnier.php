@@ -25,6 +25,9 @@ if (! jimport('clm.index', JPATH_CLM_COMPONENT)) {
     throw new Exception(JText::_('COM_CLM_TURNIER_REQ_COM_CLM'), '404');
 }
 
+// Add include path for ...
+JHtml::addIncludePath(JPATH_CLM_TURNIER_COMPONENT . '/helpers/html');
+
 echo '<div id="clm"><div class="clm">';
 
 // Get an instance of the controller
