@@ -81,8 +81,7 @@ class JFormFieldSonderranglisten extends FormField {
 		$totalItems = $model->getTotalItems($this->value);
 		
 		$saison = '';
-		// FIXME: keine Ranglisten vorhanden 
-		if ($totalItems[0]) {
+		if (count($totalItems) > 0 && $totalItems[0]) {
 			$saison = $totalItems[0]->saison;
 		}
 		
