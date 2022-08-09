@@ -2,9 +2,9 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>??.03.2022</creationDate>
+	<creationDate>??.04.2022</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>3.1.1</version>
+	<version>3.2.0</version>
 	<copyright>Copyright (C) 2017 - 2022. All rights reserved</copyright>
 	<license>GNU General Public License; see https://www.gnu.org/licenses/gpl.html</license>
 	<description>COM_CLM_TURNIER_DESC</description>
@@ -34,6 +34,7 @@
 	<media folder="media" destination="com_clm_turnier">		
 		<folder>css</folder>
 		<folder>js</folder>
+		<filename>joomla.asset.json</filename>
 	</media>
 
 	<administration>
@@ -53,7 +54,6 @@
 			<filename>changelog.txt</filename>
 			
 			<folder>controllers</folder>
-			<folder>helpers</folder>
 			<folder>layouts</folder>
 			<folder>models</folder>
 			<folder>tables</folder>

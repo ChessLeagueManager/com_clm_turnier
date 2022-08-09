@@ -54,8 +54,8 @@ if ($listOrder === 'r.name') {
 			<tfoot>
 				<tr>
 					<td colspan="6">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
+						<?php echo $this->pagination->getListFooter(); ?>
+					</td>
 				</tr>
 			</tfoot>
 		

@@ -40,11 +40,7 @@ class JFormFieldSonderranglisten extends FormField {
 		parent::__construct($form);
 
 		// Layout to render
-		if (Version::MAJOR_VERSION == 4) {
-			$this->layout = 'layouts.form.fields.sonderranglisten-j4';
-		} else {
-			$this->layout = 'layouts.form.fields.sonderranglisten';
-		}
+		$this->layout = 'layouts.form.fields.sonderranglisten';
 	}
 
 	/**
@@ -75,21 +71,26 @@ class JFormFieldSonderranglisten extends FormField {
 	 * Method to get the data to be passed to the layout for rendering.
 	 *
 	 * @return array
-	 */
-	protected function getLayoutData() {
+	 */	
+	 protected function getLayoutData() {
 		// Get the basic field data
 		$layoutData = parent::getLayoutData();
 
 		BaseDatabaseModel::addIncludePath(JPATH_ADMIN_CLM_TURNIER_COMPONENT . '/models');
 		$model = BaseDatabaseModel::getInstance('Sonderranglisten', 'CLM_TurnierModel');
 		$totalItems = $model->getTotalItems($this->value);
-
+		
 		$saison = '';
+		// FIXME: keine Ranglisten vorhanden 
 		if ($totalItems[0]) {
 			$saison = $totalItems[0]->saison;
 		}
-
-		$extraData = array ('data' => $totalItems, 'saison' => $saison);
+		
+		$extraData = array ('options' => $totalItems, 'saison' => $saison);
+		if (! isset($layoutData['dataAttribute'])) {
+			$extraData['dataAttribute'] = '';
+		}
+		
 		return array_merge($layoutData, $extraData);
 	}
 

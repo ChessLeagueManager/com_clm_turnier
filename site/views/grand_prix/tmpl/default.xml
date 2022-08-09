@@ -28,10 +28,11 @@
 			<field name="turniere" type="sql" default="0"
 				label="TOURNAMENTS" description="TOURNAMENTS_SELECT_DESC"
 				query="SELECT a.id AS value, a.name AS tname FROM #__clm_turniere a WHERE a.published = 1 ORDER BY a.datestart"
-				value_field="tname" multiple="true" class="input-xlarge"
+				value_field="tname" 
+				multiple="true" 
+				class="input-xlarge"
 				layout="joomla.form.field.list-fancy-select"
 				>
-				<option value="0">PARAMETER_SELECT</option>
 			</field>
 
 			<field name="ranglisten" type="sonderranglisten"
@@ -39,7 +40,6 @@
 				multiple="true"
 				class="input-xlarge"
 				>
-				<option value="0">PARAMETER_SELECT</option>				
 			</field>
 		</fieldset>
 	</fields>
