@@ -2,7 +2,7 @@
 <extension type="component" version="3.0" method="upgrade">
 
 	<name>CLM_TURNIER</name>
-	<creationDate>??.04.2022</creationDate>
+	<creationDate>28.08.2022</creationDate>
 	<author>Andreas Hrubesch</author>
 	<version>3.2.0</version>
 	<copyright>Copyright (C) 2017 - 2022. All rights reserved</copyright>
