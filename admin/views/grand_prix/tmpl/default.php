@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
-JHtml::_('behavior.tooltip');
+JHtml::_('grandprix.tooltip');
 
 $user = JFactory::getUser();
 $userId = $user->get('id');
@@ -103,7 +103,7 @@ $n = count($this->items);
 							<?php echo $this->escape($row->name); ?>
 						<?php endif; ?>
 					</td>
-					<td class="title"><?php echo JHtml::_('grand_prix.getGrandPrixModus', $row->typ);?></td>
+					<td class="title"><?php echo JHtml::_('grandprix.modus', $row->typ);?></td>
 					<td class="center"><?php echo JHtml::_('jgrid.published', $row->published, $i, 'grand_prix.', $canChange); ?></td>
 					<td class="center"><?php echo $row->id; ?></td>
 				</tr>
@@ -112,8 +112,8 @@ $n = count($this->items);
 		</table>
 		<?php endif; ?>
 		
-		<input type="hidden" name="task" value="" /> <input type="hidden"
-			name="boxchecked" value="0" /> 
-		<?php echo JHtml::_( 'form.token' ); ?>
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" /> 
+		<?php echo JHtml::_('form.token'); ?>
 	</div>
 </form>

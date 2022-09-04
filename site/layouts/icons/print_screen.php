@@ -8,15 +8,14 @@
  */
 
 // No direct access to this file
-defined('_JEXEC') or die('Restricted access');
+defined('_JEXEC') or die;
 
 $params = $displayData['params'];
-$attribs = $displayData['attribs'];
 
 ?>
 <?php if ($params->get('show_icons')) : ?>
-   	<span class="<?php echo $attribs['span.class']; ?>" aria-hidden="true"></span>
-   	<?php echo JText::_('COM_CLM_TURNIER_FILTER_TLNR'); ?>
+	<span class="icon-print" aria-hidden="true"></span>
+	<?php echo JText::_('COM_CLM_TURNIER_PRINT'); ?>
 <?php else : ?>
-	<?php echo JText::_('COM_CLM_TURNIER_FILTER_TLNR'); ?>
+	<?php echo JText::_('COM_CLM_TURNIER_PRINT'); ?>
 <?php endif; ?>
