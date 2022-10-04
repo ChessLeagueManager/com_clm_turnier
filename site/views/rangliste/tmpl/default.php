@@ -78,7 +78,7 @@ if (count($this->rangliste) == 0) {
 		<td class="verein"> <?php echo $row->verein; ?>	</td>
 		<?php } ?>
 		<td class="diff"> <?php echo $diff; ?> 	</td>
-		<td class="dwz">	<?php echo $row->DWZ ?> </td>
+		<td class="dwz" align="right">	<?php echo $row->DWZ . " "?> </td>
 		<td class="i0">	<?php echo ' - ' . $row->I0 ?> </td>
 	</tr>
 

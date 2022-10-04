@@ -8,6 +8,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\Utilities\ArrayHelper;
+
 //
 jimport('clm.index', JPATH_CLM_COMPONENT);
 jimport('clm.api.db_tournament_delDWZ', JPATH_CLM_COMPONENT);
@@ -79,7 +81,7 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 	 */
 	public function save() {
 		// Check for request forgeries
-		JRequest::checkToken() or die('Invalid Token');
+ 		$this->checkToken();
 		
 		$cid = $this->jinput->get('cid');
 		if (count($cid) && $this->_doSave($cid)) {
@@ -108,11 +110,11 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 	 * @return boolen
 	 */
 	private function _doSave($cid) {
-		$new_dwz = JRequest::getVar('new_dwz', array(), '', 'array');
-		JArrayHelper::toInteger($new_dwz, array());
-		
-		$new_I0 = JRequest::getVar('new_I0', array(), '', 'array');
-		JArrayHelper::toInteger($new_I0, array());
+		$new_dwz = $this->jinput->get('new_dwz');
+		ArrayHelper::toInteger($new_dwz, array());
+
+		$new_I0 = $this->jinput->get('new_I0');
+		ArrayHelper::toInteger($new_I0, array());
 		
 		// Set the table directory
 		JTable::addIncludePath(JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_clm' . DS . 'tables');

@@ -40,7 +40,9 @@ class CLM_TurnierModelTurniere extends JModelList {
                 'sid',
                 'a.sid',
                 'typ',
-                'a.typ'
+                'a.typ',
+            	'cname',
+            	'c.name'
             );
         }
         
@@ -74,6 +76,10 @@ class CLM_TurnierModelTurniere extends JModelList {
         $query->select($db->quoteName('s.name', 'sname'))
             ->join('LEFT', $db->quoteName('#__clm_saison', 's') . ' ON ' . $db->quoteName('s.id') . ' = ' . $db->quoteName('a.sid'));
         
+        // Join the tournament categories
+        $query->select($db->quoteName('c.name', 'cname'))
+        	->join('LEFT', $db->quoteName('#__clm_categories', 'c') . ' ON ' . $db->quoteName('c.id') . ' = ' . $db->quoteName('a.catidAlltime'));
+
         // Filter by published state
         $published = $this->getState('filter.published');
         if (is_numeric($published)) {
@@ -90,6 +96,12 @@ class CLM_TurnierModelTurniere extends JModelList {
         $typ = $this->getState('filter.typ');
         if (is_numeric($typ)) {
             $query->where($db->quoteName('a.typ') . ' = ' . (int) $typ);
+        }
+        
+        // Filter by categorie
+        $cname = $this->getState('filter.cname');
+        if (is_numeric($cname)) {
+        	$query->where($db->quoteName('c.id') . ' = ' . (int) $cname);
         }
         
         // Filter by search in name

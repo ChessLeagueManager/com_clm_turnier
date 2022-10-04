@@ -654,7 +654,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 	 *
 	 * @param integer $pk
 	 *        	Id der Grand Prix Wertung
-	 * @return integer Tunrnier Offset
+	 * @return integer Turniere Offset
 	 */
 	public function getTurnierOffset($pk = null) {
 		$pk = (! empty($pk)) ? $pk : (int) $this->getState('grand_prix.id');

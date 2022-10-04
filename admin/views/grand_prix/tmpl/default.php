@@ -17,11 +17,11 @@ JHtml::_('grandprix.tooltip');
 
 $user = JFactory::getUser();
 $userId = $user->get('id');
+$canChange = clm_core::$access->access('BE_tournament_create');
+
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
 $saveOrder = $listOrder == 'a.name';
-
-$canChange = clm_core::$access->access('BE_tournament_create');
 
 if ($saveOrder) {
     $saveOrderingUrl = 'index.php?option=com_clm_turnier&task=grand_prix.saveOrderAjax&tmpl=component';
@@ -35,7 +35,6 @@ $n = count($this->items);
 <form
 	action="<?php echo JRoute::_('index.php?option=com_clm_turnier');?>"
 	method="post" name="adminForm" id="adminForm">
-
 
 	<div id="j-main-container">
 		<?php echo JLayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>

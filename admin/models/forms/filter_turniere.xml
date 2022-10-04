@@ -50,6 +50,20 @@
 			<option value="5">MODUS_TYP_5</option>
 			<option value="6">MODUS_TYP_6</option>
 		</field>
+
+		<field
+			name="cname"
+			type="sql"
+			sql_select="id, name"
+			sql_from="#__clm_categories"
+			sql_where="#__clm_categories.parentid = 0"
+			sql_order="id ASC"
+			key_field="id"
+			value_field="name"
+			onchange="this.form.submit();"
+			>
+			<option value="">CATEGORY_NAME_SELECT_DESC</option>
+		</field>
 	</fields>
 		
 	<fields name="list">

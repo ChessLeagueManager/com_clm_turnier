@@ -13,7 +13,11 @@ defined('_JEXEC') or die('Restricted access');
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
-JHtml::_('behavior.tooltip');
+JHtml::_('grandprix.tooltip');
+
+$user = JFactory::getUser();
+$userId = $user->get('id');
+$canChange = clm_core::$access->access('BE_tournament_create');
 
 $listOrder = $this->escape($this->state->get('list.ordering'));
 $listDirn = $this->escape($this->state->get('list.direction'));
@@ -27,7 +31,8 @@ if ($saveOrder) {
 $n = count($this->items);
 ?>
 
-<form action="<?php echo JRoute::_('index.php?option=com_clm_turnier&view=turniere');?>"
+<form 
+	action="<?php echo JRoute::_('index.php?option=com_clm_turnier&view=turniere');?>"
 	method="post" name="adminForm" id="adminForm">
 
 	<div id="j-main-container">
@@ -55,6 +60,8 @@ $n = count($this->items);
 					<th class="title">
 						<?php echo JHtml::_('searchtools.sort', 'MODUS', 'a.typ', $listDirn, $listOrder); ?>
 					</th>
+					<th class="center"><?php echo JText::_('CATEGORY_NAME');?>
+					</th>
 					<th class="center" width="10"><?php echo JText::_('RATING');?></th>
 					<th class="center">
 						<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'a.published', $listDirn, $listOrder); ?>
@@ -66,9 +73,7 @@ $n = count($this->items);
 			</thead>
 			<tfoot>
 				<tr>
-					<td colspan="6">
-					<?php echo $this->pagination->getListFooter(); ?>
-				</td>
+					<td colspan="10"><?php echo $this->pagination->getListFooter(); ?></td>
 				</tr>
 			</tfoot>
 			<tbody>
@@ -86,8 +91,9 @@ $n = count($this->items);
 					<td class="center"><?php echo $row->sname;?></td>
 					<td class="center"><?php echo JHtml::_('turnier.getDatum', $row->dateStart, $row->dateEnd);?></td>
 					<td class="title"><?php echo JHtml::_('turnier.getTurnierModus', $row->typ);?></td>
+					<td class="center"><?php echo $row->cname;?></td>
 					<td class="center"><?php echo JHtml::_('turnier.getInofDWZ', $row->params, $i, 'tick.png', 'publish_x.png', 'turniere.' )?></td>
-					<td class="center"><?php echo JHtml::_('grid.published', $row->published, $i, 'tick.png', 'publish_x.png', 'turniere.' );?></td>
+					<td class="center"><?php echo JHtml::_('jgrid.published', $row->published, $i, 'turniere.', $canChange); ?></td>
 					<td class="center"><?php echo $row->id; ?></td>
             	</tr>
             <?php } ?>
