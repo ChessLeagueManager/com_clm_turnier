@@ -29,7 +29,7 @@ abstract class JHtmlIcon {
 	 * @return string HTML Markup für den Link
 	 */
 	public static function print_popup($state, $params, $attribs = array ()) {
-		$link = Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), null, $state->get('grand_prix.rid'));
+		$link = CLM_TurnierHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), null, $state->get('grand_prix.rid'));
 		$link .= '&tmpl=component&print=1';
 
 		$status = 'status=no,toolbar=no,scrollbars=yes,titlebar=no,menubar=no,resizable=yes,width=640,height=480,directories=no,location=no';
@@ -77,7 +77,7 @@ abstract class JHtmlIcon {
 	public static function email($state, $params, $attribs = array ()) {
 		$base = JUri::getInstance()->toString(array ('scheme', 'host', 'port' ));
 		$link = $base .
-				JRoute::_(Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'), $state->get('grand_prix.rid')), false);
+			JRoute::_(CLM_TurnierHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'), $state->get('grand_prix.rid')), false);
 
 		$subject = JFactory::getApplication()->get('sitename') . ': ' .
 				JFactory::getApplication()->getDocument()->getTitle();
@@ -105,7 +105,7 @@ abstract class JHtmlIcon {
 		$filter = $state->get('grand_prix.filter');
 		$filter['tlnr'] = ! $filter['tlnr'];
 
-		$link = Grand_PrixHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $filter, $state->get('grand_prix.rids'), $state->get('grand_prix.rid'));
+		$link = CLM_TurnierHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $filter, $state->get('grand_prix.rids'), $state->get('grand_prix.rid'));
 
 		$attribs['span.class'] = empty($filter['tlnr']) ? 'icon-plus' : 'icon-minus';
 		$text = JLayoutHelper::render('icons.filter', array (

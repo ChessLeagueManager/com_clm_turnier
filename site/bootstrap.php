@@ -21,18 +21,11 @@ if (! jimport('clm/index', JPATH_CLM_COMPONENT)) {
 	throw new Exception(JText::_('COM_CLM_TURNIER_ERROR'), '404');
 }
 
-$classpath = JPATH_CLM_COMPONENT . DIRECTORY_SEPARATOR . 'classes';
-foreach (JFolder::files($classpath) as $file) {
-	JLoader::register(str_replace('.class.php', '', $file), $classpath . DIRECTORY_SEPARATOR . $file);
-}
+JLoader::registerPrefix('CLM', JPATH_CLM_COMPONENT . DIRECTORY_SEPARATOR . 'classes');
 
 // ---- Turniererweiterung
-$classpath = JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'classes';
-foreach (JFolder::files($classpath) as $file) {
-	JLoader::register(str_replace('.class.php', '', $file), $classpath . DIRECTORY_SEPARATOR . $file);
-}
-
-JLoader::register('Grand_PrixHelperRoute', JPATH_CLM_TURNIER_COMPONENT . '/helpers/route.php');
+JLoader::registerPrefix('CLM_Turnier', JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'classes');
+JLoader::registerPrefix('CLM_Turnier', JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'helpers');
 
 // Add include path for ...
 JHtml::addIncludePath(JPATH_CLM_TURNIER_COMPONENT . '/helpers/html');

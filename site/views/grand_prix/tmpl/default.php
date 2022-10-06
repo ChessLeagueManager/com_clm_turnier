@@ -21,7 +21,7 @@ echo "<div id='clm'><div id='turnier_rangliste'>";
 
 // Page Header
 if ($this->params->get('show_title')) {
-    echo CLMTurnierContent::componentTitle($this->escape($this->params->get('page_title')));
+    echo CLM_TurnierContent::componentTitle($this->escape($this->params->get('page_title')));
 }
 
 // Icons
@@ -81,7 +81,7 @@ if (count($this->gesamtwertung) == 0) {
 		    }
 		    // Turnier gewertet
 		    if ($linkTurnier && isset($this->turniere[$ik])) {
-		    	$link = Grand_PrixHelperRoute::getTurnierRanglisteRoute($this->turniere[$ik]->id, $this->params->get('link_turnier'));
+		    	$link = CLM_TurnierHelperRoute::getTurnierRanglisteRoute($this->turniere[$ik]->id, $this->params->get('link_turnier'));
 		        $attribs = 'class="active_link"' .
 		  		        ' title="' . $this->turniere[$ik]->name . '"';
 		  		        
