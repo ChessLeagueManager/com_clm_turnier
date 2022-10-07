@@ -31,6 +31,7 @@ class CLM_TurnierControllerUpdate_Dwz extends JControllerLegacy {
 	function __construct($config = array()) {
 		parent::__construct($config);
 
+		// FIXME: https://docs.joomla.org/Using_own_library_in_your_extensions
 		JLoader::register('AdminLink', JPATH_ADMINISTRATOR . DS . 'components' . DS . 'com_clm' . DS . 'classes' . DS . 'AdminLink.class.php');
 		
 		// The default view for the display method.

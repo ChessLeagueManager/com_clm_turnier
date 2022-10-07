@@ -4,7 +4,7 @@
 	<name>CLM_TURNIER</name>
 	<creationDate>04.10.2022</creationDate>
 	<author>Andreas Hrubesch</author>
-	<version>3.2.0-1</version>
+	<version>3.2.1-1</version>
 	<copyright>Copyright (C) 2017 - 2022. All rights reserved</copyright>
 	<license>GNU General Public License; see https://www.gnu.org/licenses/gpl.html</license>
 	<description>COM_CLM_TURNIER_DESC</description>
@@ -56,7 +56,7 @@
 			<filename>access.xml</filename>
 			<filename>config.xml</filename>
 			<filename>changelog.txt</filename>
-			
+
 			<folder>controllers</folder>
 			<folder>layouts</folder>
 			<folder>models</folder>
