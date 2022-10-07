@@ -13,12 +13,12 @@
 defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
 
 /**
- * CLM_TurnierContent
+ * CLMTurnierContent
  *
  * Klassenbibliothek für content-bezogene, modulare, Funktionalitäten
  * keine Printausgabe, immer nur String-Rückgabe
  */
-class CLM_TurnierContent extends CLMContent {
+class CLMTurnierContent extends CLMContent {
 
     /**
      * Componenten Titel, entspricht einem Beitragstitel
