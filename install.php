@@ -191,7 +191,9 @@ class com_clm_turnierInstallerScript {
 				'/administrator/com_clm_turnier/helpers/html/grand_prix.php',
 				'/administrator/com_clm_turnier/helpers/index.html',
 				'/administrator/com_clm_turnier/layouts/form/fields/sonderranglisten-j4.php',
-				'/components/com_clm_turnier/helpers/html/clm_turnier.php'
+				'/components/com_clm_turnier/helpers/html/clm_turnier.php',
+				// Release 3.2.1
+				'/media/com_clm_turnier/js/sonderranglisten-j4.php'
 		);
 
 		$folders = array (
