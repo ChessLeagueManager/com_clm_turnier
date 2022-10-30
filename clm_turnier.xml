@@ -19,7 +19,6 @@
 		<filename>defines.php</filename>
 		<filename>clm_turnier.php</filename>
 		<filename>controller.php</filename>
-		<folder>classes</folder>
 		<folder>helpers</folder>
 		<folder>layouts</folder>
 		<folder>models</folder>
