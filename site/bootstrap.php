@@ -28,9 +28,7 @@ foreach (JFolder::files($classpath) as $file) {
 }
 
 // ---- Turniererweiterung
-// ACHTUNG: Reihenfolge nicht ändern
-JLoader::registerPrefix('CLMTurnierHelper', JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'helpers');
-JLoader::registerPrefix('CLMTurnier', JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'classes');
+JLoader::registerPrefix('CLMTurnier', JPATH_CLM_TURNIER_COMPONENT . DIRECTORY_SEPARATOR . 'helpers');
 
 // Add include path for ...
 JHtml::addIncludePath(JPATH_CLM_TURNIER_COMPONENT . '/helpers/html');

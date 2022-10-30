@@ -24,13 +24,13 @@ if ($state->get('grand_prix.rids')) :
 	<ul class="clm-nav clm-nav-pills">
 	<li>
 	<?php
-	$link = CLMTurnierHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'));
+	$link = CLMTurnierRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'));
 		echo JHtml::_('link', JRoute::_($link), JText::_('TOURNAMENT_RANKING'));
 	?>
 		<ul class="clm-nav-child">
 	<?php
 		foreach ($displayData['ranglisten'] as $rangliste) {
-			$link = CLMTurnierHelperRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'), $rangliste->id);
+			$link = CLMTurnierRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $state->get('grand_prix.filter'), $state->get('grand_prix.rids'), $rangliste->id);
 
 			echo '<li>';
 			echo JHtml::_('link', JRoute::_($link), $rangliste->name);

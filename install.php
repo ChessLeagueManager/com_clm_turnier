@@ -187,10 +187,7 @@ class com_clm_turnierInstallerScript {
 				'/administrator/language/de-DE/de-DE.com_clm_turnier.sys.ini',
 				'/administrator/language/en-GB/en-GB.com_clm_turnier.sys.ini',
 				// Release 3.2.0
-				'/administrator/com_clm_turnier/helpers/html/index.html',
-				'/administrator/com_clm_turnier/helpers/html/grand_prix.php',
-				'/administrator/com_clm_turnier/helpers/index.html',
-				'/administrator/com_clm_turnier/layouts/form/fields/sonderranglisten-j4.php',
+				'/administrator/components/com_clm_turnier/layouts/form/fields/sonderranglisten-j4.php',
 				'/components/com_clm_turnier/helpers/html/clm_turnier.php',
 				// Release 3.2.1
 				'/media/com_clm_turnier/js/sonderranglisten-j4.php'
@@ -198,10 +195,12 @@ class com_clm_turnierInstallerScript {
 
 		$folders = array (
 				// Release 3.0
-				'components/com_clm_turnier/includes',
+				'/components/com_clm_turnier/includes',
 				// Release 3.2.0
-				'/administrator/com_clm_turnier/helpers/html',
-				'/administrator/com_clm_turnier/helpers',
+				'/administrator/components/com_clm_turnier/helpers/html',
+				'/administrator/components/com_clm_turnier/helpers',
+				// Release 3.2.1
+				'/components/com_clm_turnier/classes/'
 		);
 
 		jimport('joomla.filesystem.file');
