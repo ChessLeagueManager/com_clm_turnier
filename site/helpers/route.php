@@ -16,7 +16,7 @@ defined('_JEXEC') or die('Restricted access');
  * @since 2.1
  *       
  */
-abstract class CLMTurnierHelperRoute {
+abstract class CLMTurnierRoute {
 
 	/**
 	 * erstellt einen "Link" zu einer Grand Prix Gesamtwertung.
