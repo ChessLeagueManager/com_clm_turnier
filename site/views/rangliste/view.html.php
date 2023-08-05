@@ -23,30 +23,29 @@ class CLM_TurnierViewRangliste extends JViewLegacy {
 	protected $rangliste;
 	// Datum des letzten ausgewerteten Turnieres
 	protected $maxDateStart;
-
+	
 	function display($tpl = null) {
 		$options = array();
-		
+
 		$app = JFactory::getApplication();
-		if (isset($app)) {
-			$this->params = $app->getParams();
-			$menu = $app->getMenu();
-			if (isset($menu) && $menu->getActive() != null) {
-				$this->titel = $menu->getActive()->title;
-			} else {
-				$this->params->set('show_title', 0);
-				$this->params->set('show_verein', $app->input->getUint('show_verein', 0));
-				$this->params->set('col_dwz', $app->input->getString('col_dwz', 'DWZ'));
-			}
+		$this->params = $app->getParams();
+
+		$menu = $app->getMenu();
+		if (isset($menu) && $menu->getActive() != null && strcmp($menu->getActive()->component, 'com_clm_turnier') == 0) {
+			$this->titel = $menu->getActive()->title;
+		} else {
+			$this->params->set('show_title', 0);
+			$this->params->set('show_verein', $app->input->getUint('show_verein', 0));
+			$this->params->set('col_dwz', $app->input->getString('col_dwz', 'DWZ'));
 		}
-		
+
 		$options['catIdAllTime'] = $app->input->getUint('kategorie');
 		$options['dateBefore'] = $app->input->get('date_before');
-		
+
 		$model = $this->getModel();
 		$this->rangliste = $model->getTurnierKategorieRangliste($options);
 		$this->maxDateStart = $model->getTurnierKategorieMaxDateStart($options);
-		
+
 		// Tables with floating headers
 		JHtml::_('thead.framework');
 

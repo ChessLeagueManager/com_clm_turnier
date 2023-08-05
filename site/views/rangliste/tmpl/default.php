@@ -50,7 +50,7 @@ if (count($this->rangliste) == 0) {
 		<th class="verein">Verein</th>
 		<?php } ?>
 		<th class="diff"></th>
-		<th colspan=2 align="center"><?php echo $colDWZ; ?></th>
+		<th colspan=2 style="text-align:center"><?php echo $colDWZ; ?></th>
 	</tr>
 	</thead>
 
@@ -78,7 +78,7 @@ if (count($this->rangliste) == 0) {
 		<td class="verein"> <?php echo $row->verein; ?>	</td>
 		<?php } ?>
 		<td class="diff"> <?php echo $diff; ?> 	</td>
-		<td class="dwz" align="right">	<?php echo $row->DWZ . " "?> </td>
+		<td class="dwz"> <?php echo $row->DWZ . " "?> </td>
 		<td class="i0">	<?php echo ' - ' . $row->I0 ?> </td>
 	</tr>
 
