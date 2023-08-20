@@ -31,9 +31,8 @@ class CLM_TurnierViewRangliste extends JViewLegacy {
 		$this->params = $app->getParams();
 
 		$menu = $app->getMenu();
-		if (isset($menu) && $menu->getActive() != null && strcmp($menu->getActive()->component, 'com_clm_turnier') == 0) {
-			$this->titel = $menu->getActive()->title;
-		} else {
+		if (! (isset($menu) && $menu->getActive() != null &&
+				strcmp($menu->getActive()->component, 'com_clm_turnier') == 0)) {
 			$this->params->set('show_title', 0);
 			$this->params->set('show_verein', $app->input->getUint('show_verein', 0));
 			$this->params->set('col_dwz', $app->input->getString('col_dwz', 'DWZ'));

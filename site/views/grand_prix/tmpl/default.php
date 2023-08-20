@@ -12,12 +12,14 @@ defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
 
 echo "<div class='clm'>";
 
+// Stylesheet laden
+jimport('includes.css_path', JPATH_CLM_TURNIER_COMPONENT);
+
 // CLM Config
 $config = clm_core::$db->config();
 
 // CLM-Container
 echo "<div id='clm'><div id='turnier_rangliste'>";
-
 
 // Page Header
 if ($this->params->get('show_title')) {

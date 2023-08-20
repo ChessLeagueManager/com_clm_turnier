@@ -23,7 +23,7 @@ echo "<div id='clm'><div id='turnier_rangliste'>";
 
 // Page Header
 if ($this->params->get('show_title')) {
-	echo CLMTurnierContent::componentTitle($this->escape($this->titel));
+	echo CLMTurnierContent::componentTitle($this->escape($this->params->get('page_title')));
 }
 
 if (count($this->rangliste) == 0) {

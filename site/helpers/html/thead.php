@@ -31,13 +31,14 @@ abstract class JHtmlThead {
 	 * den HTML Dokumentkopf.
 	 */
 	public static function framework() {
+		file_put_contents(JPATH_ROOT . '/tmp/ca.txt', __FILE__ . ': ' . __METHOD__ . PHP_EOL, FILE_APPEND );
 		// Only load once
 		if (! empty ( static::$loaded [__METHOD__] )) {
 			return;
 		}
 		
 		// load jQuery JavaScript framework
-		JHtml::_ ( 'jquery.framework' );
+ 		JHtml::_ ( 'script', 'vendor/jquery/jquery.js', array('relative' => true) );
 		
 		// load floatThead JavaScript framework
 		JHtml::_ ( 'script', 'https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.2.4/jquery.floatThead.js' );

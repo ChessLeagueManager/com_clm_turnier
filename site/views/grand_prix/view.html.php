@@ -58,7 +58,8 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 		}
 
 		$menu = $app->getMenu();
-		if (! (isset($menu) && $menu->getActive() != null)) {
+		if (! (isset($menu) && $menu->getActive() != null &&
+				strcmp($menu->getActive()->component, 'com_clm_turnier') == 0)) {
 			$this->params->set('show_title', 0);
 			$this->params->set('show_print_icon', 0);
 			$this->params->set('show_email_icon', 0);
