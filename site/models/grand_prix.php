@@ -10,6 +10,8 @@
 // No direct access to this file
 defined('JPATH_CLM_TURNIER_COMPONENT') or die('Restricted access');
 
+use Joomla\CMS\Log\Log;
+
 /**
  * Grand Prix Model Class
  */
@@ -579,7 +581,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 				}
 				$this->grandPrix = $result;
 			} catch (Exception $e) {
-				$this->setError($e->getMessage());
+				Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
 				return false;
 			}
 
@@ -595,7 +597,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 						$this->rangliste = $result;
 					}
 				} catch (Exception $e) {
-					$this->setError($e->getMessage());
+					Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
 				}
 			}
 
@@ -603,7 +605,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 			try {
 				$this->_getGesamtwertung($orderBy);
 			} catch (Exception $e) {
-				$this->setError($e->getMessage());
+				Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
 				return false;
 			}
 		}

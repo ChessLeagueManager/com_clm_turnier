@@ -10,6 +10,9 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Log\Log;
+use Joomla\CMS\Language\Text;
+
 /**
  * Script file of CLM Turnier component.
  *
@@ -28,6 +31,8 @@ defined('_JEXEC') or die('Restricted access');
  * @license GNU General Public License version 2 or later; see LICENSE.txt
  */
 class com_clm_turnierInstallerScript {
+	// the minimum major version
+	protected $minJoomlaVersion = '4.0';
 
 	// the version we are updating from
 	protected $fromVersion = null;
@@ -106,6 +111,14 @@ class com_clm_turnierInstallerScript {
 	 * @return void
 	 */
 	public function preflight($type, $parent) {
+		// check for the minimum Joomla version before continuing
+		if (! empty($this->minJoomlaVersion) &&
+				version_compare(JVERSION, $this->minJoomlaVersion, '<')) {
+			Log::add(Text::sprintf('JLIB_INSTALLER_MINIMUM_JOOMLA', $this->minJoomlaVersion), Log::WARNING, 'jerror');
+			
+			return false;
+		}
+				
 		// Chess League Manager installiert ?
 		$db = JFactory::getDbo();
 		$result = $db->setQuery($db->getQuery(true)->select('COUNT(' .
@@ -124,6 +137,8 @@ class com_clm_turnierInstallerScript {
 			$manifest = new \Joomla\Registry\Registry($extension->manifest_cache);
 			$this->fromVersion = $manifest->get('version');
 		}
+		
+		return true;
 	}
 
 	/**

@@ -10,6 +10,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Log\Log;
+
 /**
  * CLM Turnier Controller
  */
@@ -44,8 +46,7 @@ class CLM_TurnierController extends JControllerLegacy {
         // Check for edit form.
         if ($view == 'grand_prix_form' && $layout == 'edit' && ! $this->checkEditId('com_clm_turnier.edit.grand_prix_form', $id)) {
             // Somehow the person just went to the form - we don't allow that.
-            $this->setError(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID', $id));
-            $this->setMessage($this->getError(), 'error');
+        	Log::add(JText::sprintf('JLIB_APPLICATION_ERROR_UNHELD_ID'), Log::ERROR, 'clm_grand_prix_error');
             $this->setRedirect(JRoute::_('index.php?option=com_clm_turnier&view=grand_prix', false));
             
             return false;

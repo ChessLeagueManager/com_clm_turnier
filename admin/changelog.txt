@@ -13,6 +13,10 @@ $ -> Language fix or change
 ! -> Note
 
 
+- - - - - 4.0.0 - [19-05-2024] - - - - - - - - - - - - - - - - - - - - -
+> Code-Anpassungen für Joomla 5
+> Joomla 3 Unterstützung entfernt
+
 - - - - - 3.2.1 - [30-10-2022] - - - - - - - - - - - - - - - - - - - - -
 ! Code Gardening
 

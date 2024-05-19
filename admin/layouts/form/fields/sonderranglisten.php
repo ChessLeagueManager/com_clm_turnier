@@ -14,7 +14,6 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\HTML\HTMLHelper;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Uri\Uri;
-use Joomla\CMS\Version;
 
 extract($displayData);
 
@@ -92,52 +91,25 @@ if ($readonly) {
 	$uri = new Uri('index.php?option=com_clm_turnier&view=sonderranglisten&layout=modal&tmpl=component');
 	$uri->setVar('field', $this->escape($id));
 	
-	// Create a regular list.
-	switch (Version::MAJOR_VERSION) {
-		case 3:
-			$attr .= ' id="' . $id . '"';
-			$attr .= ' name=' . $name . '"';
-			$attr .= ' class="field-sonderranglisten-input-name ';
-			$attr .= !empty($class) ? $class : '';
-			$attr .= '"';
+	$htmlTag = 'clm-field-sonderranglisten';
+	$htmlTagAttributes[] = !empty($class) ? 'class="' . $class . '"' : '';
+	$htmlTagAttributes[] = 'placeholder="' . $this->escape($hint ?: JText::_('JGLOBAL_TYPE_OR_SELECT_SOME_OPTIONS')) . '" ';
+	$htmlTagAttributes[] = 'url="' . (string) $uri . '"';
+	$htmlTagAttributes[] = 'modal=".modal"';
+	$htmlTagAttributes[] = 'modal-width="100%"';
+	$htmlTagAttributes[] = 'modal-height="400px"';
+	$htmlTagAttributes[] = 'button-select=".button-select"';
+	$htmlTagAttributes[] = 'button-clear=".button-clear"';
+	$htmlTagAttributes[] = 'button-save-selected=".button-save-selected"';
+	$dataDismiss='data-bs-dismiss="modal"';
 
-			$htmlTag = 'div';
-			$htmlTagAttributes[] = 'class="field-sonderranglisten-wrapper"';
-			$htmlTagAttributes[] = 'data-url="' . (string)$uri . '"';
-			$htmlTagAttributes[] = 'data-modal=".modal"';
-			$htmlTagAttributes[] = 'data-modal-width="100%"';
-			$htmlTagAttributes[] = 'data-modal-height="400px"';
-			$htmlTagAttributes[] = 'data-input=".field-sonderranglisten-input"';
-			$htmlTagAttributes[] = 'data-input-name=".field-sonderranglisten-input-name"';
-			$htmlTagAttributes[] = 'data-button-select=".button-select"';
-			$htmlTagAttributes[] = 'data-button-save-selected=".button-save-selected"';
-			$dataDismiss='data-dismiss="modal"';
-			
-			JHtml::_('script', 'com_clm_turnier/sonderranglisten.js', array('version' => 'auto', 'relative' => true));
-			break;
-		case 4:
-			$htmlTag = 'clm-field-sonderranglisten';
-			$htmlTagAttributes[] = !empty($class) ? 'class="' . $class . '"' : '';
-			$htmlTagAttributes[] = 'placeholder="' . $this->escape($hint ?: JText::_('JGLOBAL_TYPE_OR_SELECT_SOME_OPTIONS')) . '" ';
-			$htmlTagAttributes[] = 'url="' . (string) $uri . '"';
-			$htmlTagAttributes[] = 'modal=".modal"';
-			$htmlTagAttributes[] = 'modal-width="100%"';
-			$htmlTagAttributes[] = 'modal-height="400px"';
-			$htmlTagAttributes[] = 'button-select=".button-select"';
-			$htmlTagAttributes[] = 'button-clear=".button-clear"';
-			$htmlTagAttributes[] = 'button-save-selected=".button-save-selected"';
-			$dataDismiss='data-bs-dismiss="modal"';
+	Text::script('JGLOBAL_SELECT_NO_RESULTS_MATCH');
+	Text::script('JGLOBAL_SELECT_PRESS_TO_SELECT');
 
-			Text::script('JGLOBAL_SELECT_NO_RESULTS_MATCH');
-			Text::script('JGLOBAL_SELECT_PRESS_TO_SELECT');
-
-			$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
-			$wa->getRegistry()->addRegistryFile('media/com_clm_turnier/joomla.asset.json');
-			$wa->usePreset('choicesjs')
-				->useScript('webcomponent.field-sonderranglisten');
-			break;
-			// <!-- TODO: modal über ID, da class nicht eindeutig -->
-	}
+	$wa = Factory::getApplication()->getDocument()->getWebAssetManager();
+	$wa->getRegistry()->addRegistryFile('media/com_clm_turnier/joomla.asset.json');
+	$wa->usePreset('choicesjs')
+		->useScript('webcomponent.field-sonderranglisten');
 	
 	// TODO: id = value, name = text
 	$html[] = HTMLHelper::_('select.genericlist', $options, $name, trim($attr), 'id', 'name', $value, $id);
