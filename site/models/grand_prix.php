@@ -404,7 +404,10 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 
 		// Gesamtwertung sortieren
 		usort($this->gesamtergebnis, function ($a, $b) {
-			return $a->gesamt < $b->gesamt;
+			if ($a->gesamt == $b->gesamt) {
+				return 0;
+			}
+			return ($a->gesamt < $b->gesamt) ? 1 : -1;
 		});
 	}
 
