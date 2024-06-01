@@ -13,6 +13,8 @@ defined('_JEXEC') or die('Restricted access');
 // Include the component HTML helpers.
 JHtml::addIncludePath(JPATH_COMPONENT . '/helpers/html');
 
+JHtml::_('grandprix.tooltip');
+
 $user = JFactory::getUser();
 $userId = $user->get('id');
 $canChange = clm_core::$access->access('BE_tournament_create');

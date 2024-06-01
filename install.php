@@ -32,7 +32,7 @@ use Joomla\CMS\Language\Text;
  */
 class com_clm_turnierInstallerScript {
 	// the minimum major version
-	protected $minJoomlaVersion = '4.0';
+	protected $minJoomlaVersion = '3.0';
 
 	// the version we are updating from
 	protected $fromVersion = null;

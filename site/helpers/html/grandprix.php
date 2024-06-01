@@ -10,6 +10,8 @@
 // No direct access to this file
 defined('_JEXEC') or die('Restricted access');
 
+use \Joomla\CMS\Version;
+
 /**
  * HTML Utility Klasse
  * 
@@ -76,6 +78,17 @@ abstract class JHtmlGrandPrix {
 		return;
 	}
 
+	/**
+	 * Joomla 3 / 4 Tooltip im Admin Bereich
+	 */
+	public static function tooltip() {
+		switch (Version::MAJOR_VERSION) {
+			case 3:
+				JHtml::_('behavior.tooltip');
+				break;
+		}
+	}
+	
 	/**
 	 * Grand Prix Modus
 	 * 

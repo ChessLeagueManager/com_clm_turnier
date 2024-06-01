@@ -1,4 +1,5 @@
 <?php
+use \Joomla\CMS\Version;
 
 /**
  * Chess League Manager Turnier Erweiterungen
@@ -13,6 +14,8 @@ defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('bootstrap.dropdown');
 
+$dataToggle = ((Version::MAJOR_VERSION == 3) ? 'data-toggle' : 'data-bs-toggle') . '="dropdown"';
+
 ?>
 
 <div class="icons">
@@ -20,8 +23,8 @@ JHtml::_('bootstrap.dropdown');
 
 		<?php if ($displayData['params']->get('show_print_icon') || $displayData['params']->get('show_email_icon') || $displayData['params']->get('show_filter_icon')) : ?>
         	<div class="btn-group pull-right">
-        		<a class="btn dropdown-toggle" data-bs-toggle="dropdown" href="#"> 
-        			<span class="icon-cog"></span><span class="caret"></span>
+        		<a class="btn dropdown-toggle" <?php echo $dataToggle?> href="#"> <span
+        			class="icon-cog"></span><span class="caret"></span>
         		</a>
 
         		<ul class="dropdown-menu">
