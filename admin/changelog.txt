@@ -13,6 +13,9 @@ $ -> Language fix or change
 ! -> Note
 
 
+- - - - - 3.3.2 - [15-06-2024] - - - - - - - - - - - - - - - - - - - - -
+# Exception Handling korrigiert
+
 - - - - - 3.3.1 - [01-06-2024] - - - - - - - - - - - - - - - - - - - - -
 > Code-Anpassungen für Joomla 5
 > Als "veraltet" markierten Code korrigiert

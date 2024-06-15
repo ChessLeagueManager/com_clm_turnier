@@ -575,16 +575,19 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$orderBy = (! empty($orderBy)) ? $orderBy : (int) $this->getState('grand_prix.order_by');
 
 		if ($this->grandPrix === null || $this->grandPrix->id != $pk) {
-
 			// Grand Prix Wertung ermitteln
 			try {
 				$result = JTable::getInstance('turnier_grand_prix', 'TableCLM');
-				if (! $result->load($pk)) {
+				if (! $result) {
+					Log::add(__FILE__ . ' (' . __LINE__ . '): Class not found: TableCLMTurnier_Grand_Prix' , Log::CRITICAL, 'clm_grand_prix_error');
+					return false;
+				}
+				if (! $result->load($pk) ) {
 					return false;
 				}
 				$this->grandPrix = $result;
 			} catch (Exception $e) {
-				Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
+				Log::add(__FILE__ . ' (' . __LINE__ . '): ' . $e->getMessage(), Log::ERROR, 'clm_grand_prix_error');
 				return false;
 			}
 
@@ -595,12 +598,14 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 					JTable::addIncludePath(JPATH_ADMIN_CLM_COMPONENT .
 							DIRECTORY_SEPARATOR . 'tables');
 					$result = JTable::getInstance('sonderranglistenform', 'TableCLM');
-					if ($result) {
+					if (! $result) {
+						Log::add(__FILE__ . ' (' . __LINE__ . '): Class not found: TableCLMSonderranglistenform' , Log::CRITICAL, 'clm_grand_prix_error');
+					} else {
 						$result->load($rid);
 						$this->rangliste = $result;
 					}
 				} catch (Exception $e) {
-					Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
+					Log::add(__FILE__ . ' (' . __LINE__ . '): ' . $e->getMessage(), Log::ERROR, 'clm_grand_prix_error');
 				}
 			}
 
@@ -608,7 +613,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 			try {
 				$this->_getGesamtwertung($orderBy);
 			} catch (Exception $e) {
-				Log::add(e->getMessage, Log::ERROR, 'clm_grand_prix_error');
+				Log::add(__FILE__ . ' (' . __LINE__ . '): ' . $e->getMessage(), Log::ERROR, 'clm_grand_prix_error');
 				return false;
 			}
 		}
