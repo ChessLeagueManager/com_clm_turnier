@@ -13,6 +13,10 @@ $ -> Language fix or change
 ! -> Note
 
 
+- - - - - 3.4.0 - [04-03-2025] - - - - - - - - - - - - - - - - - - - - -
+# Filter: fehlerhafte Anzeige der Icons   
++ Einstellung "Filter aktiv" bei erreichen der Mindestanzhal der Turniere 
+
 - - - - - 3.3.2 - [15-06-2024] - - - - - - - - - - - - - - - - - - - - -
 # Exception Handling korrigiert
 
