@@ -104,8 +104,8 @@ abstract class JHtmlIcon {
 	 */
 	public static function filter($state, $params, $attribs = array ()) {
 		$filter = $state->get('grand_prix.filter');
-		$filter['tlnr'] = ! $filter['tlnr'];
-
+		$filter['tlnr'] = ($filter['tlnr'] == 1) ? 0 : 1;
+		
 		$link = CLMTurnierRoute::getGrandPrixRoute($state->get('grand_prix.id'), $state->get('grand_prix.catidEdition'), $state->get('grand_prix.tids'), $filter, $state->get('grand_prix.rids'), $state->get('grand_prix.rid'));
 
 		$attribs['span.class'] = empty($filter['tlnr']) ? 'icon-plus' : 'icon-minus';

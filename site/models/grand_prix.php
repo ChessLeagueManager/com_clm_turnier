@@ -548,8 +548,9 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$this->setState('grand_prix.order_by', $orderBy);
 
 		// Filter, inkl. Default Werte
+		$active = ($params->get('show_filter_icon') && $params->get('filter_active')) ? 1 : 0;
 		$filter = (array) $app->input->get('filter', null, 'RAW');
-		$filter['tlnr'] = (isset($filter['tlnr'])) ? $filter['tlnr'] : 0;
+		$filter['tlnr'] = (isset($filter['tlnr'])) ? $filter['tlnr'] : $active;
 		$this->setState('grand_prix.filter', $filter);
 
 		// Sonderranglisten ID's
