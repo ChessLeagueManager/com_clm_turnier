@@ -115,7 +115,6 @@ body {
 	text-align: center;
 }
 
-/* Spielername darf die Breite nicht verlassen, sonst verzerrt das Layout */
 #turnier_rangliste .name {
 	margin: auto;
 }
@@ -126,20 +125,21 @@ body {
 }
 
 #turnier_rangliste .verein {
+	margin: auto;	
 }
 
 #turnier_rangliste .twz {
-	width: 20px;
+	width: 1em;
 	text-align: center !important;
 }
 
 #turnier_rangliste .erg {
-	width: 40px;
+	width: 2em;
 	text-align: center;
 }
 
 #turnier_rangliste .gesamt {
-	width: 40px;
+	width: 2em;
 	text-align: center;
 }
 

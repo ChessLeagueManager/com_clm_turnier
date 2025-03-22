@@ -57,7 +57,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		$query->where($this->_db->quoteName('t1.turnier') . ' = ' . $pk);
 		$query->group($this->_db->quoteName('t1.sum_punkte'));
 		$query->order($this->_db->quoteName('t1.sum_punkte') . ' DESC');
-		
+
 		Log::add(__FILE__ . ' (' . __LINE__ . '): Database Query: ' . $query->__toString(), Log::DEBUG, 'clm_grand_prix_error');
 		$this->_db->setQuery($query);
 		$list = $this->_db->loadObjectList();
@@ -350,7 +350,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 		// veröffentlichte Turniere ermitteln
 		$list = $this->_loadTurnierListe($orderBy);
 		Log::add(__FILE__ . ' (' . __LINE__ . '): Veröffentlichte Turniere: ' . count($list), Log::DEBUG, 'clm_grand_prix_error');
-		
+
 		// Tunrierergebnisse berechnen
 		$ii = 0;
 		foreach ($list as $row) {
@@ -415,7 +415,7 @@ class CLM_TurnierModelGrand_Prix extends JModelLegacy {
 			}
 			return ($a->gesamt < $b->gesamt) ? 1 : -1;
 		});
-		
+
 		Log::add(__FILE__ . ' (' . __LINE__ . '): Teilnehmer Gesamtergebnis: ' . count($this->gesamtergebnis), Log::DEBUG, 'clm_grand_prix_error');
 	}
 
