@@ -106,55 +106,55 @@ body {
 }
 
 #turnier_rangliste .rang {
-	width: 20px;
+	width: 1em;
 	text-align: right !important;
 }
 
 #turnier_rangliste .titel {
-	width: 40px;
+	width: 2em;
 	text-align: center;
 }
 
-/* Spielername darf die Breite nicht verlassen, sonst verzerrt das Layout */
 #turnier_rangliste .name {
-	max-width: 150px;
 	margin: auto;
 }
 
 #turnier_rangliste td.name,
 #turnier_rangliste th.name {
-	width: 150px;
 	overflow: hidden !important;
 }
 
 #turnier_rangliste .verein {
-	
+	margin: auto;	
 }
 
 #turnier_rangliste .twz {
-	width: 20px;
+	width: 1em;
 	text-align: center !important;
 }
 
 #turnier_rangliste .erg {
-	width: 40px;
+	width: 2em;
 	text-align: center;
 }
 
 #turnier_rangliste .gesamt {
-	width: 40px;
+	width: 2em;
 	text-align: center;
 }
 
 /** Turnier DWZ Rangliste **/
 #turnier_rangliste .diff {
-	width: 50px;
+	width: 3em;
 	text-align: center;
 	color: blue;
 }
 
+#turnier_rangliste .dwz {
+	width: 4em;
+	text-align: right;
+}
 #turnier_rangliste .i0 {
-	width: 40px;
+	width: 3em;
 	text-align: left;
-	border-left-style: none;
 }

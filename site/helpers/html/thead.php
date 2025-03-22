@@ -37,7 +37,7 @@ abstract class JHtmlThead {
 		}
 		
 		// load jQuery JavaScript framework
-		JHtml::_ ( 'jquery.framework' );
+ 		JHtml::_ ( 'script', 'vendor/jquery/jquery.js', array('relative' => true) );
 		
 		// load floatThead JavaScript framework
 		JHtml::_ ( 'script', 'com_clm_turnier/jquery.floatThead.js', array('relative' => true) );
