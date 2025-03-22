@@ -13,6 +13,20 @@ $ -> Language fix or change
 ! -> Note
 
 
+- - - - - 3.4.1 - [16-03-2025] - - - - - - - - - - - - - - - - - - - - -
+# Inhaltliche Korrekturen
+
+- - - - - 3.4.0 - [04-03-2025] - - - - - - - - - - - - - - - - - - - - -
+# Filter: fehlerhafte Anzeige der Icons
++ Einstellung "Filter aktiv" beim Erreichen der Mindestanzahl der Turniere
+
+- - - - - 3.3.2 - [15-06-2024] - - - - - - - - - - - - - - - - - - - - -
+# Exception Handling korrigiert
+
+- - - - - 3.3.1 - [01-06-2024] - - - - - - - - - - - - - - - - - - - - -
+> Code-Anpassungen für Joomla 5
+> Als "veraltet" markierten Code korrigiert
+
 - - - - - 3.2.1 - [30-10-2022] - - - - - - - - - - - - - - - - - - - - -
 ! Code Gardening
 

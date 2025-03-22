@@ -28,8 +28,6 @@ if (! jimport('clm.index', JPATH_CLM_COMPONENT)) {
 // Add include path for ...
 JHtml::addIncludePath(JPATH_CLM_TURNIER_COMPONENT . '/helpers/html');
 
-echo '<div id="clm"><div class="clm">';
-
 // Get an instance of the controller
 $controller = JControllerLegacy::getInstance('clm_turnier');
 
@@ -38,5 +36,3 @@ $controller->execute(JFactory::getApplication()->input->get('task'));
 
 // Redirect if set by the controller
 $controller->redirect();
-
-echo "</div></div>";

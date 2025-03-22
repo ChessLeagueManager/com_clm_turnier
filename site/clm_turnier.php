@@ -18,9 +18,6 @@ if (! jimport('components.com_clm_turnier.bootstrap', JPATH_SITE)) {
 // Bootstrap CSS / JS
 JHtml::_('grandprix.stylesheet');
 
-// set current locale for date and time formatting with strftime()
-setlocale(LC_TIME, JFactory::getLanguage()->getLocale());
-
 // Get an instance of the controller
 $controller = JControllerLegacy::getInstance('CLM_Turnier');
 

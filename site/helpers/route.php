@@ -53,9 +53,7 @@ abstract class CLMTurnierRoute {
 
 		if (isset($filter)) {
 			foreach ($filter as $key => $value) {
-				if (! empty($value)) {
-					$link .= '&filter[' . $key . ']=' . $value;
-				}
+				$link .= '&filter[' . $key . ']=' . $value;
 			}
 		}
 
@@ -71,6 +69,12 @@ abstract class CLMTurnierRoute {
 			$link .= '&rid=' . (int) $rid;
 		}
 
+		// Menü Id hinzufügen
+		$menu = JFactory::getApplication()->getMenu();
+		if (isset($menu) && $menu->getActive() != null) {
+			$link .= '&Itemid=' . $menu->getActive()->id;
+		}
+		
 		return $link;
 	}
 

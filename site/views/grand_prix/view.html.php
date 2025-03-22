@@ -39,6 +39,15 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 
 	// Grand Prix Wertung
 	protected $grand_prix;
+	
+	/**
+	 * Display the view.
+	 *
+	 * @param string $tpl
+	 *        	The name of the template file to parse; automatically searches through the template paths.
+	 *
+	 * @return mixed A string if successful, otherwise an Error object.
+	 */
 	function display($tpl = null) {
 		$app = JFactory::getApplication();
 
@@ -48,7 +57,7 @@ class CLM_TurnierViewGrand_Prix extends JViewLegacy {
 		$this->turniere = $this->get('TurnierListe');
 		$this->anzahlTurniere = $this->get('AnzahlTurniere');
 		$this->offset = $this->get('TurnierOffset');
-
+		
 		$this->print = $app->input->getBool('print');
 
 		// merge params

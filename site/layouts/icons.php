@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
 
 JHtml::_('bootstrap.dropdown');
 
-$dataToggle = ((Version::MAJOR_VERSION == 4) ? 'data-bs-toggle' : 'data-toggle') . '="dropdown"';
+$dataToggle = ((Version::MAJOR_VERSION == 3) ? 'data-toggle' : 'data-bs-toggle') . '="dropdown"';
 
 ?>
 

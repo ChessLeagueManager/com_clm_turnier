@@ -45,6 +45,14 @@ if (count($this->gesamtwertung) == 0) {
 } else {
     $min_tournaments = $this->get('minTournaments');
     $filter = $this->state->get('grand_prix.filter');
+
+    try {
+    	$fmt = new IntlDateFormatter(JFactory::getApplication()->getLanguage()->getTag(), IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+    	$fmt->setPattern('LLL');
+    } catch (Error $e) {
+    	$fmt = new IntlDateFormatter(null, IntlDateFormatter::FULL, IntlDateFormatter::FULL);
+    	$fmt->setPattern('LLL');
+    }    
 ?>
 
 <table <?php JHtml::_('thead.tableClass', ($config->fixth_ttab == "1")); ?> id="turnier_kategorie_gesamtwertung" cellpadding="0" cellspacing="0">
@@ -77,7 +85,7 @@ if (count($this->gesamtwertung) == 0) {
 		<?php
 			$ik = $this->getTurnierIndex($ii);
     		if (is_object($this->grand_prix) && $this->grand_prix->col_header) {
-		        $colTitle = strftime("%b", mktime(0, 0, 0, $ik, 1));
+    			$colTitle = $fmt->format(mktime(0, 0, 0, $ik, 1));
             } else {
 		        $colTitle = $ik;
 		    }

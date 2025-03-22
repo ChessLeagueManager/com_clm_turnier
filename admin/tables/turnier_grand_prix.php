@@ -10,6 +10,8 @@
 // no direct access
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Log\Log;
+
 /**
  * Grand Prix Datenbank Tabelle
  */
@@ -75,7 +77,7 @@ class TableCLMTurnier_Grand_Prix extends JTable {
     function check() {
         // Name vorhanden
         if (trim($this->name) == '') {
-            $this->setError(CLMText::errorText('NAME', 'MISSING'));
+        	Log::add(CLMText::errorText('NAME', 'MISSING'), Log::ERROR, 'clm_grand_prix_error');
             return false;
         }
         

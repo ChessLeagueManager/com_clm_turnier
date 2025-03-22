@@ -89,6 +89,13 @@
 				<option value="0">JHIDE</option>
 				<option value="1">JSHOW</option>
 			</field>
+			<field name="filter_active" type="radio" default="1"
+				layout="joomla.form.field.radio.switcher"
+				label="COM_CLM_TURNIER_FILTER_ACTIV_LABEL"
+				description="COM_CLM_TURNIER_FILTER_ACTIV_DESC">
+				<option value="0">JNO</option>
+				<option value="1">JYES</option>
+			</field>
 	</fieldset>
 
 	<fieldset name="permissions" label="JCONFIG_PERMISSIONS_LABEL"

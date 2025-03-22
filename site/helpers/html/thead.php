@@ -41,7 +41,7 @@ abstract class JHtmlThead {
  		JHtml::_ ( 'script', 'vendor/jquery/jquery.js', array('relative' => true) );
 		
 		// load floatThead JavaScript framework
-		JHtml::_ ( 'script', 'https://cdnjs.cloudflare.com/ajax/libs/floatthead/2.2.4/jquery.floatThead.js' );
+		JHtml::_ ( 'script', 'com_clm_turnier/jquery.floatThead.js', array('relative' => true) );
 		JHtml::_ ( 'script', 'com_clm_turnier/thead.js', array('relative' => true) );
 		
 		static::$loaded [__METHOD__] = true;

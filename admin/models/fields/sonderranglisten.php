@@ -15,7 +15,6 @@ jimport('components.com_clm_turnier.defines', JPATH_SITE);
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Layout\FileLayout;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
-use \Joomla\CMS\Version;
 
 /**
  * Field to select Turnier Sonderlangliste(n) from a modal list.
